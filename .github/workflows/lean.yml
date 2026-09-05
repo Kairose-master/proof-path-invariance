@@ -74,3 +74,4 @@ jobs:
           python3 -m py_compile scripts/decompose_s3_pairwise_order.py
           python3 -m py_compile scripts/analyze_role_order_generalization.py
           python3 -m py_compile scripts/run_hf_hankel.py
+          python3 -m py_compile scripts/analyze_hankel.py
