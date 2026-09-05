@@ -27,6 +27,12 @@ jobs:
         run: python3 scripts/validate_paired_benchmark.py /tmp/ppi-paired.jsonl
       - name: Verify frozen benchmark hashes
         run: python3 scripts/verify_benchmark_lock.py /tmp/symbolic_v0.jsonl /tmp/ppi-paired.jsonl
+      - name: Generate Phase 2 S3 benchmark
+        run: python3 scripts/generate_s3_benchmark.py --out /tmp/s3_v0.jsonl
+      - name: Validate Phase 2 S3 benchmark
+        run: python3 scripts/validate_s3_benchmark.py /tmp/s3_v0.jsonl
+      - name: Report Phase 2 S3 benchmark hash
+        run: sha256sum /tmp/s3_v0.jsonl
       - name: Validate JSON schemas and run template
         run: |
           python3 -m json.tool experiments/schemas/run_manifest.schema.json >/dev/null
@@ -38,3 +44,7 @@ jobs:
           python3 -m py_compile scripts/create_run_manifest.py
           python3 -m py_compile scripts/validate_run_artifacts.py
           python3 -m py_compile scripts/score_flips.py
+          python3 -m py_compile scripts/generate_s3_benchmark.py
+          python3 -m py_compile scripts/validate_s3_benchmark.py
+          python3 -m py_compile scripts/run_hf_s3_margin.py
+          python3 -m py_compile scripts/score_s3.py
