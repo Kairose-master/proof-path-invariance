@@ -70,6 +70,25 @@ improves held-out case prediction.
 This phase does not test an S3 representation or compositionality. See
 `docs/ANALYSIS_PHASE2_5.md`.
 
+**Status:** completed. Exploratory aggregate leave-one-family-out skill was
+positive, but one held-out family failed badly and family-specific effects
+improved within-family prediction.
+
+## Phase 2.6 — Confirmatory unseen-family replication
+
+Freeze the Phase 2 pooled permutation coefficients and evaluate them, without
+refitting, on eight new Lean-certified formal families.
+
+Primary endpoint:
+
+`skill = 1 - SSE_frozen / SSE_zero`
+
+Confirmatory success criterion:
+
+`aggregate skill > 0`.
+
+See `docs/PREREGISTRATION_PHASE2_6.md`.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.
