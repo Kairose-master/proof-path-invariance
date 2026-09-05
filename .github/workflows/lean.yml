@@ -23,3 +23,5 @@ jobs:
         run: python3 scripts/generate_prompts.py --cases experiments/cases/negative_v0.jsonl --out /tmp/ppi-negative.jsonl
       - name: Render minimal paired benchmark
         run: python3 scripts/generate_paired_benchmark.py --out /tmp/ppi-paired.jsonl
+      - name: Validate minimal paired benchmark
+        run: python3 scripts/validate_paired_benchmark.py /tmp/ppi-paired.jsonl
