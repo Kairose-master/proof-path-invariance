@@ -1,0 +1,6 @@
+name = "proof-path-invariance"
+version = "0.1.0"
+defaultTargets = ["PPI"]
+
+[[lean_lib]]
+name = "PPI"
