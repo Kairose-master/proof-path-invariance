@@ -10,6 +10,11 @@
       "median": 0.9466459210438349,
       "max": 1.4315207978981874
     },
+    "ratio_delta_inv_over_median_separation": {
+      "min": 2.003670696436179,
+      "median": 3.0112563772172924,
+      "max": 4.80784536587918
+    },
     "separation_min": {
       "min": 0.030397713822432323,
       "median": 0.1227412985432483,
@@ -161,6 +166,7 @@
           "gated|skip": 0.22738688213806946
         }
       },
+      "ratio_delta_inv_over_median_separation": 3.905995317378328,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48691.71765089174,
@@ -344,6 +350,7 @@
           "gated|skip": 0.1669061896647773
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.7225835285439683,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48706.51874745201,
@@ -527,6 +534,7 @@
           "gated|skip": 0.39329647178730776
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.950232081293885,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48606.260679230945,
@@ -710,6 +718,7 @@
           "gated|skip": 0.20817884836855585
         }
       },
+      "ratio_delta_inv_over_median_separation": 4.466761575797963,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48708.906270052714,
@@ -893,6 +902,7 @@
           "gated|skip": 0.23852192340310424
         }
       },
+      "ratio_delta_inv_over_median_separation": 4.358105200497006,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48691.31786015879,
@@ -1076,6 +1086,7 @@
           "gated|skip": 0.18723616316160407
         }
       },
+      "ratio_delta_inv_over_median_separation": 4.80784536587918,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48733.67647117082,
@@ -1259,6 +1270,7 @@
           "gated|skip": 0.2815761794007231
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.905752937857748,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48584.84809103041,
@@ -1442,6 +1454,7 @@
           "gated|skip": 0.14824030979258965
         }
       },
+      "ratio_delta_inv_over_median_separation": 3.651834126396765,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48726.0713254544,
@@ -1625,6 +1638,7 @@
           "gated|skip": 0.22073256034696526
         }
       },
+      "ratio_delta_inv_over_median_separation": 4.38908434372706,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48687.560885368,
@@ -1808,6 +1822,7 @@
           "gated|skip": 0.25673409535103336
         }
       },
+      "ratio_delta_inv_over_median_separation": 3.3723022529240954,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48706.4330151548,
@@ -1991,6 +2006,7 @@
           "gated|skip": 0.3195710322977317
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.8250186682186595,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48604.81973622506,
@@ -2174,6 +2190,7 @@
           "gated|skip": 0.2113476756530984
         }
       },
+      "ratio_delta_inv_over_median_separation": 3.0722806731406997,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48710.317041075425,
@@ -2357,6 +2374,7 @@
           "gated|skip": 0.3821537812050521
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.003670696436179,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48732.198682023234,
@@ -2540,6 +2558,7 @@
           "gated|skip": 0.28140098439764943
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.354312366032891,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48736.950500120394,
@@ -2723,6 +2742,7 @@
           "gated|skip": 0.40227893196125003
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.5006575275805254,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48641.92926093928,
@@ -2906,6 +2926,7 @@
           "gated|skip": 0.17495128941405572
         }
       },
+      "ratio_delta_inv_over_median_separation": 2.565492549793457,
       "C_rank": {
         "rows_32": {
           "sigma_1": 48733.39252783043,

@@ -200,9 +200,11 @@ def main() -> None:
     for key in sorted(tables):
         H = tables[key]
         a = section_a(H)
+        b = section_b(H, a["delta_inv"])
         per_control["/".join(key)] = {
             "A_invariance": a,
-            "B_separation": section_b(H, a["delta_inv"]),
+            "B_separation": b,
+            "ratio_delta_inv_over_median_separation": a["delta_inv"] / b["median"],
             "C_rank": section_c(H),
             "D_readout": section_d(H, gold),
             "E_closure": section_e(H, a["delta_inv"]),
@@ -229,6 +231,7 @@ def main() -> None:
         "control_combinations": len(tables),
         "aggregate": {
             "delta_inv": agg(["A_invariance", "delta_inv"]),
+            "ratio_delta_inv_over_median_separation": agg(["ratio_delta_inv_over_median_separation"]),
             "separation_min": agg(["B_separation", "min"]),
             "separation_median": agg(["B_separation", "median"]),
             "class_pairs_separated_at_delta_inv": agg(["B_separation", "class_pairs_separated_at_delta_inv"]),
