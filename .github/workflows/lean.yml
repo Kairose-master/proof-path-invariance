@@ -49,6 +49,12 @@ jobs:
         run: python3 scripts/validate_hankel_benchmark.py /tmp/hankel_v0.jsonl
       - name: Verify frozen Phase 3 Hankel table
         run: python3 scripts/verify_hankel_lock.py /tmp/hankel_v0.jsonl
+      - name: Generate Phase 3.2 Boolean Hankel table
+        run: python3 scripts/generate_hankel_v1_benchmark.py --out /tmp/hankel_v1.jsonl
+      - name: Validate Phase 3.2 Boolean Hankel table
+        run: python3 scripts/validate_hankel_v1_benchmark.py /tmp/hankel_v1.jsonl
+      - name: Verify frozen Phase 3.2 table
+        run: python3 scripts/verify_hankel_v1_lock.py /tmp/hankel_v1.jsonl
       - name: Validate JSON schemas and run template
         run: |
           python3 -m json.tool experiments/schemas/run_manifest.schema.json >/dev/null
@@ -75,3 +81,4 @@ jobs:
           python3 -m py_compile scripts/analyze_role_order_generalization.py
           python3 -m py_compile scripts/run_hf_hankel.py
           python3 -m py_compile scripts/analyze_hankel.py
+          python3 -m py_compile scripts/analyze_hankel_v1.py

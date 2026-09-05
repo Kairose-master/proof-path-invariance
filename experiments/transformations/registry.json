@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.4.0",
   "principle": "Measure observable answer changes under deterministic transformations whose formal status is explicit. Do not infer categorical or proof-theoretic structure.",
   "transformations": [
     {
@@ -42,6 +42,22 @@
       "enabled_phase3": true,
       "motivation": "Estimates the finite restriction of the recognition congruence defined in recognition-paths (RecognitionPaths/Recognition.lean), which is what the Recognition Factorization Theorem compares with logical identity.",
       "caution": "Rank, clustering, and separation statistics describe the finite table only. They are not evidence that the model realises the logical quotient."
+    },
+    {
+      "id": "comparative_preference_readout",
+      "layer": "readout",
+      "description": "Read each logit cell only through order relations: the decision [pos > neg] and, for two queries after the same continuation, the preference [margin(q1) > margin(q2)]. Threshold-free and invariant to the common logit offset.",
+      "formal_status": "readout_only; no change to the formal problem",
+      "enabled_phase3_2": true,
+      "motivation": "Makes the observation table a Boolean Chu space, the same kind of object as the logical table, so the canonical map F : L -> B is checked by exact equality rather than a metric tolerance."
+    },
+    {
+      "id": "repeated_block",
+      "layer": "renderer",
+      "description": "Repeat a continuation clause (a.a) or the whole prefix (u.u).",
+      "formal_status": "same_formal_problem; Lean-certified by Horn.logicalEquiv_dup (recognition-paths)",
+      "enabled_phase3_2": true,
+      "motivation": "Logical invariance forces ww ≈ w (Recognition.lean); this is its direct test."
     }
   ]
 }

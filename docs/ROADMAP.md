@@ -139,6 +139,18 @@ offset; readout is at chance. The identifiability criterion is not testable
 until a recognizer has `Δ_inv` below its class separation. See
 `docs/RESULTS_PHASE3_HANKEL.md`.
 
+## Phase 3.2 — Boolean Hankel table
+
+Remove the metric from the readout: each logit cell is read only through
+order relations (decision `pos > neg`, preference `margin(q1) > margin(q2)`),
+so the table is a Boolean Chu space and `F : L → B` is checked by exact
+equality. Depth-two continuations make the closure criterion of
+`Identification.lean` checkable; repeated blocks test the idempotence
+consequence `ww ≈ w`. Benchmark `hankel_v1` (18240 prompts), frozen in
+`docs/PHASE3_HANKEL_V1_DESIGN.md` and `experiments/hankel_v1.lock.json`.
+
+**Status:** inputs and analysis plan frozen; no model data collected.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.

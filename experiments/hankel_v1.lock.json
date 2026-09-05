@@ -1,0 +1,32 @@
+{
+  "benchmark": "hankel_v1",
+  "status": "frozen-inputs",
+  "generator": "scripts/generate_hankel_v1_benchmark.py",
+  "prompts": 18240,
+  "rows": 40,
+  "row_structure": "8 logical classes x (4 serializations + 1 doubled prefix '123x2')",
+  "continuations": 57,
+  "continuation_structure": "empty + 7 single clauses + 49 ordered pairs (including 7 repeats 'a.a')",
+  "queries": ["ad", "ae", "bd", "ce"],
+  "logit_cells_per_renderer": 9120,
+  "boolean_columns_per_renderer": {"decision": 228, "preference": 342, "total": 570},
+  "relabeling": "sym1",
+  "answer_map": "yesno",
+  "renderers": ["bullets", "prose"],
+  "class_gold_yes_cells": 1043,
+  "class_gold_total_cells": 1824,
+  "sha256": "53028d8ba0d42cfbc3831e940ad9027716a4e642551864378179d4117993d1fa",
+  "model_plan": {
+    "runner": "scripts/run_hf_hankel.py",
+    "observable": "answer_position_logit_pair",
+    "read_as": "order relations only: [pos > neg] and [margin(q1) > margin(q2)]",
+    "device": "cpu",
+    "dtype": "float32"
+  },
+  "formal_status": {
+    "row_equivalence": "serializations: Horn.logicalEquiv_of_perm; doubled prefix: Horn.logicalEquiv_dup (recognition-paths)",
+    "cell_gold": "forward chaining in the generator, re-derived by the validator; not Lean-certified per cell",
+    "controls": "renderer is not Lean-certified as logically irrelevant"
+  },
+  "interpretation_limit": "Boolean Chu space of a finite test family. Identical row profiles mean 'not separated by these tests'."
+}
