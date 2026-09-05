@@ -1,0 +1,158 @@
+{
+  "run_id": "pythia70m-step143000-s3-v0",
+  "provenance": "User-supplied output from scripts/score_s3.py. Raw Phase 2 result JSONL not yet committed.",
+  "benchmark": "s3_v0",
+  "model": {
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000"
+  },
+  "cases": 128,
+  "prompt_rows": 768,
+  "prediction_counts": {
+    "YES": 768
+  },
+  "within_case": {
+    "mean_range": 0.11499595642089844,
+    "median_range": 0.102294921875,
+    "mean_population_sd": 0.039450170786057795
+  },
+  "permutation_effect_vs_123": {
+    "123": {
+      "mean": 0,
+      "median": 0
+    },
+    "132": {
+      "mean": -0.032772064208984375,
+      "median": -0.019775390625
+    },
+    "213": {
+      "mean": -0.032546043395996094,
+      "median": -0.021728515625
+    },
+    "231": {
+      "mean": -0.016511917114257812,
+      "median": -0.009521484375
+    },
+    "312": {
+      "mean": -0.027113914489746094,
+      "median": -0.0108642578125
+    },
+    "321": {
+      "mean": 0.05498981475830078,
+      "median": 0.04876708984375
+    }
+  },
+  "permutation_effect_by_family": {
+    "chain3_positive": {
+      "123": {
+        "mean": 0,
+        "median": 0
+      },
+      "132": {
+        "mean": -0.07012557983398438,
+        "median": -0.0689697265625
+      },
+      "213": {
+        "mean": -0.046596527099609375,
+        "median": -0.0489501953125
+      },
+      "231": {
+        "mean": -0.02889251708984375,
+        "median": -0.036376953125
+      },
+      "312": {
+        "mean": -0.056079864501953125,
+        "median": -0.0672607421875
+      },
+      "321": {
+        "mean": 0.10726547241210938,
+        "median": 0.12103271484375
+      }
+    },
+    "collider_negative": {
+      "123": {
+        "mean": 0,
+        "median": 0
+      },
+      "132": {
+        "mean": -0.012203216552734375,
+        "median": -0.01153564453125
+      },
+      "213": {
+        "mean": -0.03389739990234375,
+        "median": -0.03546142578125
+      },
+      "231": {
+        "mean": -0.019741058349609375,
+        "median": -0.02313232421875
+      },
+      "312": {
+        "mean": -0.0034332275390625,
+        "median": 0.0089111328125
+      },
+      "321": {
+        "mean": 0.036685943603515625,
+        "median": 0.05224609375
+      }
+    },
+    "reverse_start_negative": {
+      "123": {
+        "mean": 0,
+        "median": 0
+      },
+      "132": {
+        "mean": -0.0032806396484375,
+        "median": -0.00262451171875
+      },
+      "213": {
+        "mean": -0.009075164794921875,
+        "median": -0.0089111328125
+      },
+      "231": {
+        "mean": -0.002044677734375,
+        "median": 0.0009765625
+      },
+      "312": {
+        "mean": 0.01808929443359375,
+        "median": 0.010498046875
+      },
+      "321": {
+        "mean": 0.048236846923828125,
+        "median": 0.0438232421875
+      }
+    },
+    "shortcut_positive": {
+      "123": {
+        "mean": 0,
+        "median": 0
+      },
+      "132": {
+        "mean": -0.04547882080078125,
+        "median": -0.02679443359375
+      },
+      "213": {
+        "mean": -0.040615081787109375,
+        "median": -0.02117919921875
+      },
+      "231": {
+        "mean": -0.015369415283203125,
+        "median": -0.0107421875
+      },
+      "312": {
+        "mean": -0.0670318603515625,
+        "median": -0.027587890625
+      },
+      "321": {
+        "mean": 0.02777099609375,
+        "median": 0.01251220703125
+      }
+    }
+  },
+  "interpretation": {
+    "observed": "All 768 prompts induced YES, but premise permutation produced nonzero within-case continuous margin variation.",
+    "key_pattern": "The reversal permutation 321 increased margin on average (+0.05499), while 132, 213, 231, and 312 decreased it relative to 123.",
+    "family_interaction": "Permutation effects differ substantially by formal family; chain3_positive shows the largest 321 increase (+0.10727), while reverse_start_negative is much smaller (+0.04824).",
+    "caution": "Because all binary judgments are YES, the result does not show logical competence or binary group-equivariant behavior.",
+    "next_step": "Fit permutation effects on held-out cases/families and test whether a shared transformation law predicts unseen permutation responses beyond family-specific baselines."
+  }
+}
