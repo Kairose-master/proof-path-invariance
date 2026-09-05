@@ -107,6 +107,28 @@ AUROC of `pos_logit − neg_logit` against gold, per control combination.
 This is reported so that Phase 1's chance-level accuracy is not silently
 assumed away; it is not a primary endpoint.
 
+### E. Closure diagnostic (what the finite table can and cannot conclude)
+
+`RecognitionPaths/Identification.lean` proves that a test family containing
+the direct queries induces exactly `≡_ρ` if and only if the induced identity
+is closed under appending one symbol. `hankel_v0` has continuations of depth
+at most one, so only the lowest level of that criterion is checkable:
+
+- Let `T₀ = {([], q)}` be the four direct-query columns. Two rows `u`, `v`
+  agree on `T₀` at tolerance ε when `‖H(u,([],q)) − H(v,([],q))‖₂ ≤ ε` for
+  all four `q`.
+- For each of the seven single-clause continuations `a`, the row `ua`
+  restricted to `T₀` is available as the four columns `(a, q)`.
+- The closure defect at ε is the maximum, over row pairs that agree on `T₀`
+  and over `a`, of `max_q ‖H(u,(a,q)) − H(v,(a,q))‖₂`.
+
+A large closure defect is a concrete refinement witness: it names the
+column `(a, q)` that separates rows the direct queries could not. Checking
+closure of the full 32-column family would require depth-two continuations
+`(a z, q)` and is deferred to a `hankel_v1` table. Rows that agree on all
+32 columns are therefore reported as "not separated by `T`", never as
+`≡_ρ`-identical.
+
 ### Pre-specified decision language
 
 - No result on this table is described as evidence that the model "has" a
