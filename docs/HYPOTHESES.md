@@ -4,35 +4,43 @@
 
 This project does **not** assume that LLM reasoning is categorical, functorial, geometric, Markovian, or proof-theoretically identical to Lean derivations.
 
-Lean is used only to certify formal logical relations used to construct controlled interventions.
+Lean certifies formal logical cases. Deterministic renderers create stimuli. Model responses are empirical observations.
 
-## Phase 1 research question
+## Minimal Phase 1 question
 
-Holding the target entailment fixed, does exposing a formally valid intermediate entailment alter an LLM's final entailment accuracy beyond matched presentation controls?
+For a fixed formally certified problem, does a deterministic renderer-level transformation that preserves the formal problem change the model's binary judgment?
 
-Let:
+For benchmark v0 the only confirmatory transformation is:
 
-- `D` = direct presentation of a certified target entailment;
-- `F` = presentation exposing a formally valid intermediate entailment;
-- `C` = length/format-matched control that does not supply the valid decomposition.
+- `premise_reverse`: reverse the order of the same premises.
 
-Primary null hypothesis:
+Let `q` be a certified case, `E(q)` its base rendering, and `E_rev(q)` the rendering with premise order reversed.
 
-`H0: e_D = e_F`
+The gold label is identical because the underlying formal problem is identical.
 
-Two-sided alternative:
+Observed pairwise instability is:
 
-`H1: e_D ≠ e_F`
+`I_rev(q) = 1[M(E(q)) != M(E_rev(q))]`
 
-The direction of the effect is not assumed in Phase 1.
+and the primary descriptive statistic is the mean flip rate across paired cases.
+
+No claim about proof paths, composition, categories, or internal semantics follows from a nonzero flip rate.
+
+## Deferred transformations
+
+- atom renaming / aliasing;
+- redundant valid information;
+- explicit valid intermediates;
+- derivation factorization;
+- composition-sensitive interventions.
+
+These require separate control arguments or stronger formal representations before confirmatory use.
 
 ## Not yet hypotheses
-
-The following are explicitly deferred:
 
 1. LLM behavior preserves composition laws.
 2. LLM behavior admits an approximate functorial model.
 3. Predictive distributions induce a useful semantic geometry.
 4. HoTT or higher-categorical structure is required.
 
-These claims may only be promoted after preregistered lower-level evidence warrants them.
+Stronger structure is introduced only if lower-level measurements independently motivate it.
