@@ -2,30 +2,34 @@
 
 ## Phase 0 — Formal certification
 
-Use Lean to certify only the logical relations underlying experimental cases. Start with implication transitivity and conjunction. Keep the formal layer independent of any LLM API.
+Use Lean to certify positive and negative logical cases. Keep the formal layer independent of model APIs.
 
-Exit criterion: all experimental logical relations compile in Lean and every empirical case has a traceable certificate family.
+Exit criterion: all logical case families compile in Lean and every empirical case has traceable certificate provenance.
 
-## Phase 1 — Controlled behavioral measurement
+## Phase 1 — Minimal paired stability measurement
 
-Compare direct (`D`), valid-intermediate (`F`), and matched-control (`C`) presentations while holding the target entailment fixed. Measure final binary entailment accuracy and disagreement rates. Do not interpret differences as categorical failures.
+Start with transformations that do not alter the formal problem at all. Benchmark v0 uses only premise-order reversal at the renderer layer.
 
-Exit criterion: preregistered analysis with enough cases and repeated runs to estimate uncertainty, plus matched controls for presentation length and format.
+For each certified case, generate a base prompt and a reversed-premise prompt. Measure binary answer flips.
 
-## Phase 2 — Robustness
+Exit criterion: deterministic paired generator, positive and negative gold cases, frozen scoring rule, CI validation, and a preregistered model-evaluation protocol.
 
-Vary proposition names, natural-language realizations, ordering, distractors, depth, and model family. Test whether any Phase 1 effect survives these perturbations.
+## Phase 2 — Additional certified or audited transformations
 
-Exit criterion: replicated effect that cannot be explained by obvious presentation confounds.
+Add one transformation family at a time. Each must state exactly what is preserved, what changes, and whether that fact is Lean-checked or only generator-validated.
 
-## Phase 3 — Compositional behavioral hypothesis
+Candidates include atom aliases, alternative serializations, and carefully controlled redundant information.
 
-Only after Phases 1–2, test whether behavior across 2-, 3-, and n-step certified decompositions admits a stable compositional description.
+## Phase 3 — Derivation-sensitive experiments
 
-## Phase 4 — Categorical model candidate
+Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.
 
-Only if multiple independently tested composition/equivalence laws are behaviorally preserved, ask whether an approximate structure-preserving categorical model is useful. Category theory enters here as a model candidate, not as a Phase 1 assumption.
+## Phase 4 — Minimal structural model
 
-## Phase 5 — Optional geometry
+Only after robust regularities across multiple transformation families should the project fit a mathematical structure to the behavior.
 
-Only if the empirical object at Phase 4 provides a justified probabilistic structure, investigate whether a chosen metric or spectral construction yields explanatory geometry. Do not call it intrinsic or semantic without separate evidence.
+Category theory is a candidate only if identity/composition/equivalence laws are independently motivated by data.
+
+## Phase 5 — Optional richer structure
+
+Probabilistic geometry, Markov structure, HoTT, or higher categories are not milestones by default. They enter only when a precise empirical object and testable prediction require them.
