@@ -14,6 +14,26 @@ For each certified case, generate a base prompt and a reversed-premise prompt. M
 
 Exit criterion: deterministic paired generator, positive and negative gold cases, frozen scoring rule, CI validation, and a preregistered model-evaluation protocol.
 
+**Status:** first Pythia-70M run completed. Binary sign-flip rate was 0/256,
+while both base and reversed accuracy were 0.5. Continuous margin displacement
+was nonzero. Phase 1 now moves to secondary diagnosis of response bias and
+sub-threshold label separation before adding new transformations.
+
+## Phase 1.5 — Diagnose the continuous signal
+
+Before expanding the transformation family, measure whether the observed
+logit margin contains gold-label information despite chance threshold accuracy.
+
+Required diagnostics:
+
+- prediction counts by variant;
+- positive/negative gold-conditioned margin distributions;
+- AUROC of the margin before and after premise reversal;
+- distribution of paired margin displacement.
+
+Exit criterion: determine whether Phase 1's zero flips are best explained by a
+one-sided answer bias or by a stable but miscalibrated continuous signal.
+
 ## Phase 2 — Additional certified or audited transformations
 
 Add one transformation family at a time. Each must state exactly what is preserved, what changes, and whether that fact is Lean-checked or only generator-validated.
