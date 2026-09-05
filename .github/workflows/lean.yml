@@ -51,3 +51,4 @@ jobs:
           python3 -m py_compile scripts/run_hf_s3_margin.py
           python3 -m py_compile scripts/score_s3.py
           python3 -m py_compile scripts/verify_s3_lock.py
+          python3 -m py_compile scripts/analyze_s3_generalization.py
