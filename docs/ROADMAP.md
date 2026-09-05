@@ -53,6 +53,23 @@ negative formal families, not to assume that the model itself represents
 
 See `docs/PREREGISTRATION_PHASE2.md`.
 
+**Status:** completed. Phase 2 observed nonzero within-case margin variation
+under S3 premise permutations, while all 768 binary judgments remained YES.
+Permutation effects differed by formal family.
+
+## Phase 2.5 — Held-out scalar generalization
+
+Run an exploratory post-hoc test on the already-collected Phase 2 raw results.
+Estimate permutation effects on training cases/families and evaluate prediction
+on held-out cases/families against a zero-effect null.
+
+Exit criterion: determine whether a family-blind scalar permutation law has
+positive out-of-sample skill, and whether family-specific interaction materially
+improves held-out case prediction.
+
+This phase does not test an S3 representation or compositionality. See
+`docs/ANALYSIS_PHASE2_5.md`.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.
