@@ -89,6 +89,26 @@ Confirmatory success criterion:
 
 See `docs/PREREGISTRATION_PHASE2_6.md`.
 
+**Status:** completed; confirmatory endpoint failed. The frozen pooled scalar
+permutation law had aggregate skill -0.1188 versus the zero-effect null on eight
+unseen formal families. The previously positive 321 effect reversed sign.
+
+## Phase 2.7 — Explain interaction before adding structure
+
+Do not refit the failed pooled scalar law on the confirmatory holdout.
+
+Use the accumulated Phase 2/2.6 data only for exploratory mechanism diagnosis:
+separate permutation effects associated with formal-family structure, local
+syntax, conjunction placement, and positional/token context.
+
+The next confirmatory model must be specified from that diagnosis and then
+evaluated on a fresh set of unseen formal families.
+
+Exit criterion: identify a compact interaction hypothesis that explains the
+sign reversals and yields a new frozen out-of-family prediction. No group,
+representation, equivariance, or categorical claim enters before that fresh
+replication succeeds.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.
