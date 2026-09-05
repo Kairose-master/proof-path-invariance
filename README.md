@@ -61,6 +61,26 @@ Stronger claims are downstream only:
 
 Composition or category theory enters only if later measurements independently justify those structures.
 
+## First empirical result
+
+The first Pythia-70M / premise-reversal run produced:
+
+- 256 / 256 valid binary pairs;
+- 0 sign flips;
+- 0.0 flip rate;
+- 0.5 base accuracy;
+- 0.5 reversed accuracy;
+- mean absolute logit-margin shift of 0.07551097869873047.
+
+This is not evidence of correct logical invariance because accuracy is at chance
+on the balanced benchmark. It is evidence only that premise reversal did not
+cross the YES/NO decision boundary in this run, while still moving the continuous
+logit margin.
+
+See `docs/RESULTS_PHASE1.md`.
+
 ## Status
 
-Research scaffold. No empirical result or novelty claim is made yet.
+Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in
+result file records the supplied scorer summary and its provenance. No novelty
+claim is made yet.
