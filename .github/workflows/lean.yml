@@ -64,3 +64,4 @@ jobs:
           python3 -m py_compile scripts/validate_s3_unseen_benchmark.py
           python3 -m py_compile scripts/score_s3_unseen_confirmatory.py
           python3 -m py_compile scripts/verify_s3_unseen_lock.py
+          python3 -m py_compile scripts/analyze_s3_interactions.py
