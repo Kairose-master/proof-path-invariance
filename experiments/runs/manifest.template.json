@@ -1,0 +1,35 @@
+{
+  "run_id": "FILL-BEFORE-RUN",
+  "benchmark": {
+    "name": "symbolic_v0",
+    "lock_file": "experiments/benchmark_v0.lock.json",
+    "paired_prompts_sha256": "63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e",
+    "prompt_count": 512
+  },
+  "model": {
+    "provider": "FILL-BEFORE-RUN",
+    "model_id": "FILL-BEFORE-RUN",
+    "version_observed": null,
+    "access_date_utc": "FILL-BEFORE-RUN",
+    "endpoint_or_interface": null
+  },
+  "decoding": {
+    "temperature": null,
+    "top_p": null,
+    "max_output_tokens": null,
+    "seed": null,
+    "response_constraint": "Answer exactly YES or NO."
+  },
+  "sampling": {
+    "repeats_per_prompt": 1,
+    "expected_result_rows": 512
+  },
+  "execution": {
+    "runner_commit": "FILL-BEFORE-RUN",
+    "started_at_utc": null,
+    "finished_at_utc": null,
+    "notes": ""
+  },
+  "system_prompt": null,
+  "analysis_status": "planned"
+}
