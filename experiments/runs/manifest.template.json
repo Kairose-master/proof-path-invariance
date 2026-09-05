@@ -22,7 +22,7 @@
     "repeats_per_prompt": 1
   },
   "execution": {
-    "runner_commit": "FILL-BEFORE-RUN",
+    "runner_commit": "936f62f926226ed017877fc24bffa40327da463b",
     "torch_version": null,
     "transformers_version": null,
     "device": "cpu",
