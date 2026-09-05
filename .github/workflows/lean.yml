@@ -32,3 +32,8 @@ jobs:
           python3 -m json.tool experiments/schemas/run_manifest.schema.json >/dev/null
           python3 -m json.tool experiments/schemas/result_row.schema.json >/dev/null
           python3 scripts/validate_run_artifacts.py experiments/runs/manifest.template.json --allow-placeholders
+      - name: Syntax-check model runner and analysis
+        run: |
+          python3 -m py_compile scripts/run_hf_logit_margin.py
+          python3 -m py_compile scripts/validate_run_artifacts.py
+          python3 -m py_compile scripts/score_flips.py
