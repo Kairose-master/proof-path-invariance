@@ -1,52 +1,65 @@
 # Proof-Path Invariance
 
-A Lean-grounded experimental project for measuring whether formally valid intermediate entailments change LLM entailment judgments under controlled presentation conditions.
+A Lean-grounded project for measuring behavioral stability under formally controlled input transformations.
 
-> This repository does **not** assume that LLM reasoning is categorical or compositional. Lean is used only to certify logical relations used to construct controlled interventions.
+> The project does **not** assume that LLM reasoning is categorical, compositional, geometric, or proof-theoretically identical to Lean derivations.
 
-## Phase 1 question
+## Phase 1
 
-Holding the target entailment fixed, does exposing a formally valid intermediate entailment alter an LLM's final entailment accuracy beyond matched presentation controls?
+The initial confirmatory question is deliberately small:
 
-The first experiment compares:
+> For the same certified entailment problem, does reversing premise serialization order change a model's YES-vs-NO judgment?
 
-- **D — Direct:** target entailment presented directly.
-- **F — Factored:** the same target with a Lean-certified valid intermediate entailment exposed.
-- **C — Control:** a length/format-matched presentation that does not supply the valid decomposition.
+The formal problem is unchanged. Only the premise list order changes.
 
-Primary hypothesis is deliberately weak and two-sided: `e_D != e_F`. No categorical interpretation is attached to this result.
+For the first model, the project uses the small pretrained base model `EleutherAI/pythia-70m` at revision `step143000`.
+
+No text is generated. For each prompt `x` the runner measures
+
+```text
+margin(x) = logit(" YES" | x) - logit(" NO" | x)
+```
+
+and converts the sign into an induced YES/NO judgment. The primary statistic is the paired sign-flip rate under premise reversal.
 
 ## Formal core
 
-`PPI/Transitivity.lean` certifies the initial implication family:
+Lean certifies the logical case families used by the benchmark. Current v0 uses:
 
-```text
-A -> B
-B -> C
------
-A -> C
-```
+- implication transitivity for positive cases;
+- a countermodel-backed non-entailment family for negative cases.
 
-Both a compact proof and an explicitly intermediate proof are included. `PPI/Conjunction.lean` supplies a second certificate family for later robustness tests.
+The benchmark contains 256 deterministic symbolic records, but these are repeated instantiations of two formal schemas, not 256 independent logical structures.
 
-## Research stages
+## Reproducibility
 
-1. Lean-certified logical cases.
-2. Controlled D/F/C behavioral measurement.
-3. Robustness across realizations and models.
-4. Only then: test a compositional behavioral hypothesis.
-5. Only after independent structural evidence: consider a categorical model.
-6. Geometry is optional and strictly downstream.
+CI checks:
 
-See `docs/HYPOTHESES.md`, `docs/PROTOCOL.md`, and `docs/ROADMAP.md`.
+1. Lean certificates build;
+2. symbolic case generation;
+3. case validation;
+4. paired prompt generation;
+5. exact benchmark hashes;
+6. run-schema and manifest structure.
 
-## Build
+The frozen paired-prompt SHA-256 is recorded in `experiments/benchmark_v0.lock.json`.
 
-Install Lean via `elan`, then run:
+## Run locally
 
 ```bash
 lake build
+python3 -m pip install -r requirements-runner.txt
 ```
+
+See `docs/RUN_PROTOCOL.md` for the model execution procedure.
+
+## Research escalation
+
+Stronger claims are downstream only:
+
+`formal transformation -> measured instability -> robustness -> minimal structural model`
+
+Composition or category theory enters only if later measurements independently justify those structures.
 
 ## Status
 
