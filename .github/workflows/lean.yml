@@ -17,7 +17,9 @@ jobs:
         run: lake build
       - name: Validate positive and negative cases
         run: python3 scripts/validate_cases.py
-      - name: Render positive prompts
+      - name: Render legacy positive prompts
         run: python3 scripts/generate_prompts.py --cases experiments/cases/transitivity_v0.jsonl --out /tmp/ppi-positive.jsonl
-      - name: Render negative prompts
+      - name: Render legacy negative prompts
         run: python3 scripts/generate_prompts.py --cases experiments/cases/negative_v0.jsonl --out /tmp/ppi-negative.jsonl
+      - name: Render minimal paired benchmark
+        run: python3 scripts/generate_paired_benchmark.py --out /tmp/ppi-paired.jsonl
