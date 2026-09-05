@@ -1,0 +1,44 @@
+{
+  "run_id": "pythia70m-step143000-s3-unseen-v0",
+  "analysis_status": "confirmatory_pre_frozen",
+  "benchmark": "s3_unseen_v0",
+  "cases": 128,
+  "prompt_rows": 768,
+  "prediction_counts": {
+    "YES": 768
+  },
+  "raw_result_sha256": "25d970bb9c376583c415c9af227be699469571fab1ce842d76fb2a69d50d5e6d",
+  "frozen_beta_from_phase2": {
+    "132": -0.032772064208984375,
+    "213": -0.032546043395996094,
+    "231": -0.016511917114257812,
+    "312": -0.027113914489746094,
+    "321": 0.05498981475830078
+  },
+  "primary_endpoint": {
+    "name": "aggregate_skill_vs_zero",
+    "success_rule": "skill_vs_zero > 0",
+    "result": {
+      "n": 640,
+      "mae": 0.060371392965316774,
+      "rmse": 0.08014615213316811,
+      "sse": 4.110979649121873,
+      "zero_null_sse": 3.674517810344696,
+      "skill_vs_zero": -0.11878071118567624
+    },
+    "success": false
+  },
+  "observed_mean_effect_by_permutation": {
+    "132": -0.0160675048828125,
+    "213": -0.028473854064941406,
+    "231": -0.0063915252685546875,
+    "312": -0.05844306945800781,
+    "321": -0.032113075256347656
+  },
+  "interpretation": {
+    "confirmatory_conclusion": "The pre-frozen pooled scalar permutation law failed to beat the zero-effect null on eight unseen formal families.",
+    "important_reversal": "The previously positive 321 effect reversed sign on the unseen-family benchmark.",
+    "boundary": "This falsifies the current family-blind scalar-law hypothesis for this model/renderer/benchmark; it does not imply that all transformation structure is absent."
+  },
+  "provenance": "Score values copied from user-supplied phase2_6_confirmatory_score.json; raw JSONL was independently checked in-session for 768 rows, all YES, and SHA-256 above. Raw JSONL not yet committed."
+}
