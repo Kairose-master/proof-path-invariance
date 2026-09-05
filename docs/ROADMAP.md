@@ -132,7 +132,12 @@ Exit criterion: report the empirical invariance defect on logically identical
 rows, between-class separation, and numerical rank stability, at the level of
 the finite test family only.
 
-**Status:** inputs frozen; no model data collected.
+**Status:** completed on Pythia-70M. In every control the invariance defect
+on logically identical rows (0.39–1.43) exceeds the separation between every
+pair of logical classes (min 0.03–0.19); raw rank is 1 from the common logit
+offset; readout is at chance. The identifiability criterion is not testable
+until a recognizer has `Δ_inv` below its class separation. See
+`docs/RESULTS_PHASE3_HANKEL.md`.
 
 ## Phase 3 — Derivation-sensitive experiments
 

@@ -1,6 +1,6 @@
 # Phase 3 — Hankel observation table `hankel_v0`
 
-Status: **INPUTS FROZEN. ANALYSIS PLAN v0 FROZEN. NO MODEL DATA COLLECTED.**
+Status: **INPUTS FROZEN. ANALYSIS PLAN v0 FROZEN. Pythia-70M run completed: see `docs/RESULTS_PHASE3_HANKEL.md`.**
 
 This benchmark is designed from the definitions in the `recognition-paths`
 repository (`RecognitionPaths/Recognition.lean`). It collects the observations

@@ -124,3 +124,37 @@ Raw result SHA-256:
 `25d970bb9c376583c415c9af227be699469571fab1ce842d76fb2a69d50d5e6d`.
 
 See `docs/RESULTS_PHASE2_6.md`.
+
+
+## 2026-09-05 — Phase 3.0 Pythia-70M Hankel observation table
+
+**Status:** completed; descriptive under the frozen v0 plan.
+
+- benchmark: `hankel_v0` (32 prefixes × 32 continuation-query tests × 16 controls)
+- prompt rows: 16384
+- observation: answer-logit pair in ℝ²
+- run time: 2026-09-05T17:10:03Z → 17:16:36Z, CPU, 4 single-thread shards
+
+```text
+delta_inv (min/median/max over controls)   = 0.394 / 0.947 / 1.432
+min class separation                       = 0.030 / 0.123 / 0.185
+class pairs separated at delta_inv (of 28) = 0 / 0 / 0
+raw numerical rank at 1e-3                 = 1 in every control
+AUROC margin vs gold                       = 0.357 / 0.519 / 0.574
+closure defect at eps = delta_inv          = 0.519 / 1.133 / 1.533
+```
+
+- **OBSERVED:** serialization of logically identical premises moves the logit
+  pair farther than changing the logical class does, in every control.
+- **OBSERVED:** raw table rank is 1 (common logit offset). Exploratory
+  column-centered rank is full (31) at 1e-3 in every control.
+- **OBSERVED:** readout at chance; YES/NO map predicts positive on every cell.
+- **CONFOUND:** the atom-label family changes `Δ_inv` by about 3×.
+- **LIMIT:** `Δ_inv` above class separation means the identifiability
+  criterion is not yet testable on this recognizer.
+
+Raw result SHA-256 (uncompressed):
+`d5090d9792fe00477fcddcce67b12c52196bc6bfa166445400baf69e7e603e34`.
+
+See `docs/RESULTS_PHASE3_HANKEL.md`.
+

@@ -1,0 +1,45 @@
+{
+  "run_id": "pythia70m-step143000-hankel-v0",
+  "benchmark": {
+    "name": "hankel_v0",
+    "lock_file": "experiments/hankel_v0.lock.json",
+    "prompts_sha256": "9491e21e82e00b3fab20bbcb6bf6cced10285edbad47d0851cbc61d017513cdf",
+    "prompt_count": 16384,
+    "generator_commit": "4e7b0fbc360417aecfeba68de4480ee13fd3dd76"
+  },
+  "model": {
+    "provider": "huggingface-local",
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "resolved_commit": "de3e4e2d6cbb3b1a51f90fe153ea51fcd8c7c852",
+    "access_date_utc": "2026-09-05T17:10:03Z",
+    "interface": "transformers.AutoModelForCausalLM"
+  },
+  "measurement": {
+    "mode": "answer_position_logit_pair",
+    "observation_space": "R^2 (positive candidate logit, negative candidate logit)",
+    "candidate_token_ids": {" YES": 22487, " NO": 7651, " True": 11793, " False": 16708},
+    "require_single_token_candidates": true,
+    "repeats_per_prompt": 1
+  },
+  "execution": {
+    "runner": "scripts/run_hf_hankel.py",
+    "runner_commit": "4e7b0fbc360417aecfeba68de4480ee13fd3dd76",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "5.16.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads_per_process": 1,
+    "sharding": "input split into 4 contiguous shards, one process each, one forward pass per prompt; outputs concatenated in input order and re-aligned against the prompt file",
+    "started_at_utc": "2026-09-05T17:10:03Z",
+    "finished_at_utc": "2026-09-05T17:16:36Z",
+    "notes": "Deterministic forward passes only; no text generation. Raw rows stored gzip-compressed in experiments/runs/hankel_v0_pythia70m.jsonl.gz."
+  },
+  "raw_result_sha256_uncompressed": "d5090d9792fe00477fcddcce67b12c52196bc6bfa166445400baf69e7e603e34",
+  "analysis": {
+    "script": "scripts/analyze_hankel.py",
+    "plan": "docs/PHASE3_HANKEL_DESIGN.md (frozen v0)",
+    "summary": "experiments/results/phase3_hankel_v0_summary.json"
+  },
+  "analysis_status": "descriptive_frozen_plan_v0_completed"
+}

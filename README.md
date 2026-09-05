@@ -79,6 +79,14 @@ logit margin.
 
 See `docs/RESULTS_PHASE1.md`.
 
+## Phase 3.0 Hankel table
+
+`hankel_v0` renders 32 Horn prefix traces against 32 continuation-query tests
+under 16 presentation controls and records both answer logits. On Pythia-70M,
+serialization of logically identical premises moves the logit pair farther
+than changing the logical class does, in every control; the readout is at
+chance. See `docs/RESULTS_PHASE3_HANKEL.md`.
+
 ## Status
 
 Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in
