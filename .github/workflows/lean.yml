@@ -35,6 +35,12 @@ jobs:
         run: sha256sum /tmp/s3_v0.jsonl
       - name: Verify frozen Phase 2 S3 benchmark
         run: python3 scripts/verify_s3_lock.py /tmp/s3_v0.jsonl
+      - name: Generate unseen-family confirmatory S3 benchmark
+        run: python3 scripts/generate_s3_unseen_benchmark.py --out /tmp/s3_unseen_v0.jsonl
+      - name: Validate unseen-family confirmatory S3 benchmark
+        run: python3 scripts/validate_s3_unseen_benchmark.py /tmp/s3_unseen_v0.jsonl
+      - name: Report unseen-family benchmark hash
+        run: sha256sum /tmp/s3_unseen_v0.jsonl
       - name: Validate JSON schemas and run template
         run: |
           python3 -m json.tool experiments/schemas/run_manifest.schema.json >/dev/null
@@ -52,3 +58,6 @@ jobs:
           python3 -m py_compile scripts/score_s3.py
           python3 -m py_compile scripts/verify_s3_lock.py
           python3 -m py_compile scripts/analyze_s3_generalization.py
+          python3 -m py_compile scripts/generate_s3_unseen_benchmark.py
+          python3 -m py_compile scripts/validate_s3_unseen_benchmark.py
+          python3 -m py_compile scripts/score_s3_unseen_confirmatory.py
