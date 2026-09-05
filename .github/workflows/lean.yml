@@ -15,7 +15,9 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: Build Lean certificates
         run: lake build
-      - name: Validate experiment cases
+      - name: Validate positive and negative cases
         run: python3 scripts/validate_cases.py
-      - name: Render frozen prompts
-        run: python3 scripts/generate_prompts.py --out /tmp/ppi-prompts.jsonl
+      - name: Render positive prompts
+        run: python3 scripts/generate_prompts.py --cases experiments/cases/transitivity_v0.jsonl --out /tmp/ppi-positive.jsonl
+      - name: Render negative prompts
+        run: python3 scripts/generate_prompts.py --cases experiments/cases/negative_v0.jsonl --out /tmp/ppi-negative.jsonl
