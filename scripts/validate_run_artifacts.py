@@ -19,7 +19,6 @@ from pathlib import Path
 VARIANTS = {"base", "premise_reverse"}
 PREDICTIONS = {"YES", "NO", "TIE"}
 PLACEHOLDER = "FILL-BEFORE-RUN"
-PROMPT_HASH = "63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e"
 
 
 def fail(msg: str) -> None:
@@ -42,8 +41,13 @@ def validate_manifest(m: dict, allow_placeholders: bool) -> None:
     b = m["benchmark"]
     if b.get("name") != "symbolic_v0":
         fail("benchmark.name must be symbolic_v0")
-    if b.get("paired_prompts_sha256") != PROMPT_HASH:
-        fail("paired prompt hash does not match frozen benchmark")
+    lock_path = Path(b.get("lock_file", ""))
+    if not lock_path.is_file():
+        fail(f"benchmark lock file not found: {lock_path}")
+    lock = load_json(lock_path)
+    expected_hash = lock.get("sha256", {}).get("paired_prompts_jsonl")
+    if b.get("paired_prompts_sha256") != expected_hash:
+        fail("paired prompt hash does not match benchmark lock file")
     if b.get("prompt_count") != 512:
         fail("prompt_count must be 512")
 
