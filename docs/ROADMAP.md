@@ -139,6 +139,18 @@ offset; readout is at chance. The identifiability criterion is not testable
 until a recognizer has `Δ_inv` below its class separation. See
 `docs/RESULTS_PHASE3_HANKEL.md`.
 
+## Phase 3.1 — Cross-recognizer replication
+
+Run the unchanged `hankel_v0` table on `pythia-410m` and
+`Qwen2.5-0.5B-Instruct` with preregistered gates (Gate R: AUROC > 0.55;
+Gate I: `Δ_inv` / median class separation < 1). See
+`docs/PREREGISTRATION_PHASE3_1.md`.
+
+**Status:** completed. `pythia410m` fails both gates (`R` 2.95); `qwen05b`
+passes Gate R (AUROC 0.77) and fails Gate I (`R` 1.35), as predicted.
+Exploratory: with the bullet renderer `qwen05b` has `R` below 1 in 6 of 8
+controls. See `docs/RESULTS_PHASE3_1.md`.
+
 ## Phase 3.2 — Boolean Hankel table
 
 Remove the metric from the readout: each logit cell is read only through

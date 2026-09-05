@@ -87,6 +87,12 @@ serialization of logically identical premises moves the logit pair farther
 than changing the logical class does, in every control; the readout is at
 chance. See `docs/RESULTS_PHASE3_HANKEL.md`.
 
+Phase 3.1 ran the same table on Pythia-410M and Qwen2.5-0.5B-Instruct under
+preregistered gates. Scale alone changed nothing; the instruction-tuned model
+reads the task (AUROC 0.77) but still does not identify logical equivalents
+at the pooled level (`Δ_inv` / class separation 1.35). See
+`docs/RESULTS_PHASE3_1.md`.
+
 ## Status
 
 Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in

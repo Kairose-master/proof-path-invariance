@@ -158,3 +158,33 @@ Raw result SHA-256 (uncompressed):
 
 See `docs/RESULTS_PHASE3_HANKEL.md`.
 
+
+## 2026-09-05 — Phase 3.1 cross-recognizer replication of `hankel_v0`
+
+**Status:** completed; preregistered gates evaluated.
+
+```text
+recognizer   AUROC(med)  Gate R   R=dinv/sep(med)  Gate I
+pythia70m    0.519       fail     3.01             fail
+pythia410m   0.468       fail     2.95             fail
+qwen05b      0.770       pass     1.35             fail
+```
+
+- **PREDICTED → OBSERVED:** `pythia410m` fails both gates; `qwen05b` passes
+  Gate R and fails Gate I. Reading the task and identifying logical
+  equivalents come apart, as recorded before the runs.
+- **OBSERVED:** scale alone (70M → 410M) halves absolute order sensitivity
+  and class separation together; `R` is unchanged.
+- **OBSERVED:** `qwen05b` is the first recognizer separating some class
+  pairs beyond `Δ_inv` (up to 17/28 in one control).
+- **OBSERVED:** margin sign is miscalibrated in opposite directions by
+  renderer/answer map while AUROC is informative.
+- **EXPLORATORY:** by renderer, `qwen05b` has `R` median 0.88 (bullets,
+  6/8 controls below 1) versus 1.68 (prose, 0/8). Not preregistered.
+
+Raw SHA-256 (uncompressed): `pythia410m`
+`aba44f5fc7976361878393f90c61f2a1da041009562d4b4fd861d5a2b6922c3f`;
+`qwen05b` `502b8e2750f8480c32f34df1283f22ab013a3bd0d66c8823120db1dcf4546a31`.
+
+See `docs/RESULTS_PHASE3_1.md`.
+
