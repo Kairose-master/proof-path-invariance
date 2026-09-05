@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PPI model run manifest",
+  "type": "object",
+  "required": [
+    "run_id",
+    "benchmark",
+    "model",
+    "decoding",
+    "sampling",
+    "execution"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "benchmark": {
+      "type": "object",
+      "required": ["name", "lock_file", "paired_prompts_sha256", "prompt_count"],
+      "properties": {
+        "name": {"type": "string"},
+        "lock_file": {"type": "string"},
+        "paired_prompts_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "prompt_count": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "model": {
+      "type": "object",
+      "required": ["provider", "model_id", "version_observed", "access_date_utc"],
+      "properties": {
+        "provider": {"type": "string"},
+        "model_id": {"type": "string"},
+        "version_observed": {"type": ["string", "null"]},
+        "access_date_utc": {"type": "string"},
+        "endpoint_or_interface": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "decoding": {
+      "type": "object",
+      "required": ["temperature", "top_p", "max_output_tokens", "seed", "response_constraint"],
+      "properties": {
+        "temperature": {"type": ["number", "null"]},
+        "top_p": {"type": ["number", "null"]},
+        "max_output_tokens": {"type": ["integer", "null"]},
+        "seed": {"type": ["integer", "null"]},
+        "response_constraint": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "sampling": {
+      "type": "object",
+      "required": ["repeats_per_prompt", "expected_result_rows"],
+      "properties": {
+        "repeats_per_prompt": {"type": "integer", "minimum": 1},
+        "expected_result_rows": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "execution": {
+      "type": "object",
+      "required": ["runner_commit", "started_at_utc", "finished_at_utc", "notes"],
+      "properties": {
+        "runner_commit": {"type": "string"},
+        "started_at_utc": {"type": ["string", "null"]},
+        "finished_at_utc": {"type": ["string", "null"]},
+        "notes": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "system_prompt": {"type": ["string", "null"]},
+    "analysis_status": {
+      "type": "string",
+      "enum": ["planned", "collected", "validated", "analyzed"]
+    }
+  },
+  "additionalProperties": false
+}
