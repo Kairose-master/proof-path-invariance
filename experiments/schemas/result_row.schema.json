@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PPI raw result row",
+  "type": "object",
+  "required": [
+    "run_id",
+    "pair_id",
+    "variant",
+    "sample_index",
+    "gold",
+    "raw_text",
+    "normalized_answer",
+    "valid_format"
+  ],
+  "properties": {
+    "run_id": {"type": "string"},
+    "pair_id": {"type": "string"},
+    "variant": {"type": "string", "enum": ["base", "premise_reverse"]},
+    "sample_index": {"type": "integer", "minimum": 0},
+    "gold": {"type": "boolean"},
+    "raw_text": {"type": "string"},
+    "normalized_answer": {
+      "type": "string",
+      "enum": ["YES", "NO", "INVALID"]
+    },
+    "valid_format": {"type": "boolean"},
+    "provider_request_id": {"type": ["string", "null"]},
+    "latency_ms": {"type": ["number", "null"]},
+    "created_at_utc": {"type": ["string", "null"]},
+    "error": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
