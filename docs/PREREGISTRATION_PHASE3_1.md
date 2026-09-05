@@ -1,8 +1,8 @@
 # Phase 3.1 Preregistration — Cross-recognizer replication of `hankel_v0`
 
 Status: **FROZEN BEFORE INSPECTING ANY RESULT OF THESE RUNS.** Runs were
-launched at 2026-09-05T17:3xZ; this document was committed while they were
-in progress and before any output was read.
+launched at 2026-09-05T17:27Z; this document was committed at 17:29Z while
+they were in progress (184 of 32768 rows written, none read).
 
 ## Question
 
