@@ -188,3 +188,32 @@ Raw SHA-256 (uncompressed): `pythia410m`
 
 See `docs/RESULTS_PHASE3_1.md`.
 
+
+## 2026-09-05 — Phase 3.2 Boolean Hankel table `hankel_v1` on Qwen2.5-0.5B-Instruct
+
+**Status:** completed; frozen v1 gates evaluated.
+
+```text
+Gate R  comparative accuracy (pooled)              = 0.867   pass
+Gate I  within/between median Hamming (pooled)     = 0.561   pass
+exact   classes with identical serializations      = 0 / 8
+closure depth<=1 identical pairs / separated at 2  = 1 / 1  (fork_join-312 vs 321)
+idem    a.a vs a agreement 0.957 ; u.u vs u Hamming 84 (serialization 94)
+```
+
+- **OBSERVED:** first recognizer/readout pair passing both gates.
+- **OBSERVED:** exact invariance fails (0/8); all 40 rows distinct.
+- **OBSERVED:** decision columns are constant (all positive) under bullets;
+  the comparative readout lifts accuracy 0.57 → 0.92 on the same logits.
+- **OBSERVED:** depth-one family not closed; witness is a logically
+  identical pair separated only at depth two.
+- **OBSERVED:** repeated continuation nearly invisible (96%); doubled
+  prefix costs about as much as permutation.
+- **LIMIT:** the Boolean ratio and the Phase 3.1 Euclidean ratio are
+  different statistics; the gate change is a readout change.
+
+Raw SHA-256 (uncompressed):
+`b7e574e7f29c07b1def8aa62955a63f30b18712f57c179e0f8619ad7ba09e23f`.
+
+See `docs/RESULTS_PHASE3_2.md`.
+

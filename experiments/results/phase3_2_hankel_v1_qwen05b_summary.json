@@ -1,0 +1,456 @@
+{
+  "benchmark": "hankel_v1",
+  "analysis_status": "boolean_chu_frozen_plan_v1",
+  "raw_result_sha256": "b7e574e7f29c07b1def8aa62955a63f30b18712f57c179e0f8619ad7ba09e23f",
+  "prompt_rows": 18240,
+  "per_renderer": {
+    "bullets": {
+      "A_invariance": {
+        "classes_with_identical_profiles": 0,
+        "classes": 8,
+        "within_class_hamming_median": 49.0,
+        "within_class_hamming_max": 172,
+        "columns": 570,
+        "per_class": {
+          "chain": {
+            "max_hamming": 53,
+            "median_hamming": 39.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 39.5,
+            "all_serializations_identical": false
+          },
+          "fork_join": {
+            "max_hamming": 54,
+            "median_hamming": 51.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 51.0,
+            "all_serializations_identical": false
+          },
+          "chain_gap": {
+            "max_hamming": 70,
+            "median_hamming": 52.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 52.0,
+            "all_serializations_identical": false
+          },
+          "branch": {
+            "max_hamming": 50,
+            "median_hamming": 41.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 41.5,
+            "all_serializations_identical": false
+          },
+          "reversed": {
+            "max_hamming": 44,
+            "median_hamming": 30.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 30.0,
+            "all_serializations_identical": false
+          },
+          "fragments": {
+            "max_hamming": 110,
+            "median_hamming": 77.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 77.5,
+            "all_serializations_identical": false
+          },
+          "gated": {
+            "max_hamming": 60,
+            "median_hamming": 42.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 42.5,
+            "all_serializations_identical": false
+          },
+          "skip": {
+            "max_hamming": 172,
+            "median_hamming": 150.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 150.5,
+            "all_serializations_identical": false
+          }
+        }
+      },
+      "B_separation": {
+        "min": 25,
+        "median": 85.0,
+        "max": 122,
+        "class_pairs_with_min_separation_above_within_max": 0,
+        "class_pairs_total": 28,
+        "ratio_within_median_over_between_median": 0.5764705882352941,
+        "per_class_pair": {
+          "chain|fork_join": 59,
+          "chain|chain_gap": 99,
+          "chain|branch": 85,
+          "chain|reversed": 33,
+          "chain|fragments": 105,
+          "chain|gated": 87,
+          "chain|skip": 37,
+          "fork_join|chain_gap": 108,
+          "fork_join|branch": 103,
+          "fork_join|reversed": 113,
+          "fork_join|fragments": 54,
+          "fork_join|gated": 122,
+          "fork_join|skip": 112,
+          "chain_gap|branch": 95,
+          "chain_gap|reversed": 87,
+          "chain_gap|fragments": 90,
+          "chain_gap|gated": 121,
+          "chain_gap|skip": 72,
+          "branch|reversed": 73,
+          "branch|fragments": 41,
+          "branch|gated": 38,
+          "branch|skip": 62,
+          "reversed|fragments": 102,
+          "reversed|gated": 85,
+          "reversed|skip": 28,
+          "fragments|gated": 33,
+          "fragments|skip": 50,
+          "gated|skip": 25
+        }
+      },
+      "C_collapse": {
+        "distinct_row_profiles": 40,
+        "rows": 40,
+        "distinct_column_profiles": 242,
+        "columns": 570,
+        "logical_distinct_rows": 8
+      },
+      "D_readout": {
+        "decision_accuracy": 0.5718201754385965,
+        "decision_positive_rate": 1.0,
+        "decision_gold_positive_rate": 0.5718201754385965,
+        "comparative_accuracy": 0.9181220657276995,
+        "comparative_cells_defined": 5325
+      },
+      "E_closure": {
+        "row_pairs_identical_on_depth_le_1": 1,
+        "of_which_separated_at_depth_2": 1,
+        "closed": false,
+        "witness": {
+          "rows": [
+            "fork_join-312",
+            "fork_join-321"
+          ],
+          "separating_depth2_columns": 4,
+          "example_column": "P-b_c.e_d-ae-ce"
+        },
+        "depth_le_1_columns": 80
+      },
+      "F_idempotence": {
+        "continuation_zz_vs_z_agreement": 0.9635714285714285,
+        "continuation_cells": 2800,
+        "prefix_uu_vs_u_hamming": {
+          "chain": 59,
+          "fork_join": 26,
+          "chain_gap": 40,
+          "branch": 37,
+          "reversed": 48,
+          "fragments": 49,
+          "gated": 17,
+          "skip": 52
+        },
+        "prefix_uu_vs_u_hamming_median": 44.0,
+        "serialization_hamming_median_for_reference": 49.0
+      }
+    },
+    "prose": {
+      "A_invariance": {
+        "classes_with_identical_profiles": 0,
+        "classes": 8,
+        "within_class_hamming_median": 48.5,
+        "within_class_hamming_max": 89,
+        "columns": 570,
+        "per_class": {
+          "chain": {
+            "max_hamming": 45,
+            "median_hamming": 36.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 36.5,
+            "all_serializations_identical": false
+          },
+          "fork_join": {
+            "max_hamming": 67,
+            "median_hamming": 35.5,
+            "median_hamming_decision": 2.5,
+            "median_hamming_preference": 33.0,
+            "all_serializations_identical": false
+          },
+          "chain_gap": {
+            "max_hamming": 70,
+            "median_hamming": 51.0,
+            "median_hamming_decision": 20.0,
+            "median_hamming_preference": 38.0,
+            "all_serializations_identical": false
+          },
+          "branch": {
+            "max_hamming": 68,
+            "median_hamming": 51.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 51.0,
+            "all_serializations_identical": false
+          },
+          "reversed": {
+            "max_hamming": 85,
+            "median_hamming": 47.0,
+            "median_hamming_decision": 2.0,
+            "median_hamming_preference": 45.5,
+            "all_serializations_identical": false
+          },
+          "fragments": {
+            "max_hamming": 67,
+            "median_hamming": 41.5,
+            "median_hamming_decision": 2.0,
+            "median_hamming_preference": 40.5,
+            "all_serializations_identical": false
+          },
+          "gated": {
+            "max_hamming": 81,
+            "median_hamming": 61.0,
+            "median_hamming_decision": 21.5,
+            "median_hamming_preference": 36.5,
+            "all_serializations_identical": false
+          },
+          "skip": {
+            "max_hamming": 89,
+            "median_hamming": 58.5,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 58.5,
+            "all_serializations_identical": false
+          }
+        }
+      },
+      "B_separation": {
+        "min": 8,
+        "median": 70.5,
+        "max": 108,
+        "class_pairs_with_min_separation_above_within_max": 6,
+        "class_pairs_total": 28,
+        "ratio_within_median_over_between_median": 0.6879432624113475,
+        "per_class_pair": {
+          "chain|fork_join": 36,
+          "chain|chain_gap": 106,
+          "chain|branch": 54,
+          "chain|reversed": 22,
+          "chain|fragments": 107,
+          "chain|gated": 108,
+          "chain|skip": 89,
+          "fork_join|chain_gap": 100,
+          "fork_join|branch": 64,
+          "fork_join|reversed": 67,
+          "fork_join|fragments": 74,
+          "fork_join|gated": 106,
+          "fork_join|skip": 108,
+          "chain_gap|branch": 73,
+          "chain_gap|reversed": 73,
+          "chain_gap|fragments": 71,
+          "chain_gap|gated": 71,
+          "chain_gap|skip": 45,
+          "branch|reversed": 60,
+          "branch|fragments": 52,
+          "branch|gated": 57,
+          "branch|skip": 37,
+          "reversed|fragments": 84,
+          "reversed|gated": 75,
+          "reversed|skip": 70,
+          "fragments|gated": 8,
+          "fragments|skip": 14,
+          "gated|skip": 20
+        }
+      },
+      "C_collapse": {
+        "distinct_row_profiles": 40,
+        "rows": 40,
+        "distinct_column_profiles": 235,
+        "columns": 570,
+        "logical_distinct_rows": 8
+      },
+      "D_readout": {
+        "decision_accuracy": 0.624671052631579,
+        "decision_positive_rate": 0.9342105263157895,
+        "decision_gold_positive_rate": 0.5718201754385965,
+        "comparative_accuracy": 0.8155868544600939,
+        "comparative_cells_defined": 5325
+      },
+      "E_closure": {
+        "row_pairs_identical_on_depth_le_1": 1,
+        "of_which_separated_at_depth_2": 1,
+        "closed": false,
+        "witness": {
+          "rows": [
+            "fork_join-312",
+            "fork_join-321"
+          ],
+          "separating_depth2_columns": 4,
+          "example_column": "P-b_c.e_a-ad-bd"
+        },
+        "depth_le_1_columns": 80
+      },
+      "F_idempotence": {
+        "continuation_zz_vs_z_agreement": 0.9510714285714286,
+        "continuation_cells": 2800,
+        "prefix_uu_vs_u_hamming": {
+          "chain": 91,
+          "fork_join": 55,
+          "chain_gap": 53,
+          "branch": 28,
+          "reversed": 39,
+          "fragments": 39,
+          "gated": 47,
+          "skip": 18
+        },
+        "prefix_uu_vs_u_hamming_median": 43.0,
+        "serialization_hamming_median_for_reference": 48.5
+      }
+    }
+  },
+  "pooled": {
+    "A_invariance": {
+      "classes_with_identical_profiles": 0,
+      "classes": 8,
+      "within_class_hamming_median": 94.0,
+      "within_class_hamming_max": 261,
+      "columns": 1140,
+      "per_class": {
+        "chain": {
+          "max_hamming": 87,
+          "median_hamming": 78.5,
+          "median_hamming_decision": 0.0,
+          "median_hamming_preference": 78.5,
+          "all_serializations_identical": false
+        },
+        "fork_join": {
+          "max_hamming": 100,
+          "median_hamming": 86.0,
+          "median_hamming_decision": 2.5,
+          "median_hamming_preference": 83.5,
+          "all_serializations_identical": false
+        },
+        "chain_gap": {
+          "max_hamming": 130,
+          "median_hamming": 101.0,
+          "median_hamming_decision": 20.0,
+          "median_hamming_preference": 88.0,
+          "all_serializations_identical": false
+        },
+        "branch": {
+          "max_hamming": 112,
+          "median_hamming": 94.5,
+          "median_hamming_decision": 0.0,
+          "median_hamming_preference": 94.5,
+          "all_serializations_identical": false
+        },
+        "reversed": {
+          "max_hamming": 121,
+          "median_hamming": 78.5,
+          "median_hamming_decision": 2.0,
+          "median_hamming_preference": 74.5,
+          "all_serializations_identical": false
+        },
+        "fragments": {
+          "max_hamming": 171,
+          "median_hamming": 122.5,
+          "median_hamming_decision": 2.0,
+          "median_hamming_preference": 118.5,
+          "all_serializations_identical": false
+        },
+        "gated": {
+          "max_hamming": 134,
+          "median_hamming": 100.0,
+          "median_hamming_decision": 21.5,
+          "median_hamming_preference": 75.5,
+          "all_serializations_identical": false
+        },
+        "skip": {
+          "max_hamming": 261,
+          "median_hamming": 218.0,
+          "median_hamming_decision": 0.0,
+          "median_hamming_preference": 218.0,
+          "all_serializations_identical": false
+        }
+      }
+    },
+    "B_separation": {
+      "min": 43,
+      "median": 167.5,
+      "max": 252,
+      "class_pairs_with_min_separation_above_within_max": 0,
+      "class_pairs_total": 28,
+      "ratio_within_median_over_between_median": 0.5611940298507463,
+      "per_class_pair": {
+        "chain|fork_join": 115,
+        "chain|chain_gap": 221,
+        "chain|branch": 161,
+        "chain|reversed": 73,
+        "chain|fragments": 212,
+        "chain|gated": 215,
+        "chain|skip": 128,
+        "fork_join|chain_gap": 212,
+        "fork_join|branch": 183,
+        "fork_join|reversed": 189,
+        "fork_join|fragments": 128,
+        "fork_join|gated": 252,
+        "fork_join|skip": 232,
+        "chain_gap|branch": 174,
+        "chain_gap|reversed": 200,
+        "chain_gap|fragments": 186,
+        "chain_gap|gated": 208,
+        "chain_gap|skip": 117,
+        "branch|reversed": 146,
+        "branch|fragments": 93,
+        "branch|gated": 96,
+        "branch|skip": 116,
+        "reversed|fragments": 191,
+        "reversed|gated": 178,
+        "reversed|skip": 107,
+        "fragments|gated": 43,
+        "fragments|skip": 79,
+        "gated|skip": 54
+      }
+    },
+    "C_collapse": {
+      "distinct_row_profiles": 40,
+      "rows": 40,
+      "distinct_column_profiles": 467,
+      "columns": 1140,
+      "logical_distinct_rows": 8
+    },
+    "D_readout": {
+      "decision_accuracy": 0.5982456140350877,
+      "decision_positive_rate": 0.9671052631578947,
+      "decision_gold_positive_rate": 0.5718201754385965,
+      "comparative_accuracy": 0.8668544600938967,
+      "comparative_cells_defined": 10650
+    },
+    "E_closure": {
+      "row_pairs_identical_on_depth_le_1": 1,
+      "of_which_separated_at_depth_2": 1,
+      "closed": false,
+      "witness": {
+        "rows": [
+          "fork_join-312",
+          "fork_join-321"
+        ],
+        "separating_depth2_columns": 8,
+        "example_column": "P-b_c.e_d-ae-ce-bullets"
+      },
+      "depth_le_1_columns": 160
+    },
+    "F_idempotence": {
+      "continuation_zz_vs_z_agreement": 0.9573214285714285,
+      "continuation_cells": 5600,
+      "prefix_uu_vs_u_hamming": {
+        "chain": 150,
+        "fork_join": 81,
+        "chain_gap": 93,
+        "branch": 65,
+        "reversed": 87,
+        "fragments": 88,
+        "gated": 64,
+        "skip": 70
+      },
+      "prefix_uu_vs_u_hamming_median": 84.0,
+      "serialization_hamming_median_for_reference": 94.0
+    }
+  },
+  "interpretation_limit": "Exact Boolean statements about a finite table. Identical profiles mean 'not separated by these tests', not identity under the recognition congruence."
+}

@@ -161,7 +161,11 @@ equality. Depth-two continuations make the closure criterion of
 consequence `ww ≈ w`. Benchmark `hankel_v1` (18240 prompts), frozen in
 `docs/PHASE3_HANKEL_V1_DESIGN.md` and `experiments/hankel_v1.lock.json`.
 
-**Status:** inputs and analysis plan frozen; no model data collected.
+**Status:** completed on Qwen2.5-0.5B-Instruct. Both Boolean gates pass
+(comparative accuracy 0.867; within/between median Hamming 0.561). Exact
+invariance fails (0 of 8 classes identical); the depth-one family is not
+closed, with a logically identical witness pair separated at depth two;
+repeated continuations are 96% invisible. See `docs/RESULTS_PHASE3_2.md`.
 
 ## Phase 3 — Derivation-sensitive experiments
 

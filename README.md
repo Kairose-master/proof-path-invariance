@@ -93,6 +93,12 @@ reads the task (AUROC 0.77) but still does not identify logical equivalents
 at the pooled level (`Δ_inv` / class separation 1.35). See
 `docs/RESULTS_PHASE3_1.md`.
 
+Phase 3.2 replaced the metric readout with order relations only
+(`hankel_v1`). On that Boolean table Qwen2.5-0.5B-Instruct passes both
+gates: comparative accuracy 0.87 and logically identical rows closer than
+logically distinct classes at the median (ratio 0.56), while exact
+invariance still fails in every class. See `docs/RESULTS_PHASE3_2.md`.
+
 ## Status
 
 Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in
