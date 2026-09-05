@@ -1,0 +1,35 @@
+{
+  "benchmark": "s3_unseen_v0",
+  "status": "frozen_before_model_collection",
+  "cases": 128,
+  "prompts": 768,
+  "families": 8,
+  "cases_per_family": 16,
+  "permutations": [
+    "123",
+    "132",
+    "213",
+    "231",
+    "312",
+    "321"
+  ],
+  "sha256": "2b7ddc930729b3175704ac0b088ea7159adcfd478203befc0aef9ee06c0dd8ac",
+  "frozen_beta_from_phase2": {
+    "132": -0.032772064208984375,
+    "213": -0.032546043395996094,
+    "231": -0.016511917114257812,
+    "312": -0.027113914489746094,
+    "321": 0.05498981475830078
+  },
+  "primary_endpoint": "aggregate skill_vs_zero = 1 - SSE_frozen / SSE_zero",
+  "success_rule": "aggregate skill_vs_zero > 0",
+  "model_plan": {
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "observable": "next_token_logit_margin",
+    "yes_candidate": " YES",
+    "no_candidate": " NO",
+    "device": "cpu",
+    "dtype": "float32"
+  }
+}
