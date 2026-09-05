@@ -1,15 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "PPI model run manifest",
+  "title": "PPI logit-margin run manifest",
   "type": "object",
-  "required": [
-    "run_id",
-    "benchmark",
-    "model",
-    "decoding",
-    "sampling",
-    "execution"
-  ],
+  "required": ["run_id", "benchmark", "model", "measurement", "execution"],
   "properties": {
     "run_id": {"type": "string", "minLength": 1},
     "benchmark": {
@@ -19,55 +12,65 @@
         "name": {"type": "string"},
         "lock_file": {"type": "string"},
         "paired_prompts_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-        "prompt_count": {"type": "integer", "minimum": 1}
+        "prompt_count": {"type": "integer", "const": 512}
       },
       "additionalProperties": false
     },
     "model": {
       "type": "object",
-      "required": ["provider", "model_id", "version_observed", "access_date_utc"],
+      "required": ["provider", "model_id", "revision", "resolved_commit", "access_date_utc"],
       "properties": {
         "provider": {"type": "string"},
         "model_id": {"type": "string"},
-        "version_observed": {"type": ["string", "null"]},
+        "revision": {"type": "string"},
+        "resolved_commit": {"type": ["string", "null"]},
         "access_date_utc": {"type": "string"},
-        "endpoint_or_interface": {"type": ["string", "null"]}
+        "interface": {"type": "string"}
       },
       "additionalProperties": false
     },
-    "decoding": {
+    "measurement": {
       "type": "object",
-      "required": ["temperature", "top_p", "max_output_tokens", "seed", "response_constraint"],
+      "required": [
+        "mode",
+        "yes_candidate",
+        "no_candidate",
+        "require_single_token_candidates",
+        "repeats_per_prompt"
+      ],
       "properties": {
-        "temperature": {"type": ["number", "null"]},
-        "top_p": {"type": ["number", "null"]},
-        "max_output_tokens": {"type": ["integer", "null"]},
-        "seed": {"type": ["integer", "null"]},
-        "response_constraint": {"type": "string"}
-      },
-      "additionalProperties": false
-    },
-    "sampling": {
-      "type": "object",
-      "required": ["repeats_per_prompt", "expected_result_rows"],
-      "properties": {
-        "repeats_per_prompt": {"type": "integer", "minimum": 1},
-        "expected_result_rows": {"type": "integer", "minimum": 1}
+        "mode": {"type": "string", "const": "next_token_logit_margin"},
+        "yes_candidate": {"type": "string", "const": " YES"},
+        "no_candidate": {"type": "string", "const": " NO"},
+        "require_single_token_candidates": {"type": "boolean", "const": true},
+        "repeats_per_prompt": {"type": "integer", "const": 1}
       },
       "additionalProperties": false
     },
     "execution": {
       "type": "object",
-      "required": ["runner_commit", "started_at_utc", "finished_at_utc", "notes"],
+      "required": [
+        "runner_commit",
+        "torch_version",
+        "transformers_version",
+        "device",
+        "dtype",
+        "started_at_utc",
+        "finished_at_utc",
+        "notes"
+      ],
       "properties": {
         "runner_commit": {"type": "string"},
+        "torch_version": {"type": ["string", "null"]},
+        "transformers_version": {"type": ["string", "null"]},
+        "device": {"type": "string"},
+        "dtype": {"type": "string"},
         "started_at_utc": {"type": ["string", "null"]},
         "finished_at_utc": {"type": ["string", "null"]},
         "notes": {"type": "string"}
       },
       "additionalProperties": false
     },
-    "system_prompt": {"type": ["string", "null"]},
     "analysis_status": {
       "type": "string",
       "enum": ["planned", "collected", "validated", "analyzed"]
