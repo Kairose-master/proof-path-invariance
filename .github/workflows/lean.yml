@@ -1,4 +1,4 @@
-name: Lean
+name: Lean and Cases
 
 on:
   push:
@@ -13,5 +13,9 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-      - name: Build
+      - name: Build Lean certificates
         run: lake build
+      - name: Validate experiment cases
+        run: python3 scripts/validate_cases.py
+      - name: Render frozen prompts
+        run: python3 scripts/generate_prompts.py --out /tmp/ppi-prompts.jsonl
