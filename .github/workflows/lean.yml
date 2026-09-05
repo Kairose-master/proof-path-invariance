@@ -66,3 +66,4 @@ jobs:
           python3 -m py_compile scripts/verify_s3_unseen_lock.py
           python3 -m py_compile scripts/analyze_s3_interactions.py
           python3 -m py_compile scripts/decompose_s3_pairwise_order.py
+          python3 -m py_compile scripts/analyze_role_order_generalization.py
