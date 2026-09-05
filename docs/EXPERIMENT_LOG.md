@@ -68,3 +68,26 @@ Next experiment:
 - all six `S3` premise permutations
 - 768 model prompts
 - separate notebook: `notebooks/phase2_s3_colab.ipynb`
+
+
+## 2026-09-05 — Phase 2 Pythia-70M S3 premise permutations
+
+**Status:** completed; scorer output recorded. Raw result JSONL is not yet
+committed.
+
+- cases: 128
+- prompt rows: 768
+- all six premise permutations per case
+- predictions: YES 768 / 768
+- mean within-case margin range: 0.11499595642089844
+- median within-case margin range: 0.102294921875
+- mean within-case population SD: 0.039450170786057795
+- strongest positive mean permutation effect vs 123: 321 = +0.05498981475830078
+- strongest negative mean effect vs 123: 132 = -0.032772064208984375
+
+Interpretation: continuous permutation sensitivity is present, while binary
+behavior remains saturated by a YES bias. Effects vary by formal family, so the
+next step is held-out prediction rather than a representation claim.
+
+See `docs/RESULTS_PHASE2.md` and
+`experiments/results/phase2_pythia70m_s3_summary.json`.
