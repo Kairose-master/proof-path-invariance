@@ -15,13 +15,13 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: Build Lean certificates
         run: lake build
-      - name: Validate positive and negative cases
+      - name: Validate smoke-test cases
         run: python3 scripts/validate_cases.py
-      - name: Render legacy positive prompts
-        run: python3 scripts/generate_prompts.py --cases experiments/cases/transitivity_v0.jsonl --out /tmp/ppi-positive.jsonl
-      - name: Render legacy negative prompts
-        run: python3 scripts/generate_prompts.py --cases experiments/cases/negative_v0.jsonl --out /tmp/ppi-negative.jsonl
+      - name: Generate symbolic v0 cases
+        run: python3 scripts/generate_symbolic_cases.py --out /tmp/symbolic_v0.jsonl
+      - name: Validate symbolic v0 cases
+        run: python3 scripts/validate_cases.py /tmp/symbolic_v0.jsonl
       - name: Render minimal paired benchmark
-        run: python3 scripts/generate_paired_benchmark.py --out /tmp/ppi-paired.jsonl
+        run: python3 scripts/generate_paired_benchmark.py --cases /tmp/symbolic_v0.jsonl --out /tmp/ppi-paired.jsonl
       - name: Validate minimal paired benchmark
         run: python3 scripts/validate_paired_benchmark.py /tmp/ppi-paired.jsonl
