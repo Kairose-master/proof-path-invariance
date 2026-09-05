@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "principle": "Measure observable answer changes under deterministic transformations whose formal status is explicit. Do not infer categorical or proof-theoretic structure.",
   "transformations": [
     {
@@ -24,6 +24,15 @@
       "formal_status": "changes_presented_information",
       "enabled_phase1": false,
       "reason_disabled": "Deferred until a stronger same-context derivation representation is justified by data."
+    },
+    {
+      "id": "premise_permutation_s3",
+      "layer": "renderer",
+      "description": "Render the same three-premise formal problem under all six permutations of premise order.",
+      "formal_status": "same_formal_problem",
+      "enabled_phase2": true,
+      "motivation": "Provides an exact finite transformation family with identity and composition inherited from S3, allowing empirical tests of whether response changes depend systematically on permutation structure without changing premises, gold label, or query.",
+      "caution": "Any representation or composition claim concerns observed response structure only; group/category language is not licensed unless the fitted response law generalizes beyond the construction used to define it."
     }
   ]
 }
