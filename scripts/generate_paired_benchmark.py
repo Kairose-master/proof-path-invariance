@@ -42,10 +42,7 @@ def main() -> None:
     parser.add_argument(
         "--cases",
         nargs="+",
-        default=[
-            "experiments/cases/transitivity_v0.jsonl",
-            "experiments/cases/negative_v0.jsonl",
-        ],
+        default=["experiments/cases/symbolic_v0.jsonl"],
     )
     parser.add_argument("--out", default="experiments/prompts/paired_v0.jsonl")
     args = parser.parse_args()
