@@ -1,5 +1,5 @@
 {
-  "run_id": "FILL-BEFORE-RUN",
+  "run_id": "pythia70m-step143000-symbolic-v0",
   "benchmark": {
     "name": "symbolic_v0",
     "lock_file": "experiments/benchmark_v0.lock.json",
@@ -7,29 +7,29 @@
     "prompt_count": 512
   },
   "model": {
-    "provider": "FILL-BEFORE-RUN",
-    "model_id": "FILL-BEFORE-RUN",
-    "version_observed": null,
+    "provider": "huggingface-local",
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "resolved_commit": null,
     "access_date_utc": "FILL-BEFORE-RUN",
-    "endpoint_or_interface": null
+    "interface": "transformers.AutoModelForCausalLM"
   },
-  "decoding": {
-    "temperature": null,
-    "top_p": null,
-    "max_output_tokens": null,
-    "seed": null,
-    "response_constraint": "Answer exactly YES or NO."
-  },
-  "sampling": {
-    "repeats_per_prompt": 1,
-    "expected_result_rows": 512
+  "measurement": {
+    "mode": "next_token_logit_margin",
+    "yes_candidate": " YES",
+    "no_candidate": " NO",
+    "require_single_token_candidates": true,
+    "repeats_per_prompt": 1
   },
   "execution": {
     "runner_commit": "FILL-BEFORE-RUN",
+    "torch_version": null,
+    "transformers_version": null,
+    "device": "cpu",
+    "dtype": "float32",
     "started_at_utc": null,
     "finished_at_utc": null,
-    "notes": ""
+    "notes": "Confirmatory v0 uses deterministic forward passes only; no text generation."
   },
-  "system_prompt": null,
   "analysis_status": "planned"
 }
