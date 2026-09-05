@@ -1,10 +1,10 @@
 # Phase 1 Preregistration Draft
 
-Status: **DRAFT — no confirmatory model run should be interpreted until this file is frozen.**
+Status: **DRAFT — benchmark and model choice are frozen; no confirmatory result is claimed until the first run manifest is completed and the run is validated.**
 
 ## Research question
 
-For a fixed formally certified entailment problem, does reversing the serialization order of the same premise multiset change an LLM's final binary entailment judgment?
+For a fixed formally certified entailment problem, does reversing the serialization order of the same premise multiset change the sign of a small pretrained causal LM's YES-vs-NO next-token preference?
 
 This phase tests presentation stability only. It does not test proof identity, decomposition, composition, functoriality, category structure, or internal semantics.
 
@@ -16,100 +16,97 @@ A paired item consists of:
 - a base rendering `E(q)`;
 - a premise-reversed rendering `E_rev(q)`.
 
-The two renderings must have:
+The two renderings have the same formal certificate, gold label, query, and premise multiset. Only premise list order changes.
 
-- the same case identifier;
-- the same formal certificate;
-- the same gold label;
-- the same query;
-- the same premise multiset;
-- no added or removed premise;
-- no lexical rewrite other than list order.
+## Frozen model
+
+Confirmatory v0 uses:
+
+- model: `EleutherAI/pythia-70m`;
+- revision: `step143000`;
+- interface: local Hugging Face `AutoModelForCausalLM`;
+- device: CPU;
+- dtype: float32;
+- no text generation;
+- one deterministic forward pass per prompt.
+
+Pythia's model card states that `step143000` corresponds to the final checkpoint on `main`.
+
+## Measurement
+
+Each prompt ends immediately after `Answer:`.
+
+Let
+
+`m(x) = logit(" YES" | x) - logit(" NO" | x)`.
+
+The runner must verify that both candidate strings tokenize to exactly one token under the loaded tokenizer. If either candidate is multi-token, the confirmatory run must stop; the scoring rule must not be silently changed.
+
+The induced judgment is:
+
+- `YES` if `m(x) > 0`;
+- `NO` if `m(x) < 0`;
+- `TIE` if `m(x) = 0`.
 
 ## Primary outcome
 
-For each pair:
+For pairs with non-tied induced judgments:
 
-`flip(q) = 1[answer_base != answer_reverse]`
-
-where answers are valid only when they normalize exactly to `YES` or `NO`.
+`flip(q) = 1[sign(m(E(q))) != sign(m(E_rev(q)))]`
 
 Primary descriptive statistic:
 
-`mean_flip = sum flip(q) / number_of_valid_pairs`
+`mean_flip = sum flip(q) / number_of_non_tied_pairs`.
 
-Invalid-format responses are reported separately and are not silently coerced.
+Tie pairs are reported separately and are not silently broken.
 
 ## Secondary outcomes
 
-These are exploratory unless this document is frozen with a more specific plan:
+Exploratory:
 
-- accuracy of base renderings;
-- accuracy of reversed renderings;
+- base and reversed accuracy;
 - directional flips `YES -> NO` and `NO -> YES`;
-- flip rate stratified by gold label;
-- flip rate stratified by certificate family.
+- `m(E_rev(q)) - m(E(q))`;
+- mean absolute margin displacement;
+- stratification by gold label and certificate family.
 
 ## Confirmatory transformation
 
 Only `premise_reverse` is confirmatory in benchmark v0.
 
-Other transformations in the registry are disabled for Phase 1 unless this preregistration is explicitly revised before model outputs are collected.
-
-## Model protocol to freeze before evaluation
-
-Record for every run:
-
-- provider;
-- exact model identifier/version;
-- access date;
-- system prompt, if any;
-- user prompt template;
-- temperature;
-- top-p;
-- max output tokens;
-- seed, if supported;
-- number of repeated samples per prompt;
-- any constrained-decoding or response-format setting.
-
-Do not mix silent model-version changes inside one confirmatory analysis.
+Atom renaming, redundant premises, valid intermediates, derivation factorization, and composition-sensitive interventions remain deferred.
 
 ## Sampling plan
 
-The benchmark case generator is frozen for v0:
+Frozen benchmark:
 
 - 256 deterministic symbolic case records;
 - 128 positive and 128 negative;
 - two formal certificate schemas only;
 - one base and one premise-reversed rendering per case;
-- 512 prompts total before repeated model sampling.
+- 512 prompt rows total;
+- one forward pass per prompt.
 
-The 256 records are **not** treated as 256 independent logical structures.
-They are symbolic instantiations of two formal families. Generalization claims
-must remain limited accordingly.
+The 256 records are symbolic instantiations of two formal families, not 256 independent logical structures. Generalization claims must remain limited accordingly.
 
-Repeated model samples per prompt are not yet frozen because they depend on the
-selected model/API decoding protocol. That value must be fixed before any
-confirmatory model output is collected.
+## Exclusions and failures
 
-See `docs/SAMPLING_V0.md`.
+There is no natural-language output-format exclusion because no text is generated.
 
-## Exclusions
+A run is invalid for confirmatory analysis if, among other mechanical failures:
 
-A response is invalid only for a preregistered mechanical reason such as failure to output exactly `YES` or `NO` after whitespace trimming and case normalization.
+- the frozen prompt hash does not match;
+- model ID or revision differs;
+- YES/NO candidates are not single tokens;
+- candidate token IDs change within the run;
+- result rows are missing or duplicated;
+- a stored margin does not equal YES logit minus NO logit;
+- device/dtype differs from the frozen protocol.
 
-Do not exclude a pair because its result is surprising.
+Do not exclude pairs because their result is surprising.
 
 ## Interpretation boundary
 
-A nonzero flip rate supports only the statement that observed judgments depend on premise serialization order under the tested protocol.
+A nonzero sign-flip rate supports only the statement that the model's measured YES-vs-NO preference depends on premise serialization order under this protocol.
 
-It does **not** by itself establish:
-
-- failure of logical composition;
-- failure of proof invariance;
-- categorical non-functoriality;
-- an internal representation defect;
-- lack of logical competence in general.
-
-Any stronger claim requires a separate experimental design.
+It does **not** by itself establish failure of logical composition, proof invariance, categorical structure, an internal representation defect, or logical competence in general.
