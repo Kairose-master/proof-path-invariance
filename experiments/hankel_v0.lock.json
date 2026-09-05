@@ -1,0 +1,33 @@
+{
+  "benchmark": "hankel_v0",
+  "status": "frozen-inputs",
+  "generator": "scripts/generate_hankel_benchmark.py",
+  "prompts": 16384,
+  "rows": 32,
+  "columns": 32,
+  "logical_classes": 8,
+  "serializations": ["123", "231", "312", "321"],
+  "continuations": ["none", "d_e", "c_e", "b_d", "e_a", "a_d", "e_d", "b_c"],
+  "queries": ["ad", "ae", "bd", "ce"],
+  "relabelings": ["sym1", "sym2", "sym3", "sym4"],
+  "renderers": ["bullets", "prose"],
+  "answer_maps": ["yesno", "truefalse"],
+  "class_gold_yes_cells": 112,
+  "class_gold_total_cells": 256,
+  "sha256": "9491e21e82e00b3fab20bbcb6bf6cced10285edbad47d0851cbc61d017513cdf",
+  "model_plan": {
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "observable": "answer_position_logit_pair",
+    "observation_space": "R^2 (positive candidate logit, negative candidate logit)",
+    "candidate_token_ids": {" YES": 22487, " NO": 7651, " True": 11793, " False": 16708},
+    "device": "cpu",
+    "dtype": "float32"
+  },
+  "formal_status": {
+    "row_equivalence": "same clause multiset per logical class; Lean-certified by RecognitionPaths.Horn.logicalEquiv_of_perm (recognition-paths repository)",
+    "cell_gold": "forward chaining in the generator, re-derived by the validator; not Lean-certified per cell",
+    "controls": "relabeling, renderer, and answer map are not Lean-certified as logically irrelevant"
+  },
+  "interpretation_limit": "The table estimates a finite restriction of the recognition congruence. No claim that the model respects the logical quotient is assumed."
+}

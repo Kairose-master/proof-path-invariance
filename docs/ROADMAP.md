@@ -115,6 +115,25 @@ substantial fraction of the six-point S3 response surface in many Phase 2.6
 families (mean family R2 about 0.60), but the coefficients are not yet known to
 generalize. See `docs/RESULTS_PHASE2_7_PRELIM.md`.
 
+## Phase 3.0 — Hankel observation table
+
+Before derivation-sensitive stimuli, collect the observations that the
+Recognition Factorization Theorem (`recognition-paths`,
+`RecognitionPaths/Recognition.lean`) actually compares: a prefix ×
+continuation-query table whose cells are answer-logit pairs in `ℝ²`.
+
+Benchmark `hankel_v0`: 8 Horn logical classes × 4 serializations as rows,
+8 continuations × 4 queries as columns, replicated under 4 atom relabelings,
+2 renderers, and 2 answer-token maps (16384 prompts). Inputs and the v0
+analysis plan are frozen in `docs/PHASE3_HANKEL_DESIGN.md` and
+`experiments/hankel_v0.lock.json`.
+
+Exit criterion: report the empirical invariance defect on logically identical
+rows, between-class separation, and numerical rank stability, at the level of
+the finite test family only.
+
+**Status:** inputs frozen; no model data collected.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.

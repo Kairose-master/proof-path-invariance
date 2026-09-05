@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "principle": "Measure observable answer changes under deterministic transformations whose formal status is explicit. Do not infer categorical or proof-theoretic structure.",
   "transformations": [
     {
@@ -33,6 +33,15 @@
       "enabled_phase2": true,
       "motivation": "Provides an exact finite transformation family with identity and composition inherited from S3, allowing empirical tests of whether response changes depend systematically on permutation structure without changing premises, gold label, or query.",
       "caution": "Any representation or composition claim concerns observed response structure only; group/category language is not licensed unless the fitted response law generalizes beyond the construction used to define it."
+    },
+    {
+      "id": "hankel_prefix_continuation",
+      "layer": "observation_table",
+      "description": "Fix a prefix trace and vary the continuation and the query. Rows are prefixes, columns are (continuation, query) tests, cells are the answer-logit pair in R^2.",
+      "formal_status": "same_clause_multiset_within_row_class; gold by generator forward chaining, not Lean-certified per cell",
+      "enabled_phase3": true,
+      "motivation": "Estimates the finite restriction of the recognition congruence defined in recognition-paths (RecognitionPaths/Recognition.lean), which is what the Recognition Factorization Theorem compares with logical identity.",
+      "caution": "Rank, clustering, and separation statistics describe the finite table only. They are not evidence that the model realises the logical quotient."
     }
   ]
 }
