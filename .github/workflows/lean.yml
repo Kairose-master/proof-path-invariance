@@ -35,5 +35,6 @@ jobs:
       - name: Syntax-check model runner and analysis
         run: |
           python3 -m py_compile scripts/run_hf_logit_margin.py
+          python3 -m py_compile scripts/create_run_manifest.py
           python3 -m py_compile scripts/validate_run_artifacts.py
           python3 -m py_compile scripts/score_flips.py
