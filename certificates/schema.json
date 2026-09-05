@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PPI certified experiment case",
+  "type": "object",
+  "required": ["case_id", "certificate", "atoms", "premises", "target", "gold", "conditions"],
+  "properties": {
+    "case_id": {"type": "string"},
+    "certificate": {
+      "type": "object",
+      "required": ["lean_file", "theorem", "family"],
+      "properties": {
+        "lean_file": {"type": "string"},
+        "theorem": {"type": "string"},
+        "family": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "atoms": {"type": "object", "additionalProperties": {"type": "string"}},
+    "premises": {"type": "array", "items": {"type": "string"}},
+    "target": {"type": "string"},
+    "gold": {"type": "boolean"},
+    "conditions": {
+      "type": "object",
+      "required": ["D", "F", "C"],
+      "properties": {
+        "D": {"$ref": "#/$defs/condition"},
+        "F": {"$ref": "#/$defs/condition"},
+        "C": {"$ref": "#/$defs/condition"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "condition": {
+      "type": "object",
+      "required": ["statements", "query"],
+      "properties": {
+        "statements": {"type": "array", "items": {"type": "string"}},
+        "query": {"type": "string"},
+        "control_note": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
