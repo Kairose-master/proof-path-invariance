@@ -7,16 +7,38 @@ This is the easiest path for the first Pythia-70M run. GPU is not required; use 
 Create a new notebook at Google Colab. The repository also includes
 `notebooks/pythia70m_colab.ipynb`, which contains the same commands.
 
-## 2. Reset working directory, clean, and clone
+## 2. Recover working directory, clean, and clone
 
-```bash
-%cd /content
-!rm -rf /content/proof-path-invariance
-!git clone https://github.com/Kairose-master/proof-path-invariance.git
-%cd /content/proof-path-invariance
+If Colab reports `getcwd: cannot access parent directories`, do **not** use a
+shell command first. Recover the kernel's working directory with pure Python:
+
+```python
+import os, shutil, subprocess
+os.chdir("/content")
+old = "/content/proof-path-invariance"
+if os.path.exists(old):
+    shutil.rmtree(old)
+print(os.getcwd())
 ```
 
-The `%cd /content` line must run before deleting the old clone. Otherwise Colab can end up inside a directory that has just been removed and `getcwd` will fail.
+Then clone with an explicit working directory:
+
+```python
+subprocess.run(
+    [
+        "git", "clone",
+        "https://github.com/Kairose-master/proof-path-invariance.git",
+        "/content/proof-path-invariance",
+    ],
+    check=True,
+    cwd="/content",
+)
+os.chdir("/content/proof-path-invariance")
+print(os.getcwd())
+```
+
+This avoids starting a shell while the kernel is still pointing at a deleted
+directory.
 
 ## 3. Install runner dependencies
 
