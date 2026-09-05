@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "principle": "Measure observable answer changes under deterministic transformations whose formal status is explicit. Do not infer categorical or proof-theoretic structure.",
+  "transformations": [
+    {
+      "id": "premise_reverse",
+      "layer": "renderer",
+      "description": "Reverse the order of the same premise multiset. The formal problem and gold label are unchanged; only serialization order changes.",
+      "formal_status": "same_formal_problem",
+      "enabled_phase1": true
+    },
+    {
+      "id": "atom_alias",
+      "layer": "renderer",
+      "description": "Replace domain nouns with deterministic neutral atom labels while preserving the same propositional template and query polarity.",
+      "formal_status": "same_certificate_schema_but_renderer_mapping_not_lean_checked",
+      "enabled_phase1": false,
+      "reason_disabled": "Requires an explicit audited atom-to-renderer mapping before confirmatory use."
+    },
+    {
+      "id": "valid_intermediate",
+      "layer": "problem",
+      "description": "Expose an additional formally valid intermediate statement.",
+      "formal_status": "changes_presented_information",
+      "enabled_phase1": false,
+      "reason_disabled": "Deferred until a stronger same-context derivation representation is justified by data."
+    }
+  ]
+}
