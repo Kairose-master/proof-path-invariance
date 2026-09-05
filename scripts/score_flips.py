@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Score observable answer flips from validated raw result JSONL.
+"""Score paired next-token logit margins.
 
-Rows are paired by (pair_id, sample_index). The scorer consumes
-`normalized_answer`; raw-text normalization must already have been validated by
-`validate_run_artifacts.py`.
+Primary outcome: sign flip rate between base and premise-reversed renderings.
+Secondary summaries: accuracy and continuous margin displacement.
 """
 
 from __future__ import annotations
@@ -14,16 +13,13 @@ from collections import defaultdict
 from pathlib import Path
 
 
-VALID = {"YES", "NO", "INVALID"}
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("results")
     args = parser.parse_args()
 
-    pairs: dict[tuple[str, int], dict[str, str]] = defaultdict(dict)
-    golds: dict[tuple[str, int], bool] = {}
+    pairs = defaultdict(dict)
+    golds = {}
 
     with Path(args.results).open(encoding="utf-8") as f:
         for line_no, line in enumerate(f, 1):
@@ -31,38 +27,38 @@ def main() -> None:
                 continue
             row = json.loads(line)
             pid = row["pair_id"]
-            sample = row.get("sample_index", 0)
             variant = row["variant"]
-            answer = row["normalized_answer"]
-            if answer not in VALID:
-                raise SystemExit(f"line {line_no}: invalid normalized_answer")
-
-            key = (pid, sample)
-            if variant in pairs[key]:
-                raise SystemExit(f"{key}: duplicate variant {variant}")
-            pairs[key][variant] = answer
-
+            if variant in pairs[pid]:
+                raise SystemExit(f"{pid}: duplicate variant {variant}")
+            pairs[pid][variant] = {
+                "prediction": row["predicted_answer"],
+                "margin": float(row["margin"]),
+            }
             gold = row["gold"]
-            if key in golds and golds[key] != gold:
-                raise SystemExit(f"{key}: inconsistent gold label")
-            golds[key] = gold
+            if pid in golds and golds[pid] != gold:
+                raise SystemExit(f"{pid}: inconsistent gold label")
+            golds[pid] = gold
 
     valid_pairs = 0
+    tie_pairs = 0
     flips = 0
-    invalid_pairs = 0
-    base_correct = 0
-    reverse_correct = 0
     yes_to_no = 0
     no_to_yes = 0
+    base_correct = 0
+    reverse_correct = 0
+    margin_shifts = []
 
-    for key, variants in sorted(pairs.items()):
+    for pid, variants in sorted(pairs.items()):
         if set(variants) != {"base", "premise_reverse"}:
-            raise SystemExit(f"{key}: incomplete pair")
+            raise SystemExit(f"{pid}: incomplete pair")
 
-        a = variants["base"]
-        b = variants["premise_reverse"]
-        if "INVALID" in {a, b}:
-            invalid_pairs += 1
+        base = variants["base"]
+        rev = variants["premise_reverse"]
+        margin_shifts.append(rev["margin"] - base["margin"])
+
+        a, b = base["prediction"], rev["prediction"]
+        if "TIE" in {a, b}:
+            tie_pairs += 1
             continue
 
         valid_pairs += 1
@@ -70,18 +66,26 @@ def main() -> None:
         yes_to_no += int(a == "YES" and b == "NO")
         no_to_yes += int(a == "NO" and b == "YES")
 
-        expected = "YES" if golds[key] else "NO"
+        expected = "YES" if golds[pid] else "NO"
         base_correct += int(a == expected)
         reverse_correct += int(b == expected)
 
     def ratio(x: int, n: int):
         return (x / n) if n else None
 
+    mean_shift = sum(margin_shifts) / len(margin_shifts) if margin_shifts else None
+    mean_abs_shift = (
+        sum(abs(x) for x in margin_shifts) / len(margin_shifts)
+        if margin_shifts
+        else None
+    )
+
     print(json.dumps({
-        "valid_pairs": valid_pairs,
+        "pairs_total": len(pairs),
+        "valid_binary_pairs": valid_pairs,
+        "tie_pairs": tie_pairs,
         "flips": flips,
         "flip_rate": ratio(flips, valid_pairs),
-        "invalid_pairs": invalid_pairs,
         "directional_flips": {
             "YES_to_NO": yes_to_no,
             "NO_to_YES": no_to_yes
@@ -89,6 +93,10 @@ def main() -> None:
         "accuracy": {
             "base": ratio(base_correct, valid_pairs),
             "premise_reverse": ratio(reverse_correct, valid_pairs)
+        },
+        "margin_shift": {
+            "mean_reverse_minus_base": mean_shift,
+            "mean_absolute_shift": mean_abs_shift
         }
     }, indent=2))
 
