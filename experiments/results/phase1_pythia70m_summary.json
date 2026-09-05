@@ -22,11 +22,81 @@
   },
   "margin_shift": {
     "mean_reverse_minus_base": 0.02717304229736328,
-    "mean_absolute_shift": 0.07551097869873047
+    "mean_absolute_shift": 0.07551097869873047,
+    "quantiles": {
+      "q05": -0.1116943359375,
+      "q25": -0.0361328125,
+      "q50": 0.0458984375,
+      "q75": 0.079986572265625,
+      "q95": 0.15643310546875
+    },
+    "by_gold": {
+      "positive": {
+        "n": 128,
+        "mean": -0.025316238403320312,
+        "median": -0.0372314453125,
+        "min": -0.148193359375,
+        "max": 0.1876220703125
+      },
+      "negative": {
+        "n": 128,
+        "mean": 0.07966232299804688,
+        "median": 0.07147216796875,
+        "min": -0.022216796875,
+        "max": 0.228759765625
+      }
+    }
   },
   "interpretation": {
-    "observed": "No induced YES/NO sign flips under premise reversal in the 256 tested pairs.",
-    "caution": "Accuracy was 0.5 in both variants, so sign stability must not be interpreted as evidence of correct logical reasoning.",
-    "secondary_signal": "Premise reversal changed the continuous YES-vs-NO margin despite zero sign flips."
+    "observed": "All 512 prompt variants induced YES; premise reversal produced zero sign flips but nonzero continuous margin shifts.",
+    "diagnosis": "The zero-flip result is response-bias stability, not evidence of correct logical invariance. Base margin AUROC is near chance and reversed AUROC is strongly below 0.5.",
+    "confound": "Gold label is perfectly confounded with formal family in symbolic_v0, so gold-conditioned margin differences cannot be attributed to logical truth rather than schema-specific surface/formal-family effects.",
+    "next_step": "Use multiple formally identical premise permutations within richer same-label schema families, separating transformation effects from gold/family identity before any structural representation claim."
+  },
+  "prediction_counts": {
+    "base": {
+      "YES": 256
+    },
+    "premise_reverse": {
+      "YES": 256
+    }
+  },
+  "auroc": {
+    "base_margin": 0.478057861328125,
+    "premise_reverse_margin": 0.228179931640625
+  },
+  "margin_by_gold": {
+    "base": {
+      "positive": {
+        "n": 128,
+        "mean": 1.5353775024414062,
+        "median": 1.55078125,
+        "min": 1.1715087890625,
+        "max": 1.8995361328125
+      },
+      "negative": {
+        "n": 128,
+        "mean": 1.5621347427368164,
+        "median": 1.55194091796875,
+        "min": 1.283935546875,
+        "max": 2.012939453125
+      }
+    },
+    "premise_reverse": {
+      "positive": {
+        "n": 128,
+        "mean": 1.510061264038086,
+        "median": 1.48919677734375,
+        "min": 1.230712890625,
+        "max": 1.918701171875
+      },
+      "negative": {
+        "n": 128,
+        "mean": 1.6417970657348633,
+        "median": 1.64520263671875,
+        "min": 1.4029541015625,
+        "max": 2.067626953125
+      }
+    }
   }
 }
