@@ -1,0 +1,35 @@
+{
+  "benchmark": "s3_v0",
+  "status": "frozen-inputs",
+  "cases": 128,
+  "prompts": 768,
+  "families": {
+    "positive": [
+      "chain3_positive",
+      "shortcut_positive"
+    ],
+    "negative": [
+      "collider_negative",
+      "reverse_start_negative"
+    ]
+  },
+  "permutations": [
+    "123",
+    "132",
+    "213",
+    "231",
+    "312",
+    "321"
+  ],
+  "sha256": "3630dae3b1ded71396f6b8a63770beb58c38c33b1e1e4600bd03b62a7feb65bc",
+  "model_plan": {
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "observable": "next_token_logit_margin",
+    "yes_candidate": " YES",
+    "no_candidate": " NO",
+    "device": "cpu",
+    "dtype": "float32"
+  },
+  "interpretation_limit": "Input permutations form S3. No representation or compositional structure is assumed on model responses."
+}
