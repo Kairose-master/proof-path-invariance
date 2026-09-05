@@ -1,21 +1,25 @@
 #!/usr/bin/env python3
-"""Validate provider-agnostic PPI run manifests and raw result JSONL.
+"""Validate the frozen PPI logit-margin run manifest and raw results.
 
-This validator intentionally uses only the Python standard library.
-It checks cross-file invariants needed for reproducible paired analysis.
+Only Python standard library is used. The confirmatory v0 contract is narrow:
+Pythia-70M step143000, CPU float32, one deterministic next-token forward pass
+per frozen prompt, comparing exactly the single-token candidates " YES" and
+" NO".
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 
 
 VARIANTS = {"base", "premise_reverse"}
-ANSWERS = {"YES", "NO", "INVALID"}
+PREDICTIONS = {"YES", "NO", "TIE"}
 PLACEHOLDER = "FILL-BEFORE-RUN"
+PROMPT_HASH = "63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e"
 
 
 def fail(msg: str) -> None:
@@ -30,52 +34,70 @@ def load_json(path: Path) -> dict:
 
 
 def validate_manifest(m: dict, allow_placeholders: bool) -> None:
-    required = {"run_id", "benchmark", "model", "decoding", "sampling", "execution"}
+    required = {"run_id", "benchmark", "model", "measurement", "execution"}
     missing = required - set(m)
     if missing:
         fail(f"manifest missing fields: {sorted(missing)}")
 
     b = m["benchmark"]
     if b.get("name") != "symbolic_v0":
-        fail("manifest benchmark.name must be symbolic_v0")
-    if b.get("paired_prompts_sha256") != "63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e":
-        fail("manifest paired prompt hash does not match frozen benchmark")
+        fail("benchmark.name must be symbolic_v0")
+    if b.get("paired_prompts_sha256") != PROMPT_HASH:
+        fail("paired prompt hash does not match frozen benchmark")
     if b.get("prompt_count") != 512:
-        fail("manifest prompt_count must be 512 for symbolic_v0")
+        fail("prompt_count must be 512")
 
-    repeats = m["sampling"].get("repeats_per_prompt")
-    expected = m["sampling"].get("expected_result_rows")
-    if not isinstance(repeats, int) or repeats < 1:
-        fail("repeats_per_prompt must be a positive integer")
-    if expected != 512 * repeats:
-        fail("expected_result_rows must equal 512 * repeats_per_prompt")
+    model = m["model"]
+    if model.get("provider") != "huggingface-local":
+        fail("confirmatory v0 provider must be huggingface-local")
+    if model.get("model_id") != "EleutherAI/pythia-70m":
+        fail("confirmatory v0 model_id must be EleutherAI/pythia-70m")
+    if model.get("revision") != "step143000":
+        fail("confirmatory v0 revision must be step143000")
+    if model.get("interface") != "transformers.AutoModelForCausalLM":
+        fail("unexpected model interface")
+
+    measurement = m["measurement"]
+    expected_measurement = {
+        "mode": "next_token_logit_margin",
+        "yes_candidate": " YES",
+        "no_candidate": " NO",
+        "require_single_token_candidates": True,
+        "repeats_per_prompt": 1,
+    }
+    for key, value in expected_measurement.items():
+        if measurement.get(key) != value:
+            fail(f"measurement.{key} must be {value!r}")
+
+    execution = m["execution"]
+    if execution.get("device") != "cpu":
+        fail("confirmatory v0 device must be cpu")
+    if execution.get("dtype") != "float32":
+        fail("confirmatory v0 dtype must be float32")
 
     if not allow_placeholders:
-        serialized = json.dumps(m)
-        if PLACEHOLDER in serialized:
+        if PLACEHOLDER in json.dumps(m):
             fail("manifest still contains FILL-BEFORE-RUN placeholders")
-
-        for k in ("provider", "model_id", "access_date_utc"):
-            if not m["model"].get(k):
-                fail(f"model.{k} must be frozen before collection")
-        if not m["execution"].get("runner_commit"):
-            fail("execution.runner_commit must be frozen before collection")
+        if not model.get("access_date_utc"):
+            fail("model.access_date_utc must be recorded")
+        if not execution.get("runner_commit"):
+            fail("execution.runner_commit must be recorded")
 
 
-def normalize(raw: object) -> str:
-    if not isinstance(raw, str):
-        return "INVALID"
-    x = raw.strip().upper()
-    return x if x in {"YES", "NO"} else "INVALID"
+def expected_prediction(margin: float) -> str:
+    if margin > 0:
+        return "YES"
+    if margin < 0:
+        return "NO"
+    return "TIE"
 
 
 def validate_results(path: Path, manifest: dict) -> None:
     run_id = manifest["run_id"]
-    repeats = manifest["sampling"]["repeats_per_prompt"]
-    expected_rows = manifest["sampling"]["expected_result_rows"]
-
     seen = set()
     per_pair = defaultdict(set)
+    yes_token_id = None
+    no_token_id = None
     rows = 0
 
     with path.open(encoding="utf-8") as f:
@@ -92,47 +114,68 @@ def validate_results(path: Path, manifest: dict) -> None:
 
             pid = row.get("pair_id")
             variant = row.get("variant")
-            sample = row.get("sample_index")
             if not isinstance(pid, str) or not pid:
                 fail(f"line {line_no}: invalid pair_id")
             if variant not in VARIANTS:
                 fail(f"line {line_no}: invalid variant")
-            if not isinstance(sample, int) or not (0 <= sample < repeats):
-                fail(f"line {line_no}: sample_index out of range")
 
-            key = (pid, variant, sample)
+            key = (pid, variant)
             if key in seen:
                 fail(f"line {line_no}: duplicate result key {key}")
             seen.add(key)
-            per_pair[pid].add((variant, sample))
+            per_pair[pid].add(variant)
 
-            raw = row.get("raw_text")
-            normalized = row.get("normalized_answer")
-            expected_norm = normalize(raw)
-            if normalized != expected_norm:
-                fail(f"line {line_no}: normalized_answer does not match raw_text")
-
-            if normalized not in ANSWERS:
-                fail(f"line {line_no}: invalid normalized_answer")
-            if row.get("valid_format") != (normalized != "INVALID"):
-                fail(f"line {line_no}: valid_format inconsistent with normalized_answer")
             if not isinstance(row.get("gold"), bool):
                 fail(f"line {line_no}: gold must be boolean")
 
+            yid = row.get("yes_token_id")
+            nid = row.get("no_token_id")
+            if not isinstance(yid, int) or not isinstance(nid, int) or yid < 0 or nid < 0:
+                fail(f"line {line_no}: token ids must be nonnegative integers")
+            if yid == nid:
+                fail(f"line {line_no}: YES and NO token ids are identical")
+
+            if yes_token_id is None:
+                yes_token_id, no_token_id = yid, nid
+            elif (yid, nid) != (yes_token_id, no_token_id):
+                fail(f"line {line_no}: candidate token ids changed within run")
+
+            try:
+                yes_logit = float(row["yes_logit"])
+                no_logit = float(row["no_logit"])
+                margin = float(row["margin"])
+            except (KeyError, TypeError, ValueError):
+                fail(f"line {line_no}: logits and margin must be numeric")
+
+            if not all(math.isfinite(x) for x in (yes_logit, no_logit, margin)):
+                fail(f"line {line_no}: non-finite logit or margin")
+            if abs((yes_logit - no_logit) - margin) > 1e-6:
+                fail(f"line {line_no}: margin != yes_logit - no_logit")
+
+            prediction = row.get("predicted_answer")
+            if prediction not in PREDICTIONS:
+                fail(f"line {line_no}: invalid predicted_answer")
+            if prediction != expected_prediction(margin):
+                fail(f"line {line_no}: predicted_answer inconsistent with margin sign")
+
+            token_count = row.get("prompt_token_count")
+            if not isinstance(token_count, int) or token_count < 1:
+                fail(f"line {line_no}: invalid prompt_token_count")
+
             rows += 1
 
-    if rows != expected_rows:
-        fail(f"expected {expected_rows} result rows, found {rows}")
-
-    expected_keys = {(v, i) for v in VARIANTS for i in range(repeats)}
-    for pid, keys in per_pair.items():
-        if keys != expected_keys:
-            fail(f"{pid}: incomplete variant/sample grid")
-
+    if rows != 512:
+        fail(f"expected 512 result rows, found {rows}")
     if len(per_pair) != 256:
         fail(f"expected 256 pair_ids, found {len(per_pair)}")
+    for pid, variants in per_pair.items():
+        if variants != VARIANTS:
+            fail(f"{pid}: incomplete variant pair")
 
-    print(f"validated {rows} raw result rows across {len(per_pair)} pairs")
+    print(
+        f"validated {rows} logit rows across {len(per_pair)} pairs; "
+        f"YES token={yes_token_id}, NO token={no_token_id}"
+    )
 
 
 def main() -> None:
