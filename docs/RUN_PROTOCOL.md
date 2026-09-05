@@ -1,67 +1,71 @@
-# Run Protocol
+# Run Protocol — Pythia-70M Logit Margin
 
-The benchmark input is frozen independently of any model provider. A model run
-is identified by a run manifest plus an append-only raw result JSONL file.
+The confirmatory v0 run does not generate text. It records two next-token logits for each frozen prompt.
 
-## Before collection
+## Frozen model and measurement
 
-Copy `experiments/runs/manifest.template.json` to a new run-specific file and
-replace every `FILL-BEFORE-RUN` value.
+- model: `EleutherAI/pythia-70m`
+- revision: `step143000`
+- interface: Hugging Face Transformers causal LM
+- device: CPU
+- dtype: float32
+- YES candidate: `" YES"`
+- NO candidate: `" NO"`
+- measurement: `YES_logit - NO_logit`
+- repeats: 1
 
-Freeze at minimum:
+The runner refuses to continue unless both candidate strings are exactly one tokenizer token.
 
-- provider;
-- exact model identifier exposed by the provider;
-- observed version or snapshot identifier if available;
-- UTC access date;
-- decoding parameters;
-- repeats per prompt;
-- response constraint;
-- runner commit;
-- system prompt, including an explicit `null` if none is used.
+## Prepare prompts
 
-The manifest must reference the frozen paired-prompt SHA-256:
+Generate the already-frozen benchmark artifacts:
 
-`63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e`.
+```bash
+python3 scripts/generate_symbolic_cases.py --out /tmp/symbolic_v0.jsonl
+python3 scripts/generate_paired_benchmark.py --cases /tmp/symbolic_v0.jsonl --out /tmp/ppi-paired.jsonl
+python3 scripts/verify_benchmark_lock.py /tmp/symbolic_v0.jsonl /tmp/ppi-paired.jsonl
+```
 
-## Raw results
+## Prepare environment
 
-Never overwrite raw outputs. Store one JSON object per model call.
+```bash
+python3 -m pip install -r requirements-runner.txt
+```
 
-The primary scorer uses only `raw_text` after mechanical normalization:
+Before the confirmatory run, fill the remaining `FILL-BEFORE-RUN` values in
+`experiments/runs/manifest.template.json`, especially access date and runner commit.
 
-1. trim surrounding whitespace;
-2. uppercase;
-3. accept only exactly `YES` or `NO`;
-4. otherwise mark `INVALID`.
+Record the exact installed PyTorch and Transformers versions after the runner reports them.
 
-No semantic repair, regex rescue, or human adjudication is allowed for the
-confirmatory primary outcome.
+## Execute
 
-## Repeated sampling
+```bash
+python3 scripts/run_hf_logit_margin.py \
+  --prompts /tmp/ppi-paired.jsonl \
+  --out results/pythia70m-step143000-symbolic-v0.jsonl \
+  --run-id pythia70m-step143000-symbolic-v0
+```
 
-If `repeats_per_prompt = r`, every one of 512 prompts must have exactly
-`r` rows with sample indices `0 ... r-1`.
+The output path is opened in exclusive-create mode. Existing raw results are never overwritten.
 
-Do not stop early after surprising answers.
+## Validate
 
-## Provider drift
+```bash
+python3 scripts/validate_run_artifacts.py \
+  experiments/runs/manifest.template.json \
+  --results results/pythia70m-step143000-symbolic-v0.jsonl
+```
 
-If a provider silently changes the served model, or the exposed model
-identifier/version changes during collection, stop the run and start a new
-`run_id`. Do not merge the two runs into one confirmatory dataset.
+Only a validated run should be scored.
 
-## Failure handling
+## Score
 
-Transport/API failures may be retried, but the retry policy must be fixed before
-collection and recorded in the runner or manifest notes. A failed request is not
-a logical `INVALID` response; it is an execution failure and should not be
-silently scored as model output.
+```bash
+python3 scripts/score_flips.py results/pythia70m-step143000-symbolic-v0.jsonl
+```
 
-## Validation
+The confirmatory statistic is the sign-flip rate. Continuous logit-margin displacement is secondary.
 
-Before analysis:
+## What is not measured
 
-`python3 scripts/validate_run_artifacts.py RUN_MANIFEST.json --results RAW_RESULTS.jsonl`
-
-Only validated runs should be passed to `scripts/score_flips.py`.
+This run does not claim that Pythia follows instructions, generates a proof, represents propositions categorically, or has a proof-path semantics. It measures only a frozen next-token preference under a frozen renderer intervention.
