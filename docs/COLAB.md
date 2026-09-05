@@ -7,12 +7,16 @@ This is the easiest path for the first Pythia-70M run. GPU is not required; use 
 Create a new notebook at Google Colab. The repository also includes
 `notebooks/pythia70m_colab.ipynb`, which contains the same commands.
 
-## 2. Clone the repository
+## 2. Reset working directory, clean, and clone
 
 ```bash
+%cd /content
+!rm -rf /content/proof-path-invariance
 !git clone https://github.com/Kairose-master/proof-path-invariance.git
-%cd proof-path-invariance
+%cd /content/proof-path-invariance
 ```
+
+The `%cd /content` line must run before deleting the old clone. Otherwise Colab can end up inside a directory that has just been removed and `getcwd` will fail.
 
 ## 3. Install runner dependencies
 
