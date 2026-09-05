@@ -91,3 +91,36 @@ next step is held-out prediction rather than a representation claim.
 
 See `docs/RESULTS_PHASE2.md` and
 `experiments/results/phase2_pythia70m_s3_summary.json`.
+
+
+## 2026-09-05 — Phase 2.6 confirmatory unseen-family replication
+
+**Status:** completed; primary confirmatory endpoint failed.
+
+Frozen predictor was evaluated without refitting on eight new Lean-certified
+formal families.
+
+```text
+cases              = 128
+prompt rows        = 768
+binary predictions = YES 768 / 768
+skill_vs_zero      = -0.11878071118567624
+success            = false
+```
+
+The frozen model had SSE 4.110979649121873 versus zero-effect-null SSE
+3.674517810344696.
+
+Most importantly, the previously positive `321` mean effect
+(+0.05498981475830078 in Phase 2) reversed sign on the unseen benchmark
+(-0.032113075256347656).
+
+Conclusion: the family-blind additive scalar permutation law did not replicate.
+Do not refit it and relabel the result as confirmatory. Preserve this benchmark
+as a failed holdout and move to models that explicitly allow family/syntax
+interaction or richer response states.
+
+Raw result SHA-256:
+`25d970bb9c376583c415c9af227be699469571fab1ce842d76fb2a69d50d5e6d`.
+
+See `docs/RESULTS_PHASE2_6.md`.
