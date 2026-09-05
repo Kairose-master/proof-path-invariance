@@ -3,7 +3,7 @@
   "benchmark": {
     "name": "symbolic_v0",
     "lock_file": "experiments/benchmark_v0.lock.json",
-    "paired_prompts_sha256": "63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e",
+    "paired_prompts_sha256": "d43f993bd0a7c7d047110b02063719ab695fd06ce2e5b69ed4757fe85b4a2733",
     "prompt_count": 512
   },
   "model": {
