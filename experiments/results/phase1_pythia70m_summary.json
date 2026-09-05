@@ -1,0 +1,32 @@
+{
+  "run_id": "pythia70m-step143000-symbolic-v0",
+  "provenance": "User-supplied output from scripts/score_flips.py. Raw manifest/result JSONL not yet committed.",
+  "model": {
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000"
+  },
+  "benchmark": "symbolic_v0",
+  "transform": "premise_reverse",
+  "pairs_total": 256,
+  "valid_binary_pairs": 256,
+  "tie_pairs": 0,
+  "flips": 0,
+  "flip_rate": 0,
+  "directional_flips": {
+    "YES_to_NO": 0,
+    "NO_to_YES": 0
+  },
+  "accuracy": {
+    "base": 0.5,
+    "premise_reverse": 0.5
+  },
+  "margin_shift": {
+    "mean_reverse_minus_base": 0.02717304229736328,
+    "mean_absolute_shift": 0.07551097869873047
+  },
+  "interpretation": {
+    "observed": "No induced YES/NO sign flips under premise reversal in the 256 tested pairs.",
+    "caution": "Accuracy was 0.5 in both variants, so sign stability must not be interpreted as evidence of correct logical reasoning.",
+    "secondary_signal": "Premise reversal changed the continuous YES-vs-NO margin despite zero sign flips."
+  }
+}
