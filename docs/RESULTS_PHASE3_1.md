@@ -61,7 +61,7 @@ Splitting `qwen05b` by renderer:
 | Renderer | `R` median (range) | controls with `R < 1` | AUROC median |
 |---|---:|---:|---:|
 | bullets | 0.88 (0.63–1.20) | 6 of 8 | 0.84 |
-| prose | 1.68 (1.50–2.18) | 0 of 8 | 0.72 |
+| prose | 1.69 (1.50–2.18) | 0 of 8 | 0.72 |
 
 With the bullet-list renderer, logically identical rows are closer than the
 typical pair of logically distinct classes in six of eight controls; with

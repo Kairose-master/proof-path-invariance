@@ -180,7 +180,7 @@ qwen05b      0.770       pass     1.35             fail
 - **OBSERVED:** margin sign is miscalibrated in opposite directions by
   renderer/answer map while AUROC is informative.
 - **EXPLORATORY:** by renderer, `qwen05b` has `R` median 0.88 (bullets,
-  6/8 controls below 1) versus 1.68 (prose, 0/8). Not preregistered.
+  6/8 controls below 1) versus 1.69 (prose, 0/8). Not preregistered.
 
 Raw SHA-256 (uncompressed): `pythia410m`
 `aba44f5fc7976361878393f90c61f2a1da041009562d4b4fd861d5a2b6922c3f`;
