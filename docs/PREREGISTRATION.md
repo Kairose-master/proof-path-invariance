@@ -76,16 +76,23 @@ Do not mix silent model-version changes inside one confirmatory analysis.
 
 ## Sampling plan
 
-Not yet frozen.
+The benchmark case generator is frozen for v0:
 
-Before confirmatory evaluation, specify:
+- 256 deterministic symbolic case records;
+- 128 positive and 128 negative;
+- two formal certificate schemas only;
+- one base and one premise-reversed rendering per case;
+- 512 prompts total before repeated model sampling.
 
-- number of distinct certified cases;
-- positive/negative balance;
-- number of repeated samples per prompt;
-- rationale for the chosen sample size;
-- whether cases are generated or manually authored;
-- exclusion rules.
+The 256 records are **not** treated as 256 independent logical structures.
+They are symbolic instantiations of two formal families. Generalization claims
+must remain limited accordingly.
+
+Repeated model samples per prompt are not yet frozen because they depend on the
+selected model/API decoding protocol. That value must be fixed before any
+confirmatory model output is collected.
+
+See `docs/SAMPLING_V0.md`.
 
 ## Exclusions
 
