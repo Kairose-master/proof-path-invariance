@@ -3,7 +3,7 @@
   "status": "frozen-inputs",
   "case_generator_commit": "a949e34f3068afd739c232c1db8ef8f5e2891895",
   "paired_generator_commit": "7e4ed172467f90f7ba3ab70863762ad06a859770",
-  "ci_commit": "cf0e9c36a0261e725e8903d946f33033c885c982",
+  "ci_commit": "e94feb49ced02eee21469a1d5447090afe037e0a",
   "counts": {
     "cases": 256,
     "positive": 128,
@@ -12,7 +12,7 @@
   },
   "sha256": {
     "symbolic_cases_jsonl": "e683dadd5369f2b8c43d809694b8c7348f633532841f7845cb73b2498d3e12cf",
-    "paired_prompts_jsonl": "63ab9a22ef8d77b22d6e9c4538cf94efa00a7f143d7ac4a23391eeb950ae9e1e"
+    "paired_prompts_jsonl": "d43f993bd0a7c7d047110b02063719ab695fd06ce2e5b69ed4757fe85b4a2733"
   },
   "confirmatory_transform": "premise_reverse",
   "formal_families": [
