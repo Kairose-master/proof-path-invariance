@@ -34,11 +34,24 @@ Required diagnostics:
 Exit criterion: determine whether Phase 1's zero flips are best explained by a
 one-sided answer bias or by a stable but miscalibrated continuous signal.
 
+**Status:** completed. All 256 base judgments and all 256 reversed judgments
+were YES. Base-margin AUROC was 0.4781 and reversed-margin AUROC was 0.2282.
+The zero-flip result is therefore response-bias stability, not evidence of
+correct logical invariance. Gold-conditioned effects remain confounded with
+formal family in v0.
+
 ## Phase 2 — Additional certified or audited transformations
 
 Add one transformation family at a time. Each must state exactly what is preserved, what changes, and whether that fact is Lean-checked or only generator-validated.
 
-Candidates include atom aliases, alternative serializations, and carefully controlled redundant information.
+The first Phase 2 transform family is the full six-element premise-permutation
+family on three-premise problems (`S3`). This gives an exact input-side identity
+and composition law while keeping the formal problem fixed. The empirical goal
+is to test whether response effects generalize across multiple positive and
+negative formal families, not to assume that the model itself represents
+`S3`.
+
+See `docs/PREREGISTRATION_PHASE2.md`.
 
 ## Phase 3 — Derivation-sensitive experiments
 
