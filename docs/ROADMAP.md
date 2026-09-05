@@ -109,6 +109,12 @@ sign reversals and yields a new frozen out-of-family prediction. No group,
 representation, equivariance, or categorical claim enters before that fresh
 replication succeeds.
 
+**Current exploratory clue:** simple single-feature movement summaries are not
+enough. A family-specific pairwise premise-precedence decomposition explains a
+substantial fraction of the six-point S3 response surface in many Phase 2.6
+families (mean family R2 about 0.60), but the coefficients are not yet known to
+generalize. See `docs/RESULTS_PHASE2_7_PRELIM.md`.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.
