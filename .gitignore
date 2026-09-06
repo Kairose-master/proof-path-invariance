@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 hf/build/
 experiments/rq2/logs/
+hf/build_rq2/
