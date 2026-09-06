@@ -1,8 +1,9 @@
 # Phase 3.3 Preregistration — Control and scale on the Boolean table
 
 Status: **FROZEN BEFORE INSPECTING ANY RESULT OF THESE RUNS.** The control
-run was launched at 2026-09-06T00:0xZ; this document is committed while it
-runs and before any of its output is read. The scale run starts after it.
+run was launched at 2026-09-06T01:23:03Z; this document was committed at
+01:24:00Z with 279 of 18240 rows written and none read. The scale run starts
+after it as a single 4-thread process (float32 memory does not allow two).
 
 ## Purpose
 
