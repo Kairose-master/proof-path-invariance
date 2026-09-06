@@ -269,3 +269,35 @@ Raw SHA-256 (uncompressed): `qwen05b`
 
 See `docs/RESULTS_PHASE3_4.md`.
 
+
+## 2026-09-06 — EXPLORATORY: is the premise-by-premise margin change a diffusion?
+
+Not preregistered. On the `hankel_v1` raw margins (`pos − neg`), treat
+appending one clause as one time step and look at the increments.
+
+```text
+qwen05b bullets  depth0->1 increments: mean +0.230 sd 0.240 skew +1.06 excess kurtosis +1.00
+                 depth1->2 increments: mean +0.306 sd 0.193 skew +1.24 excess kurtosis +3.11
+                 R^2 of increment on appended-clause identity: 0.08
+                 within-class dispersion across serializations by depth: 0.065, 0.055, 0.052
+                 corr(|increment|, level): -0.49
+qwen05b prose    same pattern: skew +1.4/+1.7, kurtosis +1.3/+3.5, dispersion flat (0.081, 0.083, 0.079), corr -0.53
+pythia70m        increments near zero drift, dispersion flat or falling, corr -0.26/-0.35
+```
+
+- **OBSERVED:** increments are right-skewed and heavy-tailed, not Gaussian.
+- **OBSERVED:** increments have a positive drift toward the positive
+  answer for the reader (about +0.2 to +0.3 logit per appended clause),
+  almost independent of which clause is appended.
+- **OBSERVED:** dispersion across serializations does not grow with depth;
+  a Brownian model predicts growth like the square root of depth.
+- **OBSERVED:** larger margins receive smaller increments (negative
+  correlation of magnitude with level): saturation, the opposite of a
+  geometric (multiplicative) process.
+- **HYPOTHESIS:** if a process model is wanted, the first candidate is a
+  saturating accumulator with a positive drift (mean reversion toward a
+  ceiling), not Brownian or geometric Brownian motion. No stochastic
+  layer is required yet: the measured variation is structured (position,
+  renderer) and does not accumulate. Actual randomness would need
+  sampled outputs, which this project has not collected.
+
