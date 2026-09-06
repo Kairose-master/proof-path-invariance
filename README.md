@@ -1,5 +1,7 @@
 # Proof-Path Invariance
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22495706.svg)](https://doi.org/10.5281/zenodo.22495706)
+
 A Lean-grounded project for measuring behavioral stability under formally controlled input transformations.
 
 > The project does **not** assume that LLM reasoning is categorical, compositional, geometric, or proof-theoretically identical to Lean derivations.
@@ -116,3 +118,11 @@ evaluates them on the same tables. See `docs/NOVELTY.md`,
 Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in
 result file records the supplied scorer summary and its provenance. No novelty
 claim is made yet.
+
+## Citation
+
+Concept DOI (all versions): [10.5281/zenodo.22495706](https://doi.org/10.5281/zenodo.22495706). Version v0.1.1: [10.5281/zenodo.22495707](https://doi.org/10.5281/zenodo.22495707).
+
+```
+Jang, Jinu (2026). proof-path-invariance. Zenodo. https://doi.org/10.5281/zenodo.22495706
+```

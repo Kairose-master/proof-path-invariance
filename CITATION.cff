@@ -5,6 +5,7 @@ authors:
   - family-names: Jang
     given-names: Jinu
 license: MIT
+doi: 10.5281/zenodo.22495706
 repository-code: https://github.com/Kairose-master/proof-path-invariance
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-09-06

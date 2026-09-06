@@ -3,6 +3,8 @@
 Working draft (2026-09-06). All sections written and all runs in. Labels follow `AGENTS.md`: PROVED, OBSERVED,
 HYPOTHESIS, OPEN, CONFOUND. Source and data: github.com/Kairose-master/
 {recognition-paths, proof-path-invariance}; huggingface.co/jinu0633.
+Archived: doi.org/10.5281/zenodo.22495808 (recognition-paths),
+doi.org/10.5281/zenodo.22495706 (proof-path-invariance).
 
 ## Abstract (draft)
 
