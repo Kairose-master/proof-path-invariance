@@ -67,6 +67,19 @@ reaches `S` near 0 with near-identical profiles, data alone recovers what
 architecture guarantees; if it does not, the surface quotient survives
 augmentation.
 
+## Replication and one exploratory run (added 2026-09-06, before running)
+
+- **Seed 1** for `set`, `seq_aug`, `seq_fixed` with the identical
+  protocol: a replication of the seed-0 numbers. Predictions: same
+  qualitative pattern; `set` `V` in 0.4–0.9, `E` 0–3; `seq_fixed` Gate I
+  ratio below 1 again.
+- **`seq_aug` for 18000 steps, seed 0** (three times the budget):
+  EXPLORATORY, not part of the frozen design. It asks whether the
+  seed-0 failure (`S` 1.37) is under-convergence. Prediction: validation
+  accuracy above 0.93 and `S` below 1; if `S` stays above 1 at high
+  accuracy, augmentation does not yield permutation invariance on this
+  contrast.
+
 ## Re-centring after the literature check
 
 Set-LLM (2025) and order-centric augmentation (2025) already realise the
