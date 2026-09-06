@@ -180,6 +180,18 @@ classes; bullets 0.75, prose 1.80); the non-reading control sits at the
 noise value 0.97. The within-class proximity of Phase 3.2 is
 predominantly surface. See `docs/RESULTS_PHASE3_4.md`.
 
+## Phase 3.5 — Semantic-rewrite table
+
+Measure identification of consequence-equivalent but syntactically
+different clause sets: derivable-clause extensions (Lean-certified
+schema) against length-matched single-arrow flips (`hankel_v3`, 4224
+prompts). Statistics `T`, `U`, `V`, `E` frozen in
+`docs/PHASE3_HANKEL_V3_DESIGN.md`. This is the measurement that
+separates permutation invariance from logical invariance (N4 in
+`docs/NOVELTY.md`).
+
+**Status:** inputs and predictions frozen; runs pending.
+
 ## Phase 4 — Recognizers by construction
 
 Train three small recognizers on synthetic Horn data with the eight

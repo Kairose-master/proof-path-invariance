@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.6.0",
   "principle": "Measure observable answer changes under deterministic transformations whose formal status is explicit. Do not infer categorical or proof-theoretic structure.",
   "transformations": [
     {
@@ -66,6 +66,14 @@
       "formal_status": "changes_formal_problem; gold by forward chaining, not Lean-certified per cell",
       "enabled_phase3_4": true,
       "motivation": "Contrast with permutations (maximal surface change, no logical change) to decide whether within-class behavioral proximity tracks logic or words."
+    },
+    {
+      "id": "derivable_extension",
+      "layer": "problem",
+      "description": "Append one clause derivable from the trace (semantic identity, +1 clause); two such extensions form a length-matched semantic rewrite pair.",
+      "formal_status": "same_formal_problem; Lean-certified schema Horn.logicalEquiv_append_derivable / logicalEquiv_derivable_extensions; per-row derivability by forward chaining",
+      "enabled_phase3_5": true,
+      "motivation": "Measures identification of consequence-equivalent but syntactically different clause sets, the gap between permutation invariance and logical invariance."
     }
   ]
 }

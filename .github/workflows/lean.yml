@@ -61,6 +61,12 @@ jobs:
         run: python3 scripts/validate_hankel_v2_benchmark.py /tmp/hankel_v2.jsonl
       - name: Verify frozen Phase 3.4 table
         run: python3 scripts/verify_hankel_v2_lock.py /tmp/hankel_v2.jsonl
+      - name: Generate Phase 3.5 semantic-rewrite table
+        run: python3 scripts/generate_hankel_v3_benchmark.py --out /tmp/hankel_v3.jsonl
+      - name: Validate Phase 3.5 semantic-rewrite table
+        run: python3 scripts/validate_hankel_v3_benchmark.py /tmp/hankel_v3.jsonl
+      - name: Verify frozen Phase 3.5 table
+        run: python3 scripts/verify_hankel_v3_lock.py /tmp/hankel_v3.jsonl
       - name: Validate JSON schemas and run template
         run: |
           python3 -m json.tool experiments/schemas/run_manifest.schema.json >/dev/null
@@ -89,4 +95,5 @@ jobs:
           python3 -m py_compile scripts/analyze_hankel.py
           python3 -m py_compile scripts/analyze_hankel_v1.py
           python3 -m py_compile scripts/analyze_hankel_v2.py
+          python3 -m py_compile scripts/analyze_hankel_v3.py
           python3 -m py_compile constructed/horn_data.py constructed/models.py constructed/train.py constructed/evaluate.py

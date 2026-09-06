@@ -1,0 +1,24 @@
+{
+  "benchmark": "hankel_v3",
+  "status": "frozen-inputs",
+  "generator": "scripts/generate_hankel_v3_benchmark.py",
+  "prompts": 4224,
+  "rows": 66,
+  "row_structure": "8 base + 24 perm + 14 red (base plus one derivable single-atom clause, up to 3 per class) + 20 flip",
+  "red_rows_per_class": {"chain": 3, "fork_join": 1, "chain_gap": 1, "branch": 3, "reversed": 3, "fragments": 1, "gated": 1, "skip": 1},
+  "continuations": ["none", "d_e", "c_e", "b_d", "e_a", "a_d", "e_d", "b_c"],
+  "queries": ["ad", "ae", "bd", "ce"],
+  "boolean_columns_per_renderer": 80,
+  "relabeling": "sym1",
+  "answer_map": "yesno",
+  "renderers": ["bullets", "prose"],
+  "sha256": "59fed91c9ace2c0687658a08496496a0f60527eab3af0a279cb54871daab5a4b",
+  "formal_status": {
+    "perm_rows": "Horn.logicalEquiv_of_perm",
+    "red_rows": "Horn.logicalEquiv_append_derivable (schema); derivability of the added clause checked by forward chaining per row",
+    "red_red_pairs": "Horn.logicalEquiv_derivable_extensions",
+    "flip_rows": "different theory; validator requires the gold row to change",
+    "cell_gold": "forward chaining, re-derived by the validator; not Lean-certified per cell"
+  },
+  "interpretation_limit": "Compares semantic rewrites with a length-matched logical change on a finite Boolean table."
+}
