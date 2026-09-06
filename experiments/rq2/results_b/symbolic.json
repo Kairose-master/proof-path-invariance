@@ -1,0 +1,206 @@
+{
+ "pairs": {
+  "j1_k0": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.0,
+   "yes_rate_H0_jk": 0.0
+  },
+  "j1_k1": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.0,
+   "yes_rate_H0_jk": 0.0
+  },
+  "j1_k2": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.885,
+   "yes_rate_H0_jk": 0.885
+  },
+  "j1_k3": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  },
+  "j1_k4": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  },
+  "j1_k5": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  },
+  "j2_k0": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.0,
+   "yes_rate_H0_jk": 0.0
+  },
+  "j2_k1": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.885,
+   "yes_rate_H0_jk": 0.885
+  },
+  "j2_k2": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  },
+  "j2_k3": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  },
+  "j2_k4": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  }
+ },
+ "accuracy": {
+  "j0_k0": 0.5,
+  "j1_k0": 0.5,
+  "j2_k0": 0.5,
+  "j0_k1": 0.5,
+  "j1_k1": 0.5,
+  "j2_k1": 0.9425,
+  "j0_k2": 0.5,
+  "j1_k2": 0.9425,
+  "j2_k2": 1.0,
+  "j0_k3": 0.9425,
+  "j1_k3": 1.0,
+  "j2_k3": 1.0,
+  "j0_k4": 1.0,
+  "j1_k4": 1.0,
+  "j2_k4": 1.0,
+  "j0_k5": 1.0,
+  "j1_k5": 1.0,
+  "j2_k5": 1.0,
+  "j0_k6": 1.0,
+  "j1_k6": 1.0,
+  "j2_k6": 1.0
+ },
+ "primary": {
+  "j1_k1": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.0,
+   "yes_rate_H0_jk": 0.0
+  },
+  "j1_k2": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.885,
+   "yes_rate_H0_jk": 0.885
+  },
+  "j2_k1": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 0.885,
+   "yes_rate_H0_jk": 0.885
+  },
+  "j2_k2": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  },
+  "j1_k3": {
+   "agree": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "agree_t": 1.0,
+   "agree_n": 1.0,
+   "yes_rate_Hj_k": 1.0,
+   "yes_rate_H0_jk": 1.0
+  }
+ },
+ "prediction_holds": true
+}

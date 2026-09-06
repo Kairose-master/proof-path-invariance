@@ -79,16 +79,24 @@ def random_clause(rng):
     return ((x,), (y, z))
 
 
-def sample(rng, holdout: Holdout | None = None):
-    """Balanced sample over 2-6 clauses; theories in `holdout` are rejected."""
+def sample(rng, holdout: Holdout | None = None, multi_hyp: bool = False):
+    """Balanced sample over 2-6 clauses; theories in `holdout` are rejected.
+    With `multi_hyp`, the hypothesis is a list of 1-3 atoms (`hyp` is then a
+    list); the label is entailment from the whole set."""
     target = rng.choice([NEG, POS])
     while True:
         n = rng.choice([2, 3, 4, 5, 5, 6])
         clauses = [random_clause(rng) for _ in range(n)]
         if holdout is not None and holdout.contains(clauses):
             continue
-        hyp, goal = rng.sample(ATOMS, 2)
-        label = POS if entails(clauses, hyp, goal) else NEG
+        if multi_hyp:
+            m = rng.choice([1, 1, 2, 3])
+            atoms = rng.sample(ATOMS, m + 1)
+            hyp, goal = sorted(atoms[:m]), atoms[m]
+            label = POS if goal in closure(clauses, hyp) else NEG
+        else:
+            hyp, goal = rng.sample(ATOMS, 2)
+            label = POS if entails(clauses, hyp, goal) else NEG
         if label == target:
             break
     perm = ATOMS[:]
@@ -135,7 +143,13 @@ def iter_tensors(cs, hyps, goals, relabels):
                 bodies[i, j, k] = int(rl[x][1:])
             for k, y in enumerate(h[:2]):
                 heads[i, j, k] = int(rl[y][1:])
-    hyp = torch.tensor([int(relabels[i][hyps[i]][1:]) for i in range(n)])
+    if isinstance(hyps[0], (list, tuple)):
+        hyp = torch.zeros((n, 7), dtype=torch.long)
+        for i in range(n):
+            for x in hyps[i]:
+                hyp[i, int(relabels[i][x][1:])] = 1
+    else:
+        hyp = torch.tensor([int(relabels[i][hyps[i]][1:]) for i in range(n)])
     goal = torch.tensor([int(relabels[i][goals[i]][1:]) for i in range(n)])
     return bodies, heads, None, hyp, goal
 
@@ -144,9 +158,9 @@ def tensors(kind, cs, hyps, goals, relabels):
     return set_tensors(cs, hyps, goals, relabels) if kind == "set" else iter_tensors(cs, hyps, goals, relabels)
 
 
-def batch(rng, n, kind, holdout=None):
+def batch(rng, n, kind, holdout=None, multi_hyp=False):
     raw, ys = [], []
     for _ in range(n):
-        clauses, hyp, goal, relabel, label = sample(rng, holdout)
+        clauses, hyp, goal, relabel, label = sample(rng, holdout, multi_hyp)
         raw.append((clauses, hyp, goal, relabel)); ys.append(label)
     return tensors(kind, *zip(*raw)), torch.tensor(ys)

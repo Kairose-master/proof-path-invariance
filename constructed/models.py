@@ -102,10 +102,13 @@ class IterReasoner(nn.Module):
 
     def forward(self, bodies, heads, body_mask, hyp, goal, rounds=None):
         # bodies: (B,C,2) atom ids (pad = -1 -> masked), heads: (B,C,2), body_mask/head via -1
+        # hyp: (B,) atom index, or (B,A) 0/1 mask of hypothesis atoms
         rounds = self.rounds if rounds is None else rounds
         B, C, _ = bodies.shape
         state = self.atom_emb.weight[None].expand(B, -1, -1).clone()             # (B,A,d)
-        state = state + self.hyp_flag[None, None] * torch.nn.functional.one_hot(hyp, self.n_atoms)[..., None]
+        hmask = torch.nn.functional.one_hot(hyp, self.n_atoms) if hyp.dim() == 1 else hyp   # (B,A) 0/1
+        hmask = hmask.to(state.dtype)
+        state = state + self.hyp_flag[None, None] * hmask[..., None]
         bm = bodies >= 0; hm = heads >= 0
         bidx = bodies.clamp(min=0); hidx = heads.clamp(min=0)
         for _ in range(rounds):
@@ -125,5 +128,6 @@ class IterReasoner(nn.Module):
             agg = torch.where(agg < -1e3, torch.zeros_like(agg), agg)               # atoms with no incoming message
             state = self.upd(agg.reshape(-1, self.d), state.reshape(-1, self.d)).reshape(B, self.n_atoms, self.d)
         g = torch.gather(state, 1, goal[:, None, None].expand(-1, 1, self.d))[:, 0]
-        h = torch.gather(state, 1, hyp[:, None, None].expand(-1, 1, self.d))[:, 0]
+        # hypothesis summary: max over the states of the hypothesis atoms (one atom: that state)
+        h = torch.where(hmask[..., None] > 0, state, torch.full_like(state, -1e4)).max(1).values
         return self.head(torch.cat([g, h], -1))
