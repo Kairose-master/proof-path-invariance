@@ -29,7 +29,7 @@ python3 scripts/verify_benchmark_lock.py /tmp/symbolic_v0.jsonl /tmp/ppi-paired.
 ## Prepare environment
 
 ```bash
-python3 -m pip install -r requirements-runner.txt
+python3 -m pip install -r requirements-runner.txt   # torch, numpy, transformers, safetensors, huggingface_hub
 ```
 
 Before the confirmatory run, fill the remaining `FILL-BEFORE-RUN` values in
