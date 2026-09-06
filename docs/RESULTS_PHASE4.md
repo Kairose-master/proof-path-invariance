@@ -105,6 +105,35 @@ in either direction, and any claim about augmentation versus fixed order
 needs several seeds (seeds 2–3 queued). The `set` recognizer's numbers are
 stable because most of them are forced by construction.
 
+## EXPLORATORY — `seq_aug` at three times the budget (18000 steps, seed 0)
+
+Not part of the frozen design; recorded in the design document before
+running, with the prediction "validation accuracy above 0.93 and `S` below
+1".
+
+| | val. acc. | `hankel_v1` Gate I / identical classes / distinct rows | `hankel_v2` `S` | `hankel_v3` `T` / `U` / `V` / `E` |
+|---|---:|---|---:|---|
+| `seq_aug` 6000 steps | 0.814 | 0.288 / 0/8 / 39 | 1.37 (3/8) | 0.68 / 0.13 / 1.54 / 0, 2 |
+| `seq_aug` 18000 steps | 0.981 | 0.307 / 0/8 / 40 | **0.49 (7/8)** | 0.92 / 0.46 / **1.17** / 0, 0 |
+| `set` 6000 steps (s0, s1) | 0.993, 0.990 | 0.000 / 8/8 / 8 | 0.00 (8/8) | 0.27 / 0.27 / 0.62, 0.80 / 0–2, 0 |
+
+Prediction held: converged augmentation yields `S` below 1 (0.49, 7 of 8
+classes). Three further readings.
+
+- **Approximate, never exact.** At 98% accuracy the augmented causal
+  recognizer still has no class with identical serialization profiles and
+  all 40 rows distinct; its depth-one family is closed only because no two
+  rows agree on it. Augmentation buys approximate permutation invariance;
+  architecture buys exact.
+- **No semantic identification.** `V` 1.17: on the columns where accuracy
+  imposes nothing, a derivable-clause extension moves this recognizer at
+  least as much as a flip, the same as the LLMs and the control. The `set`
+  recognizer's `V` of 0.62–0.80 is the only sub-unity value observed, and
+  it is not reproduced by a sequence model that matches it on accuracy.
+- **Length.** Doubling the prefix (`u.u`, six clauses, outside the
+  training lengths 2–4) costs the sequence model 171 of 1140 tests; the set
+  recognizer 0.
+
 ## Limits
 
 One seed; toy models of ~10⁵ parameters; `seq_aug` under-trained; the

@@ -366,3 +366,15 @@ seq_fixed s1: val 0.950 | ident 0/8 | S 0.58 (5/8) | V 2.42
   failure was under-convergence; the fixed-order model's drop shows S is
   noisy for these models on 80 tests. Seeds 2-3 queued.
 
+
+## 2026-09-06 — EXPLORATORY: seq_aug at 18000 steps
+
+```text
+val 0.981 | S 0.49 (7/8) | Gate I 0.307, identical classes 0/8, rows 40/40 | V 1.17, E 0/14
+```
+
+- **PREDICTED → OBSERVED:** converged augmentation passes Gate S.
+- **OBSERVED:** approximate permutation invariance only (no exact
+  identities); no semantic identification (V 1.17), unlike the set
+  recognizer (V 0.62–0.80).
+
