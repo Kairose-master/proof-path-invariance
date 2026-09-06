@@ -65,7 +65,9 @@ column a depth-three table would need; it is not an error.
 | doubled prefix `u.u` vs `u` (Hamming, median over classes) | 84 | serialization Hamming median 94 |
 
 Repeating a continuation clause is nearly invisible (96% of tests agree),
-more so than permuting the prefix. Doubling the whole prefix costs about as
+more so than permuting the prefix. **Phase 3.3 control:** the non-reading
+Pythia-70M shows the same 95% agreement, so this is a generic property of
+the prompts and carries no logical weight. Doubling the whole prefix costs about as
 much as permuting it. The idempotence consequence `ww ≈_ρ w` of
 `Recognition.lean` fails exactly, like permutation invariance, and to a
 similar degree.

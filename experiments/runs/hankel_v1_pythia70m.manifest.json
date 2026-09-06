@@ -1,0 +1,48 @@
+{
+  "run_id": "pythia70m-hankel-v1",
+  "phase": "3.3",
+  "preregistration": "docs/PREREGISTRATION_PHASE3_3.md",
+  "benchmark": {
+    "name": "hankel_v1",
+    "lock_file": "experiments/hankel_v1.lock.json",
+    "prompts_sha256": "53028d8ba0d42cfbc3831e940ad9027716a4e642551864378179d4117993d1fa",
+    "prompt_count": 18240
+  },
+  "model": {
+    "provider": "huggingface-local",
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "resolved_commit": "de3e4e2d6cbb3b1a51f90fe153ea51fcd8c7c852",
+    "access_date_utc": "2026-09-06T01:23:03Z",
+    "interface": "transformers.AutoModelForCausalLM"
+  },
+  "measurement": {
+    "mode": "answer_position_logit_pair",
+    "read_as": "order relations only",
+    "candidate_token_ids": {
+      " YES": 22487,
+      " NO": 7651
+    },
+    "require_single_token_candidates": true,
+    "repeats_per_prompt": 1
+  },
+  "execution": {
+    "runner": "scripts/run_hf_hankel.py",
+    "runner_commit": "4e7b0fbc360417aecfeba68de4480ee13fd3dd76",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "5.16.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads_per_process": 1,
+    "sharding": "4 contiguous shards, one process each, one forward pass per prompt; concatenated in input order and re-aligned",
+    "started_at_utc": "2026-09-06T01:23:03Z",
+    "finished_at_utc": "2026-09-06T01:30:47Z",
+    "notes": "Validity control for the Boolean Gate I."
+  },
+  "raw_result_sha256_uncompressed": "49bf32f90bb2b8aae77887b7a9e2cab7b7eb30a6ca44e16d281249ebc8ca1d6a",
+  "analysis": {
+    "script": "scripts/analyze_hankel_v1.py",
+    "summary": "experiments/results/phase3_3_hankel_v1_pythia70m_summary.json"
+  },
+  "analysis_status": "boolean_frozen_plan_v1_completed"
+}

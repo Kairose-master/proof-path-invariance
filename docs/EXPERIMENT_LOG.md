@@ -217,3 +217,23 @@ Raw SHA-256 (uncompressed):
 
 See `docs/RESULTS_PHASE3_2.md`.
 
+
+## 2026-09-06 — Phase 3.3 control: Pythia-70M on `hankel_v1`
+
+**Status:** completed; preregistered gates evaluated.
+
+```text
+Gate R  comparative accuracy (pooled)          = 0.456   fail (predicted)
+Gate I  within/between median Hamming (pooled) = 1.422   fail (predicted; range predicted 0.9-1.1 was too low)
+```
+
+- **OBSERVED:** the Boolean Gate I is valid; a non-reading recognizer fails it.
+- **OBSERVED:** repeated-continuation agreement 0.950 for the control versus
+  0.957 for `qwen05b`: generic, not logical. The Phase 3.2 idempotence
+  reading is downgraded accordingly.
+- **OBSERVED:** depth-one closure fails for the control as well.
+
+Raw SHA-256 (uncompressed):
+`49bf32f90bb2b8aae77887b7a9e2cab7b7eb30a6ca44e16d281249ebc8ca1d6a`.
+Scale run (Qwen2.5-1.5B-Instruct) in progress. See `docs/RESULTS_PHASE3_3.md`.
+
