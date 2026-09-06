@@ -1,0 +1,21 @@
+{
+  "benchmark": "hankel_v2",
+  "status": "frozen-inputs",
+  "generator": "scripts/generate_hankel_v2_benchmark.py",
+  "prompts": 3328,
+  "rows": 52,
+  "row_structure": "8 base serializations (123) + 24 permutations (231, 312, 321) + 20 single-arrow flips whose gold row changes",
+  "continuations": ["none", "d_e", "c_e", "b_d", "e_a", "a_d", "e_d", "b_c"],
+  "queries": ["ad", "ae", "bd", "ce"],
+  "boolean_columns_per_renderer": 80,
+  "relabeling": "sym1",
+  "answer_map": "yesno",
+  "renderers": ["bullets", "prose"],
+  "sha256": "81695c3e968c1253d3ac9f0f05744092ac51c1cadef38ecc1bd86422faa943b8",
+  "formal_status": {
+    "perm_rows": "same theory as base; Horn.logicalEquiv_of_perm (recognition-paths)",
+    "flip_rows": "different theory; the validator requires the forward-chaining gold row to differ from the base",
+    "cell_gold": "forward chaining, re-derived by the validator; not Lean-certified per cell"
+  },
+  "interpretation_limit": "Compares surface-maximal logic-preserving rewrites with surface-minimal logic-changing rewrites of the same trace."
+}

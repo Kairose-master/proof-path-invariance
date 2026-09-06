@@ -167,6 +167,16 @@ invariance fails (0 of 8 classes identical); the depth-one family is not
 closed, with a logically identical witness pair separated at depth two;
 repeated continuations are 96% invisible. See `docs/RESULTS_PHASE3_2.md`.
 
+## Phase 3.4 — Surface-controlled contrast
+
+Contrast permutations (maximal surface change, no logical change) with
+single-arrow flips (minimal surface change, logical change) of the same
+base trace on the depth-≤1 Boolean family (`hankel_v2`, 3328 prompts).
+Gate S: median over classes of `d_perm / d_flip < 1`. Frozen in
+`docs/PHASE3_HANKEL_V2_DESIGN.md`.
+
+**Status:** inputs and predictions frozen; runs in progress.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.

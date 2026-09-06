@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "principle": "Measure observable answer changes under deterministic transformations whose formal status is explicit. Do not infer categorical or proof-theoretic structure.",
   "transformations": [
     {
@@ -58,6 +58,14 @@
       "formal_status": "same_formal_problem; Lean-certified by Horn.logicalEquiv_dup (recognition-paths)",
       "enabled_phase3_2": true,
       "motivation": "Logical invariance forces ww ≈ w (Recognition.lean); this is its direct test."
+    },
+    {
+      "id": "single_arrow_flip",
+      "layer": "problem",
+      "description": "Exchange body and head of one single-atom clause in place: minimal surface change, logical change (gold row must differ).",
+      "formal_status": "changes_formal_problem; gold by forward chaining, not Lean-certified per cell",
+      "enabled_phase3_4": true,
+      "motivation": "Contrast with permutations (maximal surface change, no logical change) to decide whether within-class behavioral proximity tracks logic or words."
     }
   ]
 }
