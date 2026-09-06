@@ -27,7 +27,7 @@ from safetensors.torch import save_file
 ROOT = Path(__file__).resolve().parent.parent
 MODEL_REPO = "jinu0633/recognition-paths-recognizers"
 DATA_REPO = "jinu0633/hankel-tables"
-TAGS = ["set", "seq_aug", "seq_fixed"]
+TAGS = ["set", "seq_aug", "seq_fixed"]  # seed-0 primaries; further seeds are discovered from the weights dir
 DESC = {
     "set": "clause encoder + max-pool + query encoder; permutation- and repetition-invariant by architecture",
     "seq_aug": "causal transformer over the token sequence, trained with permutation/repetition augmentation",
@@ -55,7 +55,8 @@ def summary_numbers(eval_dir: Path, tag: str) -> dict:
     return out
 
 
-def model_card(tag: str, ck: dict, nums: dict) -> str:
+def model_card(tag: str, ck: dict, nums: dict, base: str | None = None) -> str:
+    base = base or tag
     rows = "\n".join(f"| `{k}` | {v if not isinstance(v, float) else f'{v:.3f}'} |" for k, v in nums.items())
     return f"""---
 license: mit
@@ -64,7 +65,7 @@ tags: [recognition-paths, horn-logic, permutation-invariance, logical-invariance
 
 # `{tag}` — a constructed recognizer for Horn entailment
 
-Part of `{MODEL_REPO}`. {DESC[tag]}. Parameters: {ck['params']}. Trained
+Part of `{MODEL_REPO}`. {DESC[base]}. Parameters: {ck['params']}. Trained
 {ck['steps']} steps of batch 128 on synthetic Horn traces (2–4 clauses, five
 atoms, random relabelling, balanced labels), seed {ck['seed']}, with the eight
 evaluation classes of the Hankel tables held out up to atom relabelling.
@@ -111,7 +112,8 @@ def build(weights_dir: Path, eval_dir: Path, out: Path) -> None:
     if out.exists():
         shutil.rmtree(out)
     mroot = out / "models"; droot = out / "dataset"
-    for tag in TAGS:
+    all_tags = sorted(p.stem for p in weights_dir.glob("*.pt"))
+    for tag in all_tags:
         d = mroot / tag; d.mkdir(parents=True)
         ck = torch.load(weights_dir / f"{tag}.pt", map_location="cpu")
         save_file({k: v.contiguous() for k, v in ck["state"].items()}, str(d / "model.safetensors"))
@@ -120,7 +122,8 @@ def build(weights_dir: Path, eval_dir: Path, out: Path) -> None:
         (d / "code").mkdir()
         for f in ("models.py", "horn_data.py"):
             shutil.copy(ROOT / "constructed" / f, d / "code" / f)
-        (d / "README.md").write_text(model_card(tag, ck, summary_numbers(eval_dir, tag)))
+        base = tag.split("_s")[0] if "_s" in tag else ("seq_aug" if tag == "seq_aug_long" else tag)
+        (d / "README.md").write_text(model_card(tag, ck, summary_numbers(eval_dir, tag), base))
         for v in ("v1", "v2", "v3"):
             shutil.copy(eval_dir / f"{tag}_{v}_summary.json", d / f"eval_hankel_{v}_summary.json")
     (mroot / "README.md").write_text(f"""---
@@ -131,7 +134,8 @@ license: mit
 Three small recognizers for Horn entailment, trained on the same synthetic
 distribution and evaluated on the same frozen Hankel tables
 (`{DATA_REPO}`): `set/` (invariance by architecture), `seq_aug/`
-(invariance by data augmentation), `seq_fixed/` (neither). Each folder has
+(invariance by data augmentation), `seq_fixed/` (neither); `*_s1`, `*_s2`,
+`*_s3` are further seeds and `seq_aug_long` a three-times-budget run. Each folder has
 its own model card with the evaluation numbers. Source and theory:
 github.com/Kairose-master/proof-path-invariance and
 github.com/Kairose-master/recognition-paths.
