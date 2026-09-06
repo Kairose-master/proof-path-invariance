@@ -1,9 +1,9 @@
 # Recognition paths: when does a recognizer respect logical identity, and how would we know?
 
-Working draft. Sections 1–3 are written from settled material; Sections 4–6
-are placeholders to be filled from the results documents once the seed-1
-replication and the 1.5B semantic-rewrite run are in. Labels follow
-`AGENTS.md`: PROVED, OBSERVED, HYPOTHESIS, OPEN, CONFOUND.
+Working draft (2026-09-06). All sections written; the Qwen2.5-1.5B row of
+Section 4.3 is pending its run. Labels follow `AGENTS.md`: PROVED, OBSERVED,
+HYPOTHESIS, OPEN, CONFOUND. Source and data: github.com/Kairose-master/
+{recognition-paths, proof-path-invariance}; huggingface.co/jinu0633.
 
 ## Abstract (draft)
 

@@ -13,7 +13,7 @@ blockquote{border-left:3px solid #999;margin-left:0;padding-left:10px;color:#333
 """
 pathlib.Path("_draft.css").write_text(css)
 pypandoc.convert_file("DRAFT.md", "html", outputfile="_draft.html",
-    extra_args=["--standalone", "--mathml", "--css=_draft.css", "--metadata", "title=Recognition paths (working draft)"])
+    extra_args=["--standalone", "--mathml", "--css=_draft.css", "--metadata", "pagetitle=Recognition paths (working draft)"])
 PY
 CHROME=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell
 $CHROME --no-sandbox --disable-gpu --headless --print-to-pdf=DRAFT.pdf --no-pdf-header-footer "file://$PWD/_draft.html" 2>/dev/null
