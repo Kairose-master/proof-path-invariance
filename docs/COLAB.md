@@ -43,7 +43,7 @@ directory.
 ## 3. Install runner dependencies
 
 ```bash
-!python3 -m pip install -q -r requirements-runner.txt
+!python3 -m pip install -q -r requirements-runner.txt   # torch, numpy, transformers, safetensors, huggingface_hub
 ```
 
 Do not manually change the model, revision, device, dtype, YES/NO candidates, or benchmark files for the confirmatory v0 run.
