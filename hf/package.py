@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -32,6 +33,7 @@ DESC = {
     "set": "clause encoder + max-pool + query encoder; permutation- and repetition-invariant by architecture",
     "seq_aug": "causal transformer over the token sequence, trained with permutation/repetition augmentation",
     "seq_fixed": "causal transformer over the token sequence, trained on fixed-order traces only",
+    "set_contrast": "the set recognizer trained with an additional symmetric-KL loss on (trace, trace + derivable clause) pairs",
 }
 
 
@@ -122,7 +124,8 @@ def build(weights_dir: Path, eval_dir: Path, out: Path) -> None:
         (d / "code").mkdir()
         for f in ("models.py", "horn_data.py"):
             shutil.copy(ROOT / "constructed" / f, d / "code" / f)
-        base = tag.split("_s")[0] if "_s" in tag else ("seq_aug" if tag == "seq_aug_long" else tag)
+        base = re.sub(r"_s\d+$", "", tag)
+        base = "seq_aug" if base == "seq_aug_long" else base
         (d / "README.md").write_text(model_card(tag, ck, summary_numbers(eval_dir, tag), base))
         for v in ("v1", "v2", "v3"):
             shutil.copy(eval_dir / f"{tag}_{v}_summary.json", d / f"eval_hankel_{v}_summary.json")
