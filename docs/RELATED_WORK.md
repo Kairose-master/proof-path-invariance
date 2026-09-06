@@ -1,8 +1,8 @@
 # Related work — what already exists, and the narrowest defensible difference
 
-Status: first pass from abstracts (2026-09-06). Full-text reading of the
-starred items is required before any novelty sentence is written. Until
-then: **novelty not established**.
+Status: first pass from abstracts, then full-text reading of the starred
+items (2026-09-06). The novelty statement that results is in
+`docs/NOVELTY.md`.
 
 ## Directly overlapping
 

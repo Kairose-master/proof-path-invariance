@@ -103,17 +103,14 @@ instruction-tuned family the Gate I ratio falls with scale while exact
 identity remains absent. HYPOTHESIS (Phase 3.4): the bullet-renderer
 logic signal on the surface-controlled contrast strengthens with scale.
 
-## Novelty: not established
+## Novelty
 
-See `docs/RELATED_WORK.md`. Premise-order sensitivity (Chen et al. 2024),
-logic-grounded metamorphic testing of equivalence invariance (LGMT 2026),
-accuracy–consistency gaps under controlled reformulation (CRTBench 2026),
-surface-versus-structure separation on parameterized SAT (2602.12665),
-permutation-invariant LLM architecture (Set-LLM 2025) and order-centric
-augmentation (2025) all exist. The empirical findings of Phases 1–3.4 are
-replications at small scale. Candidates for a contribution, pending
-full-text reading: the machine-checked quotient framework and its
-finite-test identification criterion; exact-versus-approximate identity
-with a validity control; the flip-versus-permutation statistic; and the
-question whether a permutation-invariant recognizer identifies
-consequence-equivalent clause sets, which requires a table not yet built.
+Settled after full-text reading in `docs/NOVELTY.md`. Not new: order
+sensitivity, accuracy–consistency gaps, reordering/duplication as test
+relations, permutation-invariant architectures and augmentation. New on
+the evidence read: the machine-checked framework (which test relations
+follow from which; when a finite family has decided the question), the
+exact-versus-approximate identity readout, the surface-versus-logic
+statistic with a validity control, and the unmeasured gap between
+permutation invariance and logical invariance, which `hankel_v3` is to
+measure.
