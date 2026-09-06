@@ -99,6 +99,18 @@ gates: comparative accuracy 0.87 and logically identical rows closer than
 logically distinct classes at the median (ratio 0.56), while exact
 invariance still fails in every class. See `docs/RESULTS_PHASE3_2.md`.
 
+## Phase 3.4–3.5 and Phase 4
+
+`hankel_v2` contrasts permutations (maximal surface change, no logical
+change) with single-arrow flips (minimal surface change, logical change).
+Qwen2.5-0.5B moves more under permutation (`S` 1.27); Qwen2.5-1.5B sits at
+the boundary (0.99; 0.80 under the bullet renderer). `hankel_v3` adds
+derivable-clause extensions (Lean-certified schema) to measure
+identification of consequence-equivalent clause sets; Phase 4 trains
+recognizers with invariance by architecture, by data, or neither, and
+evaluates them on the same tables. See `docs/NOVELTY.md`,
+`docs/DRAFT_OUTLINE.md`.
+
 ## Status
 
 Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in
