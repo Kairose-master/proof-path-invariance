@@ -4,6 +4,17 @@
 
 A Lean-grounded project for measuring behavioral stability under formally controlled input transformations.
 
+**Status (2026-09-06).** Phases 1–4.1 (Hankel tables v0–v3, LLMs to 1.5B,
+constructed recognizers) are written up in `docs/DRAFT.md`. RQ2, the
+budget-vs-depth prediction, is preregistered and run (`rq2/`,
+`docs/PREREGISTRATION_RQ2.md`, `docs/RESULTS_RQ2.md`: held for the
+budgeted reasoner, I = 0.885 [0.84, 0.93]); RQ2b, the composition law of
+the graded closure, is preregistered and run (`docs/RESULTS_RQ2B.md`:
+failed for the primary model at tight budgets). The paper for these two
+results lives in [graded-recognition](https://github.com/Kairose-master/graded-recognition);
+the theory in `RecognitionPaths/Graded.lean` of
+[recognition-paths](https://github.com/Kairose-master/recognition-paths).
+
 > The project does **not** assume that LLM reasoning is categorical, compositional, geometric, or proof-theoretically identical to Lean derivations.
 
 ## Phase 1
