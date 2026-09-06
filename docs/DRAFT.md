@@ -186,8 +186,152 @@ the primary statistic. The apparent invisibility of repeated continuations
 was found in the control at the same rate and downgraded to a property of
 the prompts.
 
-## 4. Measured recognizers (OBSERVED) — to be filled from RESULTS_PHASE3_*.md
+## 4. Measured recognizers (OBSERVED)
 
-## 5. Constructed recognizers — to be filled from RESULTS_PHASE4.md after seed 1
+Recognizers: Pythia-70M and Pythia-410M (base, `step143000`),
+Qwen2.5-0.5B-Instruct and Qwen2.5-1.5B-Instruct (raw prompts, no chat
+template), one forward pass per prompt in float32 on CPU, both answer
+logits recorded.
 
-## 6. Discussion, limitations, related work — see SYNTHESIS.md, NOVELTY.md, RELATED_WORK.md
+### 4.1 Reading is not identifying
+
+On the Boolean table (`hankel_v1`), Gate R and Gate I with their controls:
+
+| recognizer | comparative acc. (Gate R > 0.55) | within/between median Hamming (Gate I < 1) |
+|---|---:|---:|
+| Pythia-70M | 0.456 | 1.42 |
+| Qwen2.5-0.5B | 0.867 | 0.561 |
+
+Qwen reads the task and passes Gate I; the control fails both, so the gate
+discriminates. But no recognizer has a single logical class whose
+serializations have identical profiles (0 of 8 for every recognizer, all
+40 rows distinct), and under a matched between-class statistic the control
+also falls below 1. Gate I rewards shared surface content: for Qwen the
+class pair differing only in the direction of all three arrows is closer
+than a class to its own serializations. This is CRTBench's accuracy–
+consistency gap at small scale, with the addition that the readout is
+exact: identity never occurs.
+
+### 4.2 Surface outweighs logic, and scale moves it
+
+On the surface-controlled table (`hankel_v2`), `S` = median over classes
+of d_perm / d_flip:
+
+| recognizer | `S` pooled | bullets | prose | comparative acc. |
+|---|---:|---:|---:|---:|
+| Pythia-70M (control) | 0.97 | 1.20 | 1.11 | 0.48 |
+| Qwen2.5-0.5B | 1.27 | 0.75 | 1.80 | 0.84 |
+| Qwen2.5-1.5B | 0.99 | 0.80 | 1.25 | 0.89 |
+
+The statistic is one-sided: an accurate recognizer with no invariance
+reaches 0.5–0.6 because flips change gold decisions it tracks. So the
+diagnostic values are the ones above 1: for the 0.5B reader, and under the
+prose renderer at both scales, reordering the same three premises moves
+behavior more than reversing one arrow. From 0.5B to 1.5B the pooled value
+falls from 1.27 to 0.99 (HYPOTHESIS: logic rises over surface with scale
+within the family; two points).
+
+### 4.3 Semantic rewrites are not identified
+
+On the semantic-rewrite table (`hankel_v3`), a derivable-clause extension
+(Lean-certified logically invisible) against a flip:
+
+| recognizer | `T` red/flip | `V` free columns | `E` exact identities |
+|---|---:|---:|---:|
+| Pythia-70M (control) | 1.00 | 1.50 | 0 / 14 |
+| Qwen2.5-0.5B | 1.11 | 1.50 | 0 / 14 |
+| Qwen2.5-1.5B | ⟨pending⟩ | ⟨pending⟩ | ⟨pending⟩ |
+
+For the 0.5B reader a logically invisible extension moves behavior as much
+as a logical change, and more where accuracy imposes nothing (`V` 1.5,
+equal to the control). The behavioral quotient does not contain the
+consequence relation at any level the table sees.
+
+### 4.4 Closure, idempotence, and what is generic
+
+The depth-one test family is not closed for any measured recognizer; for
+Qwen the witness pair is logically identical and separated only at depth
+two, the situation the identification theorem describes. Repeated
+continuations agree with their single versions on about 95% of tests for
+reader and control alike, so this is a property of the prompts, not of
+logic. The largest single source of within-class distance is a
+first-premise primacy effect on the query mentioned first (CONFOUND), and
+the atom-label family changes the metric invariance defect by about 3×
+(CONFOUND). Premise-by-premise margin increments are right-skewed,
+heavy-tailed, drift toward the positive answer, do not accumulate with
+depth, and shrink with level: not a diffusion (EXPLORATORY).
+
+## 5. Constructed recognizers
+
+Three recognizers trained on synthetic Horn traces with the eight
+evaluation classes held out up to atom relabelling, 6000 steps, batch 128:
+`set` (max-pooled clause encodings: permutation- and repetition-invariant
+by construction, ~170k parameters), `seq_aug` (causal transformer with
+permutation/repetition augmentation, ~100k) and `seq_fixed` (the same
+without augmentation). Evaluated on the same tables through the same
+statistics; one rendering, so no renderer split.
+
+### 5.1 The syntactic half, exactly
+
+The `set` recognizer is, on `hankel_v1`, exactly the syntactic quotient:
+its 40 rows collapse to the 8 logical classes, all eight classes have
+identical serialization profiles, `S` = 0 on `hankel_v2`, and the
+depth-one family is closed. Both seeds. No causal recognizer, at any of
+four seeds or at three times the budget (validation accuracy 0.98), has
+one class with identical profiles or fewer than 39 distinct rows.
+Augmentation buys approximate permutation invariance (`S` 0.49 at
+convergence); architecture buys exact invariance; accuracy buys neither.
+
+### 5.2 The semantic half, partly
+
+On `hankel_v3` the `set` recognizer, 99% accurate on classes it never saw,
+identifies none of the 14 derivable-clause extensions exactly in one seed
+and two in the other; on the columns where accuracy imposes nothing it
+moves 0.62–0.80 times as far under a semantic rewrite as under a logical
+flip. Every LLM, the control, and seven of eight causal toy runs have `V`
+above 1 (medians 1.5–2.3). So the architecturally invariant recognizer is
+the only one in which a semantic rewrite is detectably less disruptive
+than a logical change, and even there most of the semantic half is
+missing and almost none of it is exact. (Two seeds; suggestive.)
+
+### 5.3 What the constructed recognizers add
+
+They separate three properties that the LLM measurements conflate:
+reading the task (all accurate recognizers), permutation invariance
+(exact only by architecture, approximate by augmentation), and logical
+invariance (present partly, and only where the syntactic half was
+exact). They also show that `S < 1` and Gate I are reached by accuracy
+and surface alone, which fixes the reading of Section 4.
+
+## 6. Discussion
+
+**Three properties, ordered.** Reading the task, respecting the syntactic
+part of logical identity, and respecting its semantic part are distinct,
+and every recognizer we measured or built sits on that ladder at a
+different rung. Accuracy does not climb it; architecture climbs one rung
+exactly; nothing we tried climbs the last.
+
+**What a finite table can conclude.** By the identification theorem, a
+test family decides `≡_ρ` when it is closed. On the measured recognizers
+the depth-one family is not closed, and the theorem names the column a
+deeper table needs. On the `set` recognizer the same family is closed,
+which is the theorem working as intended: the recognizer's quotient is
+coarse enough for the family to capture it.
+
+**Exact versus approximate.** A statistical recognizer never produces two
+identical profiles for logically identical inputs; the exceptions here are
+forced by construction. The right long-run object is a canonical distance
+with a certified tolerance, not an equality (OPEN).
+
+**Metric and duality.** Metric geometry on the logits misled twice
+(offset, scale); the Boolean readout keeps only the point–test duality of
+the Chu space, and every exact statement in this paper lives there.
+
+**Limitations.** One Horn fragment, five atoms, eight classes; models up to
+1.5B without chat templates; no sampling; toy constructed models at one
+or four seeds; gold labels by forward chaining, not certified per cell.
+
+**Related work and novelty.** `RELATED_WORK.md`, `NOVELTY.md`: the empirical
+phenomena are known; the framework, the exact readout, the one-sided
+surface statistic with its control, and the separation of permutation from
+logical invariance are, on the texts read, not.
