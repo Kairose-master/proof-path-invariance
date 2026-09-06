@@ -180,6 +180,18 @@ classes; bullets 0.75, prose 1.80); the non-reading control sits at the
 noise value 0.97. The within-class proximity of Phase 3.2 is
 predominantly surface. See `docs/RESULTS_PHASE3_4.md`.
 
+## Phase 4 — Recognizers by construction
+
+Train three small recognizers on synthetic Horn data with the eight
+evaluation classes held out: a set encoder (permutation- and
+repetition-invariant by architecture, `Specification.lean`), a causal
+transformer with permutation/repetition augmentation, and the same
+transformer without augmentation. Evaluate on the frozen `hankel_v1` and
+`hankel_v2` tables with the same Boolean statistics. Design and
+predictions frozen in `docs/PHASE4_CONSTRUCTED_DESIGN.md`.
+
+**Status:** design frozen; training pending.
+
 ## Phase 3 — Derivation-sensitive experiments
 
 Only if simpler renderer-level effects are understood, introduce explicit derivations as data and same-context alternative derivations. Test decomposition-specific effects without assuming composition failure.

@@ -89,3 +89,4 @@ jobs:
           python3 -m py_compile scripts/analyze_hankel.py
           python3 -m py_compile scripts/analyze_hankel_v1.py
           python3 -m py_compile scripts/analyze_hankel_v2.py
+          python3 -m py_compile constructed/horn_data.py constructed/models.py constructed/train.py constructed/evaluate.py
