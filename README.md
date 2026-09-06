@@ -115,9 +115,10 @@ evaluates them on the same tables. See `docs/NOVELTY.md`,
 
 ## Status
 
-Phase 1 first run recorded. Raw run artifacts are not yet committed; the checked-in
-result file records the supplied scorer summary and its provenance. No novelty
-claim is made yet.
+The formal framework, frozen benchmark families, raw model runs, constructed
+recognizer checkpoints, and analysis summaries are committed. The submission
+manuscript and arXiv-ready source are in `arxiv/`; claims are scoped to the
+small-model and synthetic settings documented there.
 
 ## Citation
 

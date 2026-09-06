@@ -1,0 +1,84 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=0.82in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,array}
+\usepackage{calc}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{newunicodechar}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\real}[1]{#1}
+\newunicodechar{≡}{\ensuremath{\equiv}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{⊆}{\ensuremath{\subseteq}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Γ}{\ensuremath{\Gamma}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{→}{\ensuremath{\to}}
+\newunicodechar{∧}{\ensuremath{\land}}
+\newunicodechar{≃}{\ensuremath{\simeq}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{−}{\ensuremath{-}}
+\title{Recognition Paths: When Does a Recognizer Respect Logical Identity, and How Would We Know?}
+\author{Jinu Jang\\
+Hankuk University of Foreign Studies\\
+\texttt{jinu0633@hufs.ac.kr}}
+\date{September 2026}
+\begin{document}
+\maketitle
+\input{paper_body}
+
+\begin{thebibliography}{99}
+\bibitem{chen2024premise}
+X. Chen, R. A. Chi, X. Wang, and D. Zhou.
+Premise order matters in reasoning with large language models.
+In \emph{Proceedings of ICML}, 2024. arXiv:2402.08939.
+
+\bibitem{zhou2026lgmt}
+Z. Zhou, M. Li, X. Fang, X. Zhou, W. Lin, and Z. Zheng.
+LGMT: Logic-grounded metamorphic testing for evaluating the reasoning reliability of LLMs.
+\emph{Knowledge-Based Systems}, 348:116324, 2026. arXiv:2605.23965.
+
+\bibitem{gu2026crtbench}
+A. Gu and A. Chen.
+Controlled reformulation testing for logical consistency in large language models.
+arXiv:2607.14528, 2026.
+
+\bibitem{essebbani2026robustness}
+N. Es-sebbani, E. Marquer, Y. Salhi, and Z. Bouraoui.
+Evaluating robustness of reasoning models on parameterized logical problems.
+arXiv:2602.12665, 2026.
+
+\bibitem{egressy2025setllm}
+B. Egressy and J. Stuehmer.
+Set-LLM: A permutation-invariant LLM.
+arXiv:2505.15433, 2025.
+
+\bibitem{he2025order}
+Q. He, Q. He, J. Liang, Y. Xiao, W. Zhou, Z. Sun, and F. Yu.
+Order doesn't matter, but reasoning does: Training LLMs with order-centric augmentation.
+arXiv:2502.19907, 2025.
+
+\bibitem{lacroce2021extracting}
+C. Lacroce, P. Panangaden, and G. Rabusseau.
+Extracting weighted automata for approximate minimization in language modelling.
+arXiv:2106.02965, 2021.
+
+\bibitem{angluin1987learning}
+D. Angluin.
+Learning regular sets from queries and counterexamples.
+\emph{Information and Computation}, 75(2):87--106, 1987.
+
+\bibitem{pratt1995chu}
+V. Pratt.
+Chu spaces and their interpretation as concurrent objects.
+In \emph{Computer Science Today}, LNCS 1000, pages 392--405. Springer, 1995.
+\end{thebibliography}
+\end{document}
