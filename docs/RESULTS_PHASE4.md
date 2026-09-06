@@ -76,6 +76,35 @@ shares it. And `seq_fixed` collapses under the doubled prefix
 outside its training lengths: a length-generalization failure that the
 set encoder does not have (`u.u` Hamming 0).
 
+## Seed 1 replication (added 2026-09-06; predictions recorded in the design document before training)
+
+| | `set` s0 | `set` s1 | `seq_aug` s0 | `seq_aug` s1 | `seq_fixed` s0 | `seq_fixed` s1 |
+|---|---:|---:|---:|---:|---:|---:|
+| final val. acc. | 0.993 | 0.990 | 0.814 | 0.895 | 0.945 | 0.950 |
+| `hankel_v1` identical classes / distinct rows | 8/8, 8 | 8/8, 8 | 0/8, 39 | 0/8, 40 | 0/8, 40 | 0/8, 40 |
+| `hankel_v1` Gate I ratio | 0.000 | 0.000 | 0.288 | 0.437 | 0.739 | 0.342 |
+| `hankel_v2` `S` | 0.00 (8/8) | 0.00 (8/8) | 1.37 (3/8) | **0.51 (7/8)** | 1.16 (3/8) | **0.58 (5/8)** |
+| `hankel_v3` `V` | 0.62 | 0.80 | 1.54 | 0.75 | 6.0 | 2.42 |
+| `hankel_v3` `E` base–red, swap | 0/14, 0/9 | 2/14, 0/9 | 0/14, 2/9 | 0/14, 5/9 | 0/14, 1/9 | 0/14, 2/9 |
+
+**`set` replicates.** Exactly the syntactic quotient again (8/8, `S` 0,
+closed), and partial semantic identification again: `V` 0.80 (seed 0:
+0.62), `E` 2 of 14 extensions exactly identical to their base (seed 0: 0).
+Both inside the recorded ranges (`V` 0.4–0.9, `E` 0–3). The central
+conclusion stands: permutation invariance plus accuracy gives part, not
+all, of the semantic half, and almost none of it exactly.
+
+**The sequence recognizers do not replicate on `S`.** With a
+better-converged seed (val 0.895) `seq_aug` passes Gate S at 0.51 (7/8);
+the seed-0 failure was under-convergence, as suspected. But `seq_fixed`,
+which never sees a permutation, also drops from 1.16 to 0.58 across seeds.
+On an 80-test table with 10⁵-parameter models, `S` for the causal
+recognizers moves by a factor of two between seeds. Two consequences:
+the recorded ordering `set < seq_aug < 1 < seq_fixed` is not established
+in either direction, and any claim about augmentation versus fixed order
+needs several seeds (seeds 2–3 queued). The `set` recognizer's numbers are
+stable because most of them are forced by construction.
+
 ## Limits
 
 One seed; toy models of ~10⁵ parameters; `seq_aug` under-trained; the

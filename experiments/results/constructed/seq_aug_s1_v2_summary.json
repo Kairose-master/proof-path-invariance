@@ -1,0 +1,181 @@
+{
+  "benchmark": "hankel_v2",
+  "analysis_status": "surface_controlled_frozen_plan_v2",
+  "raw_result_sha256": "ea309b9432b17b8fdb652ab15f5242ab5c8d3ebf20badb9fcdc08e94a97c56df",
+  "prompt_rows": 1664,
+  "per_renderer": {
+    "tokens": {
+      "S_median_ratio_perm_over_flip": 0.5083612040133779,
+      "classes_with_perm_closer_than_flip": 7,
+      "classes": 8,
+      "decision_accuracy": 0.6556490384615384,
+      "decision_positive_rate": 0.6947115384615384,
+      "comparative_accuracy": 0.7314343845371313,
+      "columns": 80,
+      "per_class": {
+        "chain": {
+          "d_perm": 7.0,
+          "d_flip": 13.0,
+          "ratio": 0.5384615384615384,
+          "perm_distances": [
+            7,
+            10,
+            4
+          ],
+          "flip_distances": [
+            13,
+            1,
+            33
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            13,
+            15
+          ],
+          "n_flips": 3
+        },
+        "fork_join": {
+          "d_perm": 13.0,
+          "d_flip": 0.5,
+          "ratio": 26.0,
+          "perm_distances": [
+            7,
+            13,
+            13
+          ],
+          "flip_distances": [
+            1,
+            0
+          ],
+          "flip_gold_changes_decision_bits": [
+            14,
+            8
+          ],
+          "n_flips": 2
+        },
+        "chain_gap": {
+          "d_perm": 6.0,
+          "d_flip": 9.0,
+          "ratio": 0.6666666666666666,
+          "perm_distances": [
+            4,
+            8,
+            6
+          ],
+          "flip_distances": [
+            9,
+            1,
+            51
+          ],
+          "flip_gold_changes_decision_bits": [
+            4,
+            2,
+            4
+          ],
+          "n_flips": 3
+        },
+        "branch": {
+          "d_perm": 4.0,
+          "d_flip": 23.5,
+          "ratio": 0.1702127659574468,
+          "perm_distances": [
+            4,
+            1,
+            4
+          ],
+          "flip_distances": [
+            35,
+            12
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            8
+          ],
+          "n_flips": 2
+        },
+        "reversed": {
+          "d_perm": 4.0,
+          "d_flip": 14.5,
+          "ratio": 0.27586206896551724,
+          "perm_distances": [
+            3,
+            4,
+            4
+          ],
+          "flip_distances": [
+            4,
+            25
+          ],
+          "flip_gold_changes_decision_bits": [
+            2,
+            2
+          ],
+          "n_flips": 2
+        },
+        "fragments": {
+          "d_perm": 11.0,
+          "d_flip": 23.0,
+          "ratio": 0.4782608695652174,
+          "perm_distances": [
+            14,
+            11,
+            7
+          ],
+          "flip_distances": [
+            21,
+            23,
+            29
+          ],
+          "flip_gold_changes_decision_bits": [
+            5,
+            10,
+            9
+          ],
+          "n_flips": 3
+        },
+        "gated": {
+          "d_perm": 16.0,
+          "d_flip": 23.0,
+          "ratio": 0.6956521739130435,
+          "perm_distances": [
+            10,
+            16,
+            18
+          ],
+          "flip_distances": [
+            34,
+            12
+          ],
+          "flip_gold_changes_decision_bits": [
+            8,
+            7
+          ],
+          "n_flips": 2
+        },
+        "skip": {
+          "d_perm": 5.0,
+          "d_flip": 15.0,
+          "ratio": 0.3333333333333333,
+          "perm_distances": [
+            4,
+            15,
+            5
+          ],
+          "flip_distances": [
+            13,
+            15,
+            33
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            15,
+            7
+          ],
+          "n_flips": 3
+        }
+      }
+    }
+  },
+  "pooled": null,
+  "interpretation_limit": "S compares two kinds of rewrites of the same base trace on a finite Boolean table. It says which of surface reordering or a one-arrow logical change moves behavior more; it does not establish logical invariance."
+}

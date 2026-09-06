@@ -1,0 +1,181 @@
+{
+  "benchmark": "hankel_v2",
+  "analysis_status": "surface_controlled_frozen_plan_v2",
+  "raw_result_sha256": "0ec7d403fe43b05fa647e1a30d99e3a7e7abee7502f4a5dc8e871b2830a5c319",
+  "prompt_rows": 1664,
+  "per_renderer": {
+    "tokens": {
+      "S_median_ratio_perm_over_flip": 0.5833333333333333,
+      "classes_with_perm_closer_than_flip": 5,
+      "classes": 8,
+      "decision_accuracy": 0.5931490384615384,
+      "decision_positive_rate": 0.12139423076923077,
+      "comparative_accuracy": 0.7466937945066124,
+      "columns": 80,
+      "per_class": {
+        "chain": {
+          "d_perm": 2.0,
+          "d_flip": 4.0,
+          "ratio": 0.5,
+          "perm_distances": [
+            1,
+            3,
+            2
+          ],
+          "flip_distances": [
+            4,
+            1,
+            11
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            13,
+            15
+          ],
+          "n_flips": 3
+        },
+        "fork_join": {
+          "d_perm": 9.0,
+          "d_flip": 2.0,
+          "ratio": 4.5,
+          "perm_distances": [
+            2,
+            9,
+            9
+          ],
+          "flip_distances": [
+            2,
+            2
+          ],
+          "flip_gold_changes_decision_bits": [
+            14,
+            8
+          ],
+          "n_flips": 2
+        },
+        "chain_gap": {
+          "d_perm": 15.0,
+          "d_flip": 7.0,
+          "ratio": 2.142857142857143,
+          "perm_distances": [
+            4,
+            16,
+            15
+          ],
+          "flip_distances": [
+            7,
+            1,
+            35
+          ],
+          "flip_gold_changes_decision_bits": [
+            4,
+            2,
+            4
+          ],
+          "n_flips": 3
+        },
+        "branch": {
+          "d_perm": 4.0,
+          "d_flip": 23.0,
+          "ratio": 0.17391304347826086,
+          "perm_distances": [
+            4,
+            1,
+            6
+          ],
+          "flip_distances": [
+            33,
+            13
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            8
+          ],
+          "n_flips": 2
+        },
+        "reversed": {
+          "d_perm": 5.0,
+          "d_flip": 7.5,
+          "ratio": 0.6666666666666666,
+          "perm_distances": [
+            2,
+            5,
+            7
+          ],
+          "flip_distances": [
+            5,
+            10
+          ],
+          "flip_gold_changes_decision_bits": [
+            2,
+            2
+          ],
+          "n_flips": 2
+        },
+        "fragments": {
+          "d_perm": 21.0,
+          "d_flip": 5.0,
+          "ratio": 4.2,
+          "perm_distances": [
+            6,
+            21,
+            22
+          ],
+          "flip_distances": [
+            5,
+            5,
+            28
+          ],
+          "flip_gold_changes_decision_bits": [
+            5,
+            10,
+            9
+          ],
+          "n_flips": 3
+        },
+        "gated": {
+          "d_perm": 9.0,
+          "d_flip": 24.5,
+          "ratio": 0.3673469387755102,
+          "perm_distances": [
+            13,
+            9,
+            4
+          ],
+          "flip_distances": [
+            23,
+            26
+          ],
+          "flip_gold_changes_decision_bits": [
+            8,
+            7
+          ],
+          "n_flips": 2
+        },
+        "skip": {
+          "d_perm": 5.0,
+          "d_flip": 10.0,
+          "ratio": 0.5,
+          "perm_distances": [
+            5,
+            7,
+            5
+          ],
+          "flip_distances": [
+            3,
+            19,
+            10
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            15,
+            7
+          ],
+          "n_flips": 3
+        }
+      }
+    }
+  },
+  "pooled": null,
+  "interpretation_limit": "S compares two kinds of rewrites of the same base trace on a finite Boolean table. It says which of surface reordering or a one-arrow logical change moves behavior more; it does not establish logical invariance."
+}

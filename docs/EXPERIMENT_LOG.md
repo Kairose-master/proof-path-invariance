@@ -350,3 +350,19 @@ Raw SHA-256 (uncompressed): `qwen05b` v3
 
 See `docs/RESULTS_PHASE3_5.md`, `docs/RESULTS_PHASE4.md`.
 
+
+## 2026-09-06 — Phase 4 seed-1 replication
+
+```text
+set       s1: val 0.990 | ident 8/8 rows 8 closed | S 0.00 | V 0.80 E 2/14   (predicted V 0.4-0.9, E 0-3: held)
+seq_aug   s1: val 0.895 | ident 0/8 | S 0.51 (7/8) | V 0.75 E 0/14, swap 5/9
+seq_fixed s1: val 0.950 | ident 0/8 | S 0.58 (5/8) | V 2.42
+```
+
+- **OBSERVED:** the set recognizer replicates; partial semantic
+  identification (V 0.6-0.8), near-zero exact identification.
+- **OBSERVED:** S for the causal recognizers varies by 2x across seeds
+  (seq_aug 1.37 -> 0.51; seq_fixed 1.16 -> 0.58). Seed-0 augmentation
+  failure was under-convergence; the fixed-order model's drop shows S is
+  noisy for these models on 80 tests. Seeds 2-3 queued.
+
