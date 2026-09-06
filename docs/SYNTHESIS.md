@@ -98,6 +98,10 @@ surface. The non-reading control sits at the noise value.
 > absent at the pooled level and present only as a weak,
 > renderer-dependent tendency.
 
+OBSERVED (`RESULTS_PHASE3_4.md`, scale). Qwen2.5-1.5B on the same contrast:
+`S` 0.99 pooled (4/8), 0.80 under bullets (6/8, Gate S pass), 1.25 under
+prose; comparative accuracy 0.89. Down from 1.27 at 0.5B.
+
 HYPOTHESIS (Phase 3.3 scale run, preregistered). Within the
 instruction-tuned family the Gate I ratio falls with scale while exact
 identity remains absent. HYPOTHESIS (Phase 3.4): the bullet-renderer

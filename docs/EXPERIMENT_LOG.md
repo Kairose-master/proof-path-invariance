@@ -301,3 +301,19 @@ pythia70m        increments near zero drift, dispersion flat or falling, corr -0
   renderer) and does not accumulate. Actual randomness would need
   sampled outputs, which this project has not collected.
 
+
+## 2026-09-06 — Phase 3.4 scale: Qwen2.5-1.5B on `hankel_v2`
+
+```text
+qwen15b  S pooled 0.99 (4/8) ; bullets 0.80 (6/8, Gate S pass) ; prose 1.25 (1/8) ; compacc 0.889
+qwen05b  S pooled 1.27 (3/8) ; bullets 0.75 (5/8)               ; prose 1.80 (0/8) ; compacc 0.842
+```
+
+- **PREDICTED → OBSERVED:** `S` lower at 1.5B (1.27 → 0.99). Pass not
+  predicted; bullets passes, pooled fails on the class count.
+- **OBSERVED:** answer bias reverses (positive rate 0.08).
+- **HYPOTHESIS:** logic rises over surface with scale within the family.
+
+Raw SHA-256 (uncompressed):
+`d8e8313b42d4b06614a6d23ef272212556c7594da2f20260c22fd2e82c7e3b6f`.
+

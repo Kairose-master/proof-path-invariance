@@ -67,6 +67,33 @@ This closes the question opened in Phase 3.3. Gate I discriminates a
 reader from a non-reader, but what it measures in the reader is mostly
 the words.
 
+## Scale: Qwen2.5-1.5B-Instruct on the same table
+
+Raw `experiments/runs/hankel_v2_qwen15b.jsonl.gz` (`d8e8313b…3b6f`),
+summary `experiments/results/phase3_4_hankel_v2_qwen15b_summary.json`.
+
+| Recognizer | Renderer | `S` | classes `d_perm < d_flip` | comparative acc. | Gate S |
+|---|---|---:|---:|---:|:---:|
+| `qwen15b` | pooled | **0.99** | 4 / 8 | 0.889 | fail (class count) |
+| `qwen15b` | bullets | 0.80 | 6 / 8 | 0.915 | **pass** |
+| `qwen15b` | prose | 1.25 | 1 / 8 | 0.863 | fail |
+| `qwen05b` | pooled | 1.27 | 3 / 8 | 0.842 | fail |
+
+The recorded prediction was "`S` lower than for `qwen05b`, pass not
+predicted": observed 1.27 → 0.99 pooled, with prose moving most
+(1.80 → 1.25) and bullets flat (0.75 → 0.80). Under the bullet renderer
+the 1.5B model passes Gate S: a one-arrow logical change now moves
+behavior more than reordering in six of eight classes. Pooled it sits at
+the boundary. Per class the largest moves are `branch` (0.67 → 0.48),
+`reversed` (1.22 → 0.52), `fragments` (2.33 → 0.95) and `skip`
+(2.18 → 1.38).
+
+Two cautions. The 1.5B model has the opposite answer bias (positive on
+7.9% of cells; decision accuracy 0.70), so its decision columns are no
+longer constant and contribute to both distances. And two points do not
+make a trend; the direction is consistent with "logic rises over surface
+with scale within one family" (HYPOTHESIS) and nothing more.
+
 ## What this does to the project's claim
 
 The defensible sentence retreats from Phase 3.2 to:
