@@ -378,3 +378,19 @@ val 0.981 | S 0.49 (7/8) | Gate I 0.307, identical classes 0/8, rows 40/40 | V 1
   identities); no semantic identification (V 1.17), unlike the set
   recognizer (V 0.62–0.80).
 
+
+## 2026-09-06 — Phase 4 seeds 2–3; S calibration recorded
+
+```text
+seq_aug   S over 4 seeds: 1.37 0.51 1.12 0.61 (median 0.87) | V: 1.54 0.75 3.00 1.92
+seq_fixed S over 4 seeds: 1.16 0.58 0.81 0.43 (median 0.69) | V: 6.0 2.42 2.25 1.26
+set       S 0, 0 | V 0.62 0.80
+synthetic gold+noise (no invariance): S 0.60 pooled, 8/8
+```
+
+- **CORRECTION (recorded):** S is one-sided; accuracy alone reaches S 0.5-0.6.
+  S > 1 is diagnostic; S < 1 is not evidence of invariance. Phase 3.4 and
+  NOVELTY N3 amended.
+- **OBSERVED:** no causal recognizer has an exactly identical class at any
+  seed; V above 1 in 7 of 8 causal runs, below 1 in both set runs.
+

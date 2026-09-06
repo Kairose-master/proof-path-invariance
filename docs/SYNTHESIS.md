@@ -99,6 +99,15 @@ of 40, `S` 0, closed depth-one family) and only partly the semantic one
 (`V` 0.63, `E` 0). A fixed-order recognizer passes Gate I (0.74) without
 ever seeing a permutation: Gate I rewards shared surface content.
 
+CORRECTION (recorded in `RESULTS_PHASE3_4.md`, `RESULTS_PHASE4.md`). The
+surface-versus-logic statistic `S` is one-sided: a synthetic accurate
+recognizer with no invariance reaches 0.5–0.6, and fixed-order toy
+recognizers reach 0.4–0.8. `S > 1` (Qwen-0.5B pooled, prose at both
+scales) shows surface dominance beyond accuracy; `S < 1` shows nothing
+further. The beyond-accuracy statistic is `V`: above 1 for every LLM, the
+control, and seven of eight causal toy runs; below 1 only for the
+architecturally invariant recognizer (0.62, 0.80; two seeds).
+
 ## The sentence the paper can currently defend
 
 > On a Lean-certified Horn benchmark read through order relations at the

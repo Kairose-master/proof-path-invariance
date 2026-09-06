@@ -94,6 +94,15 @@ longer constant and contribute to both distances. And two points do not
 make a trend; the direction is consistent with "logic rises over surface
 with scale within one family" (HYPOTHESIS) and nothing more.
 
+## Calibration (post hoc, see the design document)
+
+A synthetic gold-plus-noise recognizer with no invariance reaches `S`
+0.5–0.6 with 8 of 8 classes. `S < 1` is therefore consistent with mere
+accuracy; only `S > 1` is diagnostic. Read this way: `qwen05b` pooled
+(1.27) and prose (1.80), and the 1.5B prose (1.25), are surface-dominated
+beyond what accuracy explains; the passes (0.75–0.80 under bullets) are
+what an accurate recognizer produces and say nothing further.
+
 ## What this does to the project's claim
 
 The defensible sentence retreats from Phase 3.2 to:

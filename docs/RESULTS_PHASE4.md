@@ -105,6 +105,31 @@ in either direction, and any claim about augmentation versus fixed order
 needs several seeds (seeds 2–3 queued). The `set` recognizer's numbers are
 stable because most of them are forced by construction.
 
+## Seeds 0–3 for the causal recognizers (added 2026-09-06)
+
+| | val. acc. | `S` (`hankel_v2`) | `V` (`hankel_v3`) | Gate I | identical classes |
+|---|---:|---:|---:|---:|---:|
+| `seq_aug` s0 / s1 / s2 / s3 | 0.81 / 0.90 / 0.90 / 0.87 | 1.37 / 0.51 / 1.12 / 0.61 | 1.54 / 0.75 / 3.00 / 1.92 | 0.29 / 0.44 / 0.49 / 0.31 | 0 / 0 / 0 / 0 |
+| `seq_fixed` s0 / s1 / s2 / s3 | 0.95 / 0.95 / 0.94 / 0.95 | 1.16 / 0.58 / 0.81 / 0.43 | 6.0 / 2.42 / 2.25 / 1.26 | 0.74 / 0.34 / 0.50 / 0.19 | 0 / 0 / 0 / 0 |
+| `set` s0 / s1 | 0.99 / 0.99 | 0.00 / 0.00 | 0.62 / 0.80 | 0.00 / 0.00 | 8 / 8 |
+
+Medians over four seeds: `seq_aug` `S` 0.87 (range 0.51–1.37), `V` 1.73;
+`seq_fixed` `S` 0.69 (0.43–1.16), `V` 2.33. Readings:
+
+- At 6000 steps, augmentation does not lower `S` relative to fixed order;
+  the fixed-order recognizer, which never sees a permutation, has `S`
+  below 1 in three of four seeds. This is the accuracy effect described in
+  the `hankel_v2` calibration (an accurate recognizer tracks the gold
+  change a flip makes), not permutation invariance; it also explains the
+  1.5B bullet-renderer pass in Phase 3.4.
+- `V`, the beyond-accuracy statistic, is above 1 in seven of eight causal
+  runs (median 1.7–2.3) and below 1 in both `set` runs (0.62, 0.80). The
+  difference is suggestive with two seeds of `set`; it is the number to
+  replicate further.
+- No causal recognizer, at any seed or budget, has a single class with
+  identical serialization profiles. The set recognizer has all eight, by
+  construction.
+
 ## EXPLORATORY — `seq_aug` at three times the budget (18000 steps, seed 0)
 
 Not part of the frozen design; recorded in the design document before

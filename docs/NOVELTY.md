@@ -70,13 +70,16 @@ including one that reads the task, is a statement none of the five can
 make or refute with their readouts. The comparative readout also removes
 the answer-bias saturation that discrete readouts inherit.
 
-**N3. A designed surface-versus-logic statistic with a validity control.**
+**N3. A designed surface-versus-logic statistic with a validity control (one-sided).**
 CRTBench uses passive voice as an observational surface control; nobody
 contrasts a maximal logic-preserving rewrite with a minimal logic-changing
 one on the same instance. `S = d_perm / d_flip`, with a non-reading
 recognizer as the control that sits at the noise value, is new. Its
 result, that for the reader `S > 1`, sharpens CRTBench's gap: the
-inconsistency is not only present, it outweighs a logical change.
+inconsistency is not only present, it outweighs a logical change. The
+statistic is one-sided: a synthetic accurate recognizer reaches `S`
+0.5–0.6, so only `S > 1` is diagnostic; the beyond-accuracy measure is
+`V` (N4).
 
 **N4. Permutation invariance versus logical invariance.** Set-LLM proves
 and measures permutation equivariance and stops there. The gap between a

@@ -62,3 +62,16 @@ would not show invariance. Gate S failing would show that the Boolean Gate
 I proximity is predominantly surface for this recognizer, and would move
 the project's defensible claim back to the Euclidean and Boolean
 measurements of serialization sensitivity.
+
+## Calibration added after the fact (2026-09-06, labelled)
+
+The smoke test of the analysis on a synthetic recognizer (gold label plus
+symmetric Gaussian noise, no invariance of any kind) gave `S` = 0.47
+(bullets), 0.60 (prose), 0.60 (pooled), 8 of 8 classes. This was run before
+any model, but was not written into this document at the time; it is
+recorded here now. Consequence: **`S` below 1 is reached by accuracy
+alone**, because flips change gold decisions that an accurate recognizer
+tracks. `S` is therefore one-sided. `S` above 1 shows that surface
+rewrites outweigh a logical change; `S` below 1 does not show invariance.
+The beyond-accuracy statistic is `V` of `hankel_v3`.
+
