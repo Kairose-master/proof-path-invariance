@@ -50,7 +50,8 @@ reordering moves behavior two to three times more than a logical change.
 
 EXPLORATORY: across the 20 flips, the Spearman correlation between the
 size of a flip's logical change (gold-row Hamming) and its behavioral
-distance is reported in the summary JSON; see the experiment log.
+distance is −0.11 for `qwen05b` and −0.38 for the control. How much
+logic a flip changes does not predict how much behavior it changes.
 
 ## Reading
 

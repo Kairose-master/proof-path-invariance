@@ -254,7 +254,14 @@ qwen05b bullets 0.75 (5/8) ; prose 1.80 (0/8)
   predominantly surface.
 - **OBSERVED:** the non-reading control sits at the noise value; the
   contrast is uninformative for it.
+- **EXPLORATORY:** across the 20 flips, Spearman correlation between the
+  size of the logical change (gold-row Hamming) and the behavioral
+  distance is -0.11 for Qwen and -0.38 for the control: a flip's
+  behavioral effect does not track how much logic it changes.
 - **HYPOTHESIS:** the weak bullet-renderer logic signal grows with scale.
+- Scheduling: the 1.5B `hankel_v1` run was restarted so that `hankel_v2`
+  on 1.5B runs first (the more informative follow-up); 738 partial rows
+  discarded.
 
 Raw SHA-256 (uncompressed): `qwen05b`
 `5f6879ee777f44455db6b8de29ea90130d5248f08a67e49bb9c5b671e8999ba4`;
