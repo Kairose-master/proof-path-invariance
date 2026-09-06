@@ -190,7 +190,9 @@ prompts). Statistics `T`, `U`, `V`, `E` frozen in
 separates permutation invariance from logical invariance (N4 in
 `docs/NOVELTY.md`).
 
-**Status:** inputs and predictions frozen; runs pending.
+**Status:** completed on Qwen2.5-0.5B and the control: `T` 1.11, `V` 1.50,
+`E` 0; no identification of consequence-equivalent sets. See
+`docs/RESULTS_PHASE3_5.md`.
 
 ## Phase 4 — Recognizers by construction
 
@@ -202,7 +204,9 @@ transformer without augmentation. Evaluate on the frozen `hankel_v1` and
 `hankel_v2` tables with the same Boolean statistics. Design and
 predictions frozen in `docs/PHASE4_CONSTRUCTED_DESIGN.md`.
 
-**Status:** design frozen; training pending.
+**Status:** completed, seed 0. The set recognizer is exactly the syntactic
+quotient (S 0, 8/8 identical classes, closed depth-one family) and only
+partly the semantic one (V 0.63, E 0). See `docs/RESULTS_PHASE4.md`.
 
 ## Phase 3 — Derivation-sensitive experiments
 

@@ -86,21 +86,31 @@ under a flip of one arrow (`S` 1.27 pooled; 3 of 8 classes favour logic;
 bullets 0.75, prose 1.80). The Boolean Gate I proximity is predominantly
 surface. The non-reading control sits at the noise value.
 
+OBSERVED (`RESULTS_PHASE3_5.md`). Qwen2.5-0.5B does not identify
+consequence-equivalent clause sets: a Lean-certified derivable-clause
+extension moves it as much as a one-arrow logical change (`T` 1.11) and
+more on accuracy-free columns (`V` 1.5); no pair of logically identical
+rows is identical (`E` 0).
+
+OBSERVED (`RESULTS_PHASE4.md`). A recognizer that is permutation- and
+repetition-invariant by construction and 99% accurate on held-out classes
+has a behavioral quotient equal to the syntactic quotient (8 distinct rows
+of 40, `S` 0, closed depth-one family) and only partly the semantic one
+(`V` 0.63, `E` 0). A fixed-order recognizer passes Gate I (0.74) without
+ever seeing a permutation: Gate I rewards shared surface content.
+
 ## The sentence the paper can currently defend
 
-> For every recognizer tested on a Lean-certified Horn benchmark,
-> including an instruction-tuned model that reads the task at 0.84–0.87
-> comparative accuracy, a maximal logic-preserving rewrite (permuting the
-> premises) moves behavior at least as much as a minimal logic-changing
-> rewrite (flipping one arrow). No two logically identical traces are
-> behaviorally identical for any recognizer. Reading the task and
-> respecting logical identity are distinct properties; the second is
-> absent at the pooled level and present only as a weak,
-> renderer-dependent tendency.
-
-OBSERVED (`RESULTS_PHASE3_4.md`, scale). Qwen2.5-1.5B on the same contrast:
-`S` 0.99 pooled (4/8), 0.80 under bullets (6/8, Gate S pass), 1.25 under
-prose; comparative accuracy 0.89. Down from 1.27 at 0.5B.
+> On a Lean-certified Horn benchmark read through order relations at the
+> answer position, no recognizer tested, measured or constructed, treats
+> two logically identical traces identically. For small instruction-tuned
+> language models that read the task, permuting the premises and appending
+> a derivable clause each move behavior at least as much as reversing one
+> arrow. A recognizer built to be permutation-invariant and trained to 99%
+> accuracy is exactly the syntactic quotient and only partly the semantic
+> one. Reading the task, permutation invariance, and logical invariance
+> are three distinct properties, in that order of difficulty, and neither
+> accuracy nor architectural invariance supplies the third.
 
 HYPOTHESIS (Phase 3.3 scale run, preregistered). Within the
 instruction-tuned family the Gate I ratio falls with scale while exact

@@ -317,3 +317,36 @@ qwen05b  S pooled 1.27 (3/8) ; bullets 0.75 (5/8)               ; prose 1.80 (0/
 Raw SHA-256 (uncompressed):
 `d8e8313b42d4b06614a6d23ef272212556c7594da2f20260c22fd2e82c7e3b6f`.
 
+
+## 2026-09-06 — Phase 3.5 `hankel_v3` (Pythia-70M control, Qwen2.5-0.5B) and Phase 4 constructed recognizers
+
+```text
+hankel_v3 pooled      T      U      V     E(base-red, swap)
+qwen05b               1.11   1.45   1.50  0/14, 0/9      (predicted T 1.0-1.6, fail, E 0: held)
+pythia70m (control)   1.00   0.64   1.50  0/14, 0/9      (predicted near 1, E 0: held)
+
+constructed (seed 0)  val   v2 S         v1 Gate I  v1 identical  v3 V    v3 E
+set                   0.993 0.00 (8/8)   0.000      8/8           0.63    0/14, 0/9
+seq_aug               0.814 1.37 (3/8)   0.288      0/8           1.54    0/14, 2/9
+seq_fixed             0.945 1.16 (3/8)   0.739      0/8           6.0     0/14, 1/9
+```
+
+- **OBSERVED:** Qwen2.5-0.5B does not identify consequence-equivalent
+  clause sets: a derivable-clause extension moves it as much as a logical
+  flip, and more on the accuracy-free columns.
+- **OBSERVED:** the set recognizer is exactly the syntactic quotient
+  (8 distinct rows of 40, closed depth-one family, S = 0) and only partly
+  the semantic quotient (V 0.63, E 0). Permutation invariance plus 99%
+  accuracy does not yield logical invariance.
+- **PREDICTION FAILURES:** seq_aug S 1.37 (predicted < 1; model
+  under-converged at 0.81); seq_fixed passes Gate I at 0.74 (surface
+  sharing, as in Phase 3.4); the set recognizer's depth-one family is
+  closed on hankel_v1 (predicted not).
+- **LIMIT:** one seed; toy models.
+
+Raw SHA-256 (uncompressed): `qwen05b` v3
+`7024f1a53869fa80…`; weights and evaluation hashes in
+`experiments/results/constructed/manifest.json`.
+
+See `docs/RESULTS_PHASE3_5.md`, `docs/RESULTS_PHASE4.md`.
+

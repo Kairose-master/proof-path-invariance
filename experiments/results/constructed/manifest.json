@@ -1,0 +1,57 @@
+{
+  "phase": "4",
+  "design": "docs/PHASE4_CONSTRUCTED_DESIGN.md",
+  "trainer": "constructed/train.py",
+  "evaluator": "constructed/evaluate.py",
+  "training": {
+    "steps": 6000,
+    "batch": 128,
+    "seed": 0,
+    "data": "constructed/horn_data.py (held-out classes up to relabelling; balanced labels)",
+    "torch": "2.14.0+cpu",
+    "threads": 1,
+    "started_at_utc": "2026-09-06T03:12:11Z",
+    "finished_at_utc": "2026-09-06T04:11:42Z"
+  },
+  "models": {
+    "set": {
+      "kind": "set",
+      "augment": false,
+      "params": 168258,
+      "final_val_acc": 0.9931640625,
+      "weights": "experiments/constructed/set.pt",
+      "weights_sha256": "25b958adbcee9231015a3ce0cb0de6620de35eb9179a1751d9e55505e33d7b05",
+      "evals": {
+        "v1": "experiments/results/constructed/set_v1_summary.json",
+        "v2": "experiments/results/constructed/set_v2_summary.json",
+        "v3": "experiments/results/constructed/set_v3_summary.json"
+      }
+    },
+    "seq_aug": {
+      "kind": "seq",
+      "augment": true,
+      "params": 105090,
+      "final_val_acc": 0.814453125,
+      "weights": "experiments/constructed/seq_aug.pt",
+      "weights_sha256": "6d564b242c78ca87fa7c9cc0e26600967b07688a06aa061197fc51fa65471d06",
+      "evals": {
+        "v1": "experiments/results/constructed/seq_aug_v1_summary.json",
+        "v2": "experiments/results/constructed/seq_aug_v2_summary.json",
+        "v3": "experiments/results/constructed/seq_aug_v3_summary.json"
+      }
+    },
+    "seq_fixed": {
+      "kind": "seq",
+      "augment": false,
+      "params": 105090,
+      "final_val_acc": 0.9453125,
+      "weights": "experiments/constructed/seq_fixed.pt",
+      "weights_sha256": "68f602e890a2a011dde1b63a60ae55e0f044e68f6446c466afc93e41ab2d2eae",
+      "evals": {
+        "v1": "experiments/results/constructed/seq_fixed_v1_summary.json",
+        "v2": "experiments/results/constructed/seq_fixed_v2_summary.json",
+        "v3": "experiments/results/constructed/seq_fixed_v3_summary.json"
+      }
+    }
+  }
+}
