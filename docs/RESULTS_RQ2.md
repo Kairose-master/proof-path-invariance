@@ -72,10 +72,34 @@ depth-shortening ordering, but the F–C gap is small relative to the L
 shift and no CI has been computed for it; it is reported as a lead for a
 margin-level test, not as a result.
 
-## Secondary: constructed models — *pending*
+## Secondary: constructed models
 
-IterReasoner trained at 2 rounds (S5) and 7-atom SetRecognizer (S4) are
-training; their rows will be added here.
+### S5 — IterReasoner trained at 2 rounds (never trained on a depth-3 derivation)
+
+In-distribution val acc 0.960 (vs 0.996 for the 4-round model: 2 rounds
+cannot derive the depth-3/4 positives in the training distribution).
+
+| budget k | acc(D, all) | acc(D, target) | dis_F | dis_F1 | dis_C | dis_L | Δ [95 % CI] |
+|---:|---:|---:|---:|---:|---:|---:|---|
+| 1 | 0.75 | 0.00 | 0.01 | 1.00 | 0.00 | 0.00 | 0.01 [0.00, 0.01] |
+| **2** (training budget) | 0.79 | 0.16 | 0.77 | 0.84 | 0.10 | 0.16 | **0.67 [0.60, 0.74]** |
+| 3 | 0.98 | 0.94 | 0.07 | 0.07 | 0.01 | 0.94 | 0.06 [0.03, 0.10] |
+| **4** | 0.99 | 0.99 | 0.01 | 0.01 | 0.00 | 0.86 | **0.01 [0.00, 0.01]** |
+| 6 | 0.90 | 0.99 | 0.01 | 0.01 | 0.00 | 0.70 | 0.01 [0.00, 0.01] |
+
+I = Δ(2) − Δ(4) = 0.665 [0.60, 0.74]: the same pattern, and the gap closes
+at k = 4 although the model was never trained with 4 rounds (its rounds
+extrapolate; at k = 6 accuracy starts to degrade, 0.90, and the
+logic-change control becomes partly invisible, dis_L 0.70). Two
+differences from the 4-round model are informative: at its own budget the
+2-round model says YES on 16 % of the depth-3 bases it cannot derive, and
+its decision moves on 10 % of the depth-preserving extensions C, i.e. a
+model trained under a budget too small for its data acquires a shortcut
+component that a merely redundant clause can trigger. The budget-relative
+depth account still explains 0.67 of the 0.77 F effect; the residual 0.10
+is not depth.
+
+### S4 — 7-atom SetRecognizer (no budget knob) — *pending*
 
 ## One-sentence conclusion (so far)
 
