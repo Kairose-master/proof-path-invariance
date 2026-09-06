@@ -69,14 +69,22 @@ def stats(pc, cases):
     return s
 
 
-def bootstrap(fn, cases, B=5000, seed=0):
-    rng = random.Random(seed)
-    vals = []
-    for _ in range(B):
-        samp = [cases[rng.randrange(len(cases))] for _ in cases]
-        vals.append(fn(samp))
-    vals.sort()
-    return vals[int(0.025 * B)], vals[int(0.975 * B)]
+def bootstrap(arrays, fn, B=5000, seed=0):
+    """Paired case bootstrap: `arrays` are per-case numpy arrays (same case
+    order); fn(resampled arrays) -> statistic.  Returns the 2.5/97.5 % points."""
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    n = len(arrays[0])
+    idx = rng.integers(0, n, size=(B, n))
+    vals = np.sort(np.array([fn(*[a[i] for a in arrays]) for i in idx]))
+    return float(vals[int(0.025 * B)]), float(vals[int(0.975 * B)])
+
+
+def indicators(pc, cases):
+    import numpy as np
+    dF = np.array([pc[c]["D"]["dec_t"] != pc[c]["F"]["dec_t"] for c in cases], dtype=float)
+    dC = np.array([pc[c]["D"]["dec_t"] != pc[c]["C"]["dec_t"] for c in cases], dtype=float)
+    return dF, dC
 
 
 def main():
@@ -87,20 +95,25 @@ def main():
     a = ap.parse_args()
     files = sorted(Path(a.results).glob("*.jsonl"))
     tables = {f.stem: load(f) for f in files}
+    full = max(len(t) for t in tables.values())
+    for name in [n for n, t in tables.items() if len(t) < full]:
+        print(f"skipping {name}: {len(tables[name])} of {full} rows (incomplete)")
+        del tables[name]
     cases = sorted({k[0] for k in next(iter(tables.values()))})
     report = {"n_cases": len(cases), "recognizers": {}, "primary": []}
-    pcs = {}
+    pcs, ind = {}, {}
     for name, d in tables.items():
         pcs[name] = per_case(d, cases)
+        ind[name] = indicators(pcs[name], cases)
         s = stats(pcs[name], cases)
-        s["delta_ci"] = bootstrap(lambda smp: stats(pcs[name], smp)["delta"], cases)
+        s["delta_ci"] = bootstrap(ind[name], lambda f, c: f.mean() - c.mean())
         report["recognizers"][name] = s
     for low, high in a.primary:
         if low not in pcs or high not in pcs:
             report["primary"].append({"low": low, "high": high, "missing": True}); continue
-        def inter(smp):
-            return stats(pcs[low], smp)["delta"] - stats(pcs[high], smp)["delta"]
-        I = inter(cases); ci = bootstrap(inter, cases)
+        fl, cl = ind[low]; fh, ch = ind[high]
+        I = float((fl - cl).mean() - (fh - ch).mean())
+        ci = bootstrap((fl, cl, fh, ch), lambda a, b, c, d: (a - b).mean() - (c - d).mean())
         dl, dh = report["recognizers"][low]["delta"], report["recognizers"][high]["delta"]
         report["primary"].append({"low": low, "high": high, "delta_low": dl, "delta_high": dh, "interaction": I, "ci95": ci,
                                   "prediction_holds": bool(ci[0] > 0 and dl >= 0.10)})
