@@ -1,0 +1,48 @@
+{
+  "run_id": "qwen15b-hankel-v3",
+  "phase": "3.5 (scale)",
+  "design": "docs/PHASE3_HANKEL_V3_DESIGN.md",
+  "benchmark": {
+    "name": "hankel_v3",
+    "lock_file": "experiments/hankel_v3.lock.json",
+    "prompts_sha256": "59fed91c9ace2c0687658a08496496a0f60527eab3af0a279cb54871daab5a4b",
+    "prompt_count": 4224
+  },
+  "model": {
+    "provider": "huggingface-local",
+    "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "main",
+    "resolved_commit": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "access_date_utc": "2026-09-06T06:15:50Z",
+    "interface": "transformers.AutoModelForCausalLM"
+  },
+  "measurement": {
+    "mode": "answer_position_logit_pair",
+    "read_as": "order relations only",
+    "candidate_token_ids": {
+      " YES": 14080,
+      " NO": 5664
+    },
+    "require_single_token_candidates": true,
+    "repeats_per_prompt": 1
+  },
+  "execution": {
+    "runner": "scripts/run_hf_hankel.py",
+    "runner_commit": "738aebe174fe086149b330180adbf36c0fd0e519",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "5.16.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads_per_process": 4,
+    "sharding": "single process, one forward pass per prompt",
+    "started_at_utc": "2026-09-06T06:15:50Z",
+    "finished_at_utc": "2026-09-06T07:17:01Z",
+    "notes": "No prediction was recorded for this run in the v3 design; reported as observed."
+  },
+  "raw_result_sha256_uncompressed": "9b0d4effd058adf79416eaf56a211d92fa131c42d2f63f974eceaafdd2dbc640",
+  "analysis": {
+    "script": "scripts/analyze_hankel_v3.py",
+    "summary": "experiments/results/phase3_5_hankel_v3_qwen15b_summary.json"
+  },
+  "analysis_status": "semantic_rewrite_frozen_plan_v3_completed"
+}

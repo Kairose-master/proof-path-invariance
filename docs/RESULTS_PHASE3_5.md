@@ -40,6 +40,29 @@ The control sits at the noise value on `T` and `V`, as designed. Its
 prose-renderer identical pairs (4/14, 3/9) are an artefact of near-constant
 columns and vanish pooled.
 
+## Scale: Qwen2.5-1.5B-Instruct on the same table
+
+Raw `experiments/runs/hankel_v3_qwen15b.jsonl.gz` (`9b0d4eff…`), summary
+`experiments/results/phase3_5_hankel_v3_qwen15b_summary.json`. No prediction
+was recorded for this run; it is reported as observed.
+
+| Recognizer | `T` | classes red < flip | `U` | `V` | `E` |
+|---|---:|---:|---:|---:|---:|
+| Qwen2.5-0.5B | 1.11 | 3 / 8 | 1.45 | 1.50 | 0, 0 |
+| Qwen2.5-1.5B pooled | **0.62** | 5 / 8 | 0.82 | **1.01** | 0, 0 |
+| Qwen2.5-1.5B bullets | 0.54 | 6 / 8 | 0.53 | 0.67 | 0, 0 |
+| Qwen2.5-1.5B prose | 0.92 | 4 / 8 | 1.10 | 1.10 | 0, 1 |
+
+From 0.5B to 1.5B, `T` falls from 1.11 to 0.62 and `V` from 1.50 to 1.01.
+`T` below 1 is reached by accuracy (calibration in the design document),
+so the informative movement is in `V`: pooled it reaches exactly the
+no-identification value, under the bullet renderer it falls to 0.67, the
+range of the architecturally invariant recognizer (0.62–0.80), under prose
+it stays above 1. Exact identification remains absent (`E` 0 of 14).
+HYPOTHESIS: within the family, identification of consequence-equivalent
+sets on the accuracy-free columns begins to appear with scale, first under
+the list renderer.
+
 ## What this settles
 
 Phase 3.4 showed that permutations outweigh a logical change for this

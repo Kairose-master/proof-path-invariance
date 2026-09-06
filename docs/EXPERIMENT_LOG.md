@@ -394,3 +394,15 @@ synthetic gold+noise (no invariance): S 0.60 pooled, 8/8
 - **OBSERVED:** no causal recognizer has an exactly identical class at any
   seed; V above 1 in 7 of 8 causal runs, below 1 in both set runs.
 
+
+## 2026-09-06 — Phase 3.5 scale: Qwen2.5-1.5B on `hankel_v3`
+
+```text
+qwen15b  T 0.62 (5/8)  U 0.82  V 1.01 (bullets 0.67, prose 1.10)  E 0/14, 0/9
+qwen05b  T 1.11 (3/8)  U 1.45  V 1.50                             E 0/14, 0/9
+```
+
+- **OBSERVED (no prediction recorded):** T and V fall with scale; V pooled
+  sits at the no-identification value, bullets 0.67; E stays 0.
+- Raw SHA-256 (uncompressed): `9b0d4effd058adf79416eaf56a211d92fa131c42d2f63f974eceaafdd2dbc640`.
+

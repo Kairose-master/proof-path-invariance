@@ -1,7 +1,6 @@
 # Recognition paths: when does a recognizer respect logical identity, and how would we know?
 
-Working draft (2026-09-06). All sections written; the Qwen2.5-1.5B row of
-Section 4.3 is pending its run. Labels follow `AGENTS.md`: PROVED, OBSERVED,
+Working draft (2026-09-06). All sections written and all runs in. Labels follow `AGENTS.md`: PROVED, OBSERVED,
 HYPOTHESIS, OPEN, CONFOUND. Source and data: github.com/Kairose-master/
 {recognition-paths, proof-path-invariance}; huggingface.co/jinu0633.
 
@@ -240,12 +239,15 @@ On the semantic-rewrite table (`hankel_v3`), a derivable-clause extension
 |---|---:|---:|---:|
 | Pythia-70M (control) | 1.00 | 1.50 | 0 / 14 |
 | Qwen2.5-0.5B | 1.11 | 1.50 | 0 / 14 |
-| Qwen2.5-1.5B | ⟨pending⟩ | ⟨pending⟩ | ⟨pending⟩ |
+| Qwen2.5-1.5B | 0.62 | 1.01 (bullets 0.67, prose 1.10) | 0 / 14 |
 
 For the 0.5B reader a logically invisible extension moves behavior as much
 as a logical change, and more where accuracy imposes nothing (`V` 1.5,
-equal to the control). The behavioral quotient does not contain the
-consequence relation at any level the table sees.
+equal to the control). At 1.5B `V` falls to the no-identification value
+pooled and to 0.67 under the list renderer, with no exact identification
+(HYPOTHESIS: identification on accuracy-free columns begins with scale,
+renderer first). The behavioral quotient of the 0.5B model does not
+contain the consequence relation at any level the table sees.
 
 ### 4.4 Closure, idempotence, and what is generic
 

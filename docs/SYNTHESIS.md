@@ -92,6 +92,10 @@ extension moves it as much as a one-arrow logical change (`T` 1.11) and
 more on accuracy-free columns (`V` 1.5); no pair of logically identical
 rows is identical (`E` 0).
 
+OBSERVED (`RESULTS_PHASE3_5.md`, scale). Qwen2.5-1.5B on the same table:
+`T` 0.62, `V` 1.01 pooled (0.67 under bullets, 1.10 under prose), `E` 0.
+Scale moves the accuracy-free statistic toward, not past, identification.
+
 OBSERVED (`RESULTS_PHASE4.md`). A recognizer that is permutation- and
 repetition-invariant by construction and 99% accurate on held-out classes
 has a behavioral quotient equal to the syntactic quotient (8 distinct rows
