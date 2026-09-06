@@ -39,6 +39,8 @@ by numerical ties or run-to-run variation.
 
 ## RQ2. Is the effect of adding a derivable clause related to a shortening of derivation depth?
 
+*Status: run; see `docs/PREREGISTRATION_RQ2.md` and `docs/RESULTS_RQ2.md`.*
+
 Three conditions on one base theory:
 
 | condition | change to the input | preserved / controlled |

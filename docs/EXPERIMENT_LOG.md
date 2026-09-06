@@ -420,3 +420,17 @@ set_contrast s0, s1   V 0.53, 0.80  E 1/14, 0/14   (predicted V < 0.4, E >= 4: F
   on simple classes only. The semantic half is not supplied by an
   objective that names it on the training distribution.
 
+## 2026-09-06 — RQ2 (budget-relative derivation depth)
+
+Table `rq2/table/rq2_prompts.jsonl` (200 cases × {D, F, F1, C, L} × 4
+queries, seed 20260906, sha256 39a82a17…), preregistered in
+`docs/PREREGISTRATION_RQ2.md` before any learned recognizer ran. Runs:
+symbolic k ∈ {1,2,3,4,6}, exact oracle, constant-NO, Pythia-70M,
+IterReasoner (7 atoms) trained at 4 and at 2 rounds evaluated at k ∈
+{1,2,3,4,6}, SetRecognizer (7 atoms), Qwen2.5-0.5B/1.5B-Instruct.
+Results `experiments/rq2/results/*.jsonl`, models `experiments/rq2/*.pt`,
+analysis `experiments/rq2/analysis.json`, write-up `docs/RESULTS_RQ2.md`.
+Primary prediction held (I = 0.885 [0.84, 0.93]); LLM decision-level test
+not evaluable (0.5B all-YES, 1.5B all-NO on this rendering); LLM margin
+effect small and dominated by lexical overlap.
+
