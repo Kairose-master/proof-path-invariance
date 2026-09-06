@@ -70,6 +70,18 @@ much as permuting it. The idempotence consequence `ww ≈_ρ w` of
 `Recognition.lean` fails exactly, like permutation invariance, and to a
 similar degree.
 
+## EXPLORATORY — the `skip` outlier is a primacy effect
+
+The four serializations of `skip` (`a→c, c→e, b→d`) split into two groups,
+`{123, 231}` and `{312, 321}`, with Hamming distances 149–172 between the
+groups and 17–63 inside them. The second group is exactly the pair whose
+first premise is the disconnected clause `b→d`. The disagreeing tests are
+dominated by preferences involving the `bd` query (`ae>bd` 43, `ad>bd`
+35). Mentioning an atom pair in the first premise raises the recognizer's
+preference for the query about that pair. This is a surface primacy effect
+on the query, not a logical distinction, and it is the largest single
+source of within-class distance in the table.
+
 ## Renderer
 
 The Phase 3.1 exploratory split (bullets pass, prose fail) does not
