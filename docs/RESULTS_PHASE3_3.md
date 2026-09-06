@@ -43,6 +43,34 @@ absolute terms; only the ratio is comparable across recognizers.
 Per renderer the control ratios are 2.05 (bullets) and 1.82 (prose),
 against 0.58 and 0.69 for `qwen05b`.
 
+## EXPLORATORY — what Gate I does and does not measure
+
+Two robustness checks on the Boolean tables, not preregistered.
+
+**Matched statistic.** The frozen Gate I compares the within-class median
+with the between-class median of *minimum* row-pair distances. Replacing
+the minimum by the median over all cross-class row pairs gives
+`qwen05b` 0.43 and `pythia70m` 0.72: under the matched statistic the
+non-reading control is also below 1. The frozen gate discriminates the
+two recognizers; the ordering "same class closer than different class"
+by itself does not.
+
+**Nearest classes.** For `qwen05b`, `chain` (`a→b, b→c, c→d`) and
+`reversed` (`b→a, c→b, d→c`), which share every atom and every clause
+shape and differ in nothing but the direction of all three arrows, are at
+Hamming 73, *below* the within-class serialization distance of `chain`
+(78). Likewise `fragments`/`gated` at 43 against within-class 122 and
+100. The logically most different pairs with the most similar surface are
+not separated beyond serialization noise.
+
+Reading: part of the within-class proximity that Gate I rewards is shared
+surface content (the same clause multiset), not logical identity. The
+gate is valid as a discriminator between recognizers but does not by
+itself show that the proximity is logical. Phase 3.4 (`hankel_v2`)
+separates the two by contrasting single-arrow flips (minimal surface
+edit, logical change) with permutations (maximal surface edit, no logical
+change).
+
 ## Scale: Qwen2.5-1.5B-Instruct on `hankel_v1`
 
 Running as a single 4-thread float32 process (memory does not allow

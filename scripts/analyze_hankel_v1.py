@@ -120,7 +120,18 @@ def analyze_one(prof, col_ids, depth, dgold, pgold, rows):
         i2 = [idx[f"{c2}-{s}"] for s in SERIALIZATIONS]
         sep[f"{c1}|{c2}"] = min(hamming(prof[i], prof[j]) for i in i1 for j in i2)
     sv = np.array(list(sep.values()))
+    # Exploratory robustness statistic (not a frozen gate): between-class
+    # distance as the median over all cross-class row pairs, matching the
+    # within-class statistic, instead of the minimum.
+    cross = []
+    for c1, c2 in itertools.combinations(CLASS_ORDER, 2):
+        i1 = [idx[f"{c1}-{s}"] for s in SERIALIZATIONS]
+        i2 = [idx[f"{c2}-{s}"] for s in SERIALIZATIONS]
+        cross.extend(hamming(prof[i], prof[j]) for i in i1 for j in i2)
+    cross_median = float(np.median(cross))
     B = {"min": int(sv.min()), "median": float(np.median(sv)), "max": int(sv.max()),
+         "exploratory_cross_pair_median": cross_median,
+         "exploratory_ratio_within_median_over_cross_pair_median": float(A["within_class_hamming_median"] / max(cross_median, 1e-9)),
          "class_pairs_with_min_separation_above_within_max": int((sv > A["within_class_hamming_max"]).sum()),
          "class_pairs_total": len(sep),
          "ratio_within_median_over_between_median": float(A["within_class_hamming_median"] / max(np.median(sv), 1e-9)),
