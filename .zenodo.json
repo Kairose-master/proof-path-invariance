@@ -1,0 +1,13 @@
+{
+  "title": "Proof-Path Invariance: frozen Hankel tables, measured and constructed recognizers",
+  "description": "Lean-grounded benchmark tables of Horn premise traces against continuation-query tests, with raw runs of small language models and constructed recognizers, preregistered statistics, and the working draft of the paper.",
+  "creators": [{"name": "Jang, Jinu", "affiliation": ""}],
+  "license": "MIT",
+  "upload_type": "software",
+  "keywords": ["language models","logical invariance","premise order","metamorphic testing","Horn logic","Lean"],
+  "related_identifiers": [
+    {"identifier": "https://github.com/Kairose-master/recognition-paths", "relation": "isSupplementTo", "resource_type": "software"},
+    {"identifier": "https://github.com/Kairose-master/proof-path-invariance", "relation": "isSupplementTo", "resource_type": "software"},
+    {"identifier": "https://huggingface.co/datasets/jinu0633/hankel-tables", "relation": "isSupplementTo", "resource_type": "dataset"}
+  ]
+}
