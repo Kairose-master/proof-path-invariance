@@ -1,0 +1,154 @@
+{
+  "benchmark": "hankel_v1",
+  "analysis_status": "boolean_chu_frozen_plan_v1",
+  "raw_result_sha256": "825420eea505fe6c4acb748446bdccc6c8d35929b6728d18e42af0a262bb5612",
+  "prompt_rows": 9120,
+  "per_renderer": {
+    "tokens": {
+      "A_invariance": {
+        "classes_with_identical_profiles": 8,
+        "classes": 8,
+        "within_class_hamming_median": 0.0,
+        "within_class_hamming_max": 0,
+        "columns": 570,
+        "per_class": {
+          "chain": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "fork_join": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "chain_gap": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "branch": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "reversed": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "fragments": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "gated": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          },
+          "skip": {
+            "max_hamming": 0,
+            "median_hamming": 0.0,
+            "median_hamming_decision": 0.0,
+            "median_hamming_preference": 0.0,
+            "all_serializations_identical": true
+          }
+        }
+      },
+      "B_separation": {
+        "min": 51,
+        "median": 213.0,
+        "max": 310,
+        "exploratory_cross_pair_median": 213.0,
+        "exploratory_ratio_within_median_over_cross_pair_median": 0.0,
+        "class_pairs_with_min_separation_above_within_max": 28,
+        "class_pairs_total": 28,
+        "ratio_within_median_over_between_median": 0.0,
+        "per_class_pair": {
+          "chain|fork_join": 103,
+          "chain|chain_gap": 210,
+          "chain|branch": 86,
+          "chain|reversed": 209,
+          "chain|fragments": 237,
+          "chain|gated": 275,
+          "chain|skip": 215,
+          "fork_join|chain_gap": 159,
+          "fork_join|branch": 51,
+          "fork_join|reversed": 246,
+          "fork_join|fragments": 238,
+          "fork_join|gated": 300,
+          "fork_join|skip": 310,
+          "chain_gap|branch": 172,
+          "chain_gap|reversed": 257,
+          "chain_gap|fragments": 211,
+          "chain_gap|gated": 269,
+          "chain_gap|skip": 269,
+          "branch|reversed": 245,
+          "branch|fragments": 203,
+          "branch|gated": 269,
+          "branch|skip": 289,
+          "reversed|fragments": 262,
+          "reversed|gated": 146,
+          "reversed|skip": 206,
+          "fragments|gated": 136,
+          "fragments|skip": 172,
+          "gated|skip": 174
+        }
+      },
+      "C_collapse": {
+        "distinct_row_profiles": 8,
+        "rows": 40,
+        "distinct_column_profiles": 54,
+        "columns": 570,
+        "logical_distinct_rows": 8
+      },
+      "D_readout": {
+        "decision_accuracy": 0.9709429824561403,
+        "decision_positive_rate": 0.5986842105263158,
+        "decision_gold_positive_rate": 0.5718201754385965,
+        "comparative_accuracy": 1.0,
+        "comparative_cells_defined": 5325
+      },
+      "E_closure": {
+        "row_pairs_identical_on_depth_le_1": 80,
+        "of_which_separated_at_depth_2": 0,
+        "closed": true,
+        "witness": null,
+        "depth_le_1_columns": 80
+      },
+      "F_idempotence": {
+        "continuation_zz_vs_z_agreement": 1.0,
+        "continuation_cells": 2800,
+        "prefix_uu_vs_u_hamming": {
+          "chain": 0,
+          "fork_join": 0,
+          "chain_gap": 0,
+          "branch": 0,
+          "reversed": 0,
+          "fragments": 0,
+          "gated": 0,
+          "skip": 0
+        },
+        "prefix_uu_vs_u_hamming_median": 0.0,
+        "serialization_hamming_median_for_reference": 0.0
+      }
+    }
+  },
+  "pooled": null,
+  "interpretation_limit": "Exact Boolean statements about a finite table. Identical profiles mean 'not separated by these tests', not identity under the recognition congruence."
+}

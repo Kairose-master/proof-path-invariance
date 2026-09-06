@@ -295,16 +295,22 @@ moves 0.62–0.80 times as far under a semantic rewrite as under a logical
 flip. Every LLM, the control, and seven of eight causal toy runs have `V`
 above 1 (medians 1.5–2.3). So the architecturally invariant recognizer is
 the only one in which a semantic rewrite is detectably less disruptive
-than a logical change, and even there most of the semantic half is
-missing and almost none of it is exact. (Two seeds; suggestive.)
+than a logical change (`V` 0.48–0.80 at four seeds), and even there most
+of the semantic half is missing and almost none of it is exact. Training
+the same recognizer with a symmetric-KL objective on (trace, trace +
+derivable clause) pairs, the semantic rewrite itself, leaves `V` and `E`
+unchanged (0.53, 0.80; 1, 0 of 14; prediction of `V` below 0.4 failed):
+the objective closes the gap on simple classes and not on classes with
+disconnected or gated clauses. On this table the semantic half is not
+supplied by accuracy, by architecture, or by an objective that names it.
 
 ### 5.3 What the constructed recognizers add
 
 They separate three properties that the LLM measurements conflate:
 reading the task (all accurate recognizers), permutation invariance
 (exact only by architecture, approximate by augmentation), and logical
-invariance (present partly, and only where the syntactic half was
-exact). They also show that `S < 1` and Gate I are reached by accuracy
+invariance (present partly, only where the syntactic half was exact, and
+not improved by an equivalence objective). They also show that `S < 1` and Gate I are reached by accuracy
 and surface alone, which fixes the reading of Section 4.
 
 ## 6. Discussion
@@ -313,7 +319,10 @@ and surface alone, which fixes the reading of Section 4.
 part of logical identity, and respecting its semantic part are distinct,
 and every recognizer we measured or built sits on that ladder at a
 different rung. Accuracy does not climb it; architecture climbs one rung
-exactly; nothing we tried climbs the last.
+exactly; an objective aimed at the last rung does not reach it. What the
+last rung requires is the closure operator, which none of these
+recognizers computes; whether a recognizer with an explicit fixpoint
+layer reaches it is the next experiment (OPEN).
 
 **What a finite table can conclude.** By the identification theorem, a
 test family decides `≡_ρ` when it is closed. On the measured recognizers

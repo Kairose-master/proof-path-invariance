@@ -204,9 +204,10 @@ transformer without augmentation. Evaluate on the frozen `hankel_v1` and
 `hankel_v2` tables with the same Boolean statistics. Design and
 predictions frozen in `docs/PHASE4_CONSTRUCTED_DESIGN.md`.
 
-**Status:** completed, seed 0. The set recognizer is exactly the syntactic
-quotient (S 0, 8/8 identical classes, closed depth-one family) and only
-partly the semantic one (V 0.63, E 0). See `docs/RESULTS_PHASE4.md`.
+**Status:** completed at four seeds plus an equivalence-objective arm. The
+set recognizer is exactly the syntactic quotient and only partly the
+semantic one (V 0.48–0.80); an equivalence loss on derivable extensions
+does not change that. See `docs/RESULTS_PHASE4.md`.
 
 ## Phase 3 — Derivation-sensitive experiments
 

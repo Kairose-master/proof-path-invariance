@@ -130,6 +130,39 @@ Medians over four seeds: `seq_aug` `S` 0.87 (range 0.51–1.37), `V` 1.73;
   identical serialization profiles. The set recognizer has all eight, by
   construction.
 
+## Phase 4.1 — `set` seeds 2–3 and an objective aimed at the quotient (added 2026-09-06)
+
+Predictions recorded in the design document before training.
+
+| | val. acc. | `hankel_v1` identical classes | `S` | `hankel_v3` `T` | `V` | `E` base–red |
+|---|---:|---:|---:|---:|---:|---:|
+| `set` s0 / s1 / s2 / s3 | 0.993 / 0.990 / 0.993 / 0.987 | 8/8 all | 0 all | 0.27 / 0.20 / 0.20 / 0.17 | **0.62 / 0.80 / 0.48 / 0.57** | 0 / 2 / 1 / 1 |
+| `set_contrast` s0 / s1 (equivalence loss, weight 1.0) | 0.986 / 0.988 | 8/8 | 0 | 0.12 / 0.25 | **0.53 / 0.80** | 1 / 0 |
+
+**`set` replicates at four seeds.** `V` 0.48–0.80, all inside the recorded
+range and all below 1; `E` 0–2 of 14. The central claim holds at four
+seeds: exactly the syntactic quotient, partly the semantic one.
+
+**The equivalence objective does not move it.** `set_contrast` was trained
+with a symmetric-KL loss pulling its outputs together on (trace, trace +
+derivable clause) pairs, the semantic rewrite itself. Prediction: `V`
+below 0.4 and `E` at least 4 of 14. Observed: `V` 0.53 and 0.80, `E` 1 and
+0, indistinguishable from plain `set`. Per class the loss closes the gap
+on the simple classes (`chain_gap` 3 → 0, `chain` 4 → 2 free-column
+disagreements) and not on `fragments`, `gated`, or `skip` (21 → 12), the
+classes with disconnected or gated clauses. An objective that names the
+semantic quotient on the training distribution does not transfer it to
+the held-out classes' extensions.
+
+**Conclusion (OBSERVED).** Three routes to the semantic half have now been
+tried on this table: accuracy (every recognizer), architectural syntactic
+invariance (`set`), and a training objective on the equivalence itself
+(`set_contrast`). None produces exact identification of consequence-
+equivalent clause sets, and only the last two produce partial
+identification, at the same level. On the evidence here the semantic
+half is not a property that training on this distribution supplies; it
+belongs to the closure operator, which none of these recognizers computes.
+
 ## EXPLORATORY — `seq_aug` at three times the budget (18000 steps, seed 0)
 
 Not part of the frozen design; recorded in the design document before

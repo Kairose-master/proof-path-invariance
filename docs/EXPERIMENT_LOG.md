@@ -406,3 +406,17 @@ qwen05b  T 1.11 (3/8)  U 1.45  V 1.50                             E 0/14, 0/9
   sits at the no-identification value, bullets 0.67; E stays 0.
 - Raw SHA-256 (uncompressed): `9b0d4effd058adf79416eaf56a211d92fa131c42d2f63f974eceaafdd2dbc640`.
 
+
+## 2026-09-06 — Phase 4.1: set seeds 2-3; equivalence objective
+
+```text
+set s2, s3            V 0.48, 0.57  E 1/14, 1/14   (predicted V 0.4-0.9, E 0-3: held)
+set_contrast s0, s1   V 0.53, 0.80  E 1/14, 0/14   (predicted V < 0.4, E >= 4: FAILED)
+```
+
+- **OBSERVED:** the central set result holds at four seeds (V 0.48-0.80).
+- **PREDICTION FAILED:** a symmetric-KL objective on derivable-extension
+  pairs does not lower V or raise E on held-out classes; it closes the gap
+  on simple classes only. The semantic half is not supplied by an
+  objective that names it on the training distribution.
+

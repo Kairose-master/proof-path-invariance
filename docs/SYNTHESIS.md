@@ -112,6 +112,15 @@ further. The beyond-accuracy statistic is `V`: above 1 for every LLM, the
 control, and seven of eight causal toy runs; below 1 only for the
 architecturally invariant recognizer (0.62, 0.80; two seeds).
 
+OBSERVED (`RESULTS_PHASE4.md`, Phase 4.1). The set recognizer's partial
+semantic identification holds at four seeds (`V` 0.48–0.80). Training the
+same recognizer with an equivalence loss on derivable-extension pairs
+(the semantic rewrite itself) leaves `V` and `E` unchanged (0.53, 0.80; 1,
+0 of 14): the objective closes the gap on simple classes and not on
+classes with disconnected or gated clauses. Accuracy, architectural
+invariance, and an objective on the equivalence all fail to supply the
+semantic half; none computes the closure.
+
 ## The sentence the paper can currently defend
 
 > On a Lean-certified Horn benchmark read through order relations at the
@@ -121,9 +130,11 @@ architecturally invariant recognizer (0.62, 0.80; two seeds).
 > a derivable clause each move behavior at least as much as reversing one
 > arrow. A recognizer built to be permutation-invariant and trained to 99%
 > accuracy is exactly the syntactic quotient and only partly the semantic
-> one. Reading the task, permutation invariance, and logical invariance
-> are three distinct properties, in that order of difficulty, and neither
-> accuracy nor architectural invariance supplies the third.
+> one, and an objective that names the semantic equivalence on the
+> training distribution does not change that. Reading the task, permutation
+> invariance, and logical invariance are three distinct properties, in that
+> order of difficulty; accuracy, architectural invariance, and an
+> equivalence objective each fail to supply the third.
 
 HYPOTHESIS (Phase 3.3 scale run, preregistered). Within the
 instruction-tuned family the Gate I ratio falls with scale while exact
