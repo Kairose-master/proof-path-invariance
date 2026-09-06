@@ -105,13 +105,15 @@ logic signal on the surface-controlled contrast strengthens with scale.
 
 ## Novelty: not established
 
-Adjacent prior work: premise-order sensitivity of LLM reasoning (Chen et
-al. 2024); automata and weighted-automata extraction from recurrent
-networks via L* and Hankel matrices (Weiss et al. 2018; Okudono et al.
-2020; Ayache et al. 2018); probabilistic bisimulation (Larsen–Skou) and
-its pseudometrics; Chu spaces (Pratt). The narrowest defensible
-difference: the behavioral quotient is compared, on a machine-checked
-logical quotient, by a preregistered gate with a validity control, using
-a threshold-free readout that makes the comparison an exact statement
-about a finite Boolean table. Whether that difference is publishable
-novelty is not yet assessed against a full literature search.
+See `docs/RELATED_WORK.md`. Premise-order sensitivity (Chen et al. 2024),
+logic-grounded metamorphic testing of equivalence invariance (LGMT 2026),
+accuracy–consistency gaps under controlled reformulation (CRTBench 2026),
+surface-versus-structure separation on parameterized SAT (2602.12665),
+permutation-invariant LLM architecture (Set-LLM 2025) and order-centric
+augmentation (2025) all exist. The empirical findings of Phases 1–3.4 are
+replications at small scale. Candidates for a contribution, pending
+full-text reading: the machine-checked quotient framework and its
+finite-test identification criterion; exact-versus-approximate identity
+with a validity control; the flip-versus-permutation statistic; and the
+question whether a permutation-invariant recognizer identifies
+consequence-equivalent clause sets, which requires a table not yet built.

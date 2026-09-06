@@ -67,6 +67,20 @@ reaches `S` near 0 with near-identical profiles, data alone recovers what
 architecture guarantees; if it does not, the surface quotient survives
 augmentation.
 
+## Re-centring after the literature check
+
+Set-LLM (2025) and order-centric augmentation (2025) already realise the
+`set` and `seq_aug` ideas at LLM scale (`docs/RELATED_WORK.md`). The
+question this phase can still own is the gap between the two
+specifications in `Specification.lean`: a permutation-invariant recognizer
+is invariant under the syntactic part of `≡_L` by construction; does
+training make it identify consequence-equivalent but syntactically
+different clause sets? Answering it needs a table of such rewrites
+(`hankel_v3`: redundant derivable clauses, alternative axiomatisations of
+the same closure), on which `d_perm = 0` is trivial and the informative
+distance is between consequence-equivalent rows. The predictions above
+stand for the tables that exist; the `hankel_v3` design is the next step.
+
 ## What this cannot show
 
 These are task-specific models of ~10⁵ parameters, not language models.
