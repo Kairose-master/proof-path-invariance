@@ -47,6 +47,7 @@ def per_case(d, cases):
         for cond in ["D"] + CONDS:
             rs = [d[(c, cond, q)] for q in QUERIES]
             e[cond] = {"dec_t": dec(rs[0]), "m_t": rs[0]["observation"][0] - rs[0]["observation"][1],
+                       "m_n": rs[2]["observation"][0] - rs[2]["observation"][1],
                        "vec": [dec(r) for r in rs], "correct": [dec(r) == (r["gold"] == "pos") for r in rs]}
         out[c] = e
     return out
@@ -61,6 +62,15 @@ def stats(pc, cases):
         s[f"dis4_{cond}"] = sum(sum(x != y for x, y in zip(pc[c]["D"]["vec"], pc[c][cond]["vec"])) for c in cases) / (4 * n)
         s[f"ext_{cond}"] = sorted(abs(pc[c]["D"]["m_t"] - pc[c][cond]["m_t"]) for c in cases)[n // 2]
         s[f"acc_{cond}_t"] = sum(pc[c][cond]["correct"][0] for c in cases) / n
+    # exploratory extended observation: within-theory preference bit [m_t > m_n],
+    # comparative accuracy on D, and signed margin shift on the target query
+    def pref(c, cond):
+        return pc[c][cond]["m_t"] > pc[c][cond]["m_n"]
+    s["compacc_D"] = sum(pref(c, "D") for c in cases) / n
+    for cond in CONDS:
+        s[f"pdis_{cond}"] = sum(pref(c, "D") != pref(c, cond) for c in cases) / n
+        s[f"shift_{cond}"] = sum(pc[c][cond]["m_t"] - pc[c]["D"]["m_t"] for c in cases) / n
+    s["pdelta"] = s["pdis_F"] - s["pdis_C"]
     s["delta"] = s["dis_F"] - s["dis_C"]
     s["delta1"] = s["dis_F1"] - s["dis_C"]
     # direction of D-F disagreement: F correct & D wrong vs the reverse
@@ -120,6 +130,10 @@ def main():
     txt = json.dumps(report, indent=1)
     if a.out:
         Path(a.out).write_text(txt)
+    print(f"{'recognizer':22s} {'compacc':>7s} {'pdisF':>6s} {'pdisF1':>6s} {'pdisC':>6s} {'pdisL':>6s} {'shiftF':>7s} {'shiftF1':>7s} {'shiftC':>7s} {'shiftL':>7s}   (exploratory: preference bit m_t>m_n, signed margin shift on t)")
+    for name, s in report["recognizers"].items():
+        print(f"{name:22s} {s['compacc_D']:7.2f} {s['pdis_F']:6.2f} {s['pdis_F1']:6.2f} {s['pdis_C']:6.2f} {s['pdis_L']:6.2f} {s['shift_F']:7.3f} {s['shift_F1']:7.3f} {s['shift_C']:7.3f} {s['shift_L']:7.3f}")
+    print()
     hdr = f"{'recognizer':22s} {'acc_D':>6s} {'accDt':>6s} {'disF':>6s} {'disF1':>6s} {'disC':>6s} {'disL':>6s} {'delta':>6s} {'CI':>16s} {'extF':>7s} {'extC':>7s} {'Ffix':>5s} {'Fbrk':>5s}"
     print(hdr)
     for name, s in report["recognizers"].items():
