@@ -70,22 +70,27 @@ def main() -> None:
                 logits = model(input_ids=ids).logits[0, -1].float().cpu()
                 p = float(logits[pos_id].item())
                 q = float(logits[neg_id].item())
-                f.write(json.dumps({
+                result = {
                     "run_id": args.run_id,
                     "table": row["table"],
                     "row_id": row["row_id"],
                     "logical_class": row["logical_class"],
-                    "serialization": row["serialization"],
                     "col_id": row["col_id"],
                     "relabeling": row["relabeling"],
                     "renderer": row["renderer"],
                     "answer_map": row["answer_map"],
                     "gold": row["gold"],
+                }
+                for key in ("serialization", "variant", "kind", "flipped_clause", "doubled_prefix"):
+                    if key in row:
+                        result[key] = row[key]
+                result.update({
                     "pos_token_id": pos_id,
                     "neg_token_id": neg_id,
                     "observation": [p, q],
                     "prompt_token_count": int(ids.shape[1]),
-                }, ensure_ascii=False) + "\n")
+                })
+                f.write(json.dumps(result, ensure_ascii=False) + "\n")
                 count += 1
 
     if count != args.expected_rows:
