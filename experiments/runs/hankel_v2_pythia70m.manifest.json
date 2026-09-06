@@ -1,0 +1,48 @@
+{
+  "run_id": "pythia70m-hankel-v2",
+  "phase": "3.4",
+  "design": "docs/PHASE3_HANKEL_V2_DESIGN.md",
+  "benchmark": {
+    "name": "hankel_v2",
+    "lock_file": "experiments/hankel_v2.lock.json",
+    "prompts_sha256": "81695c3e968c1253d3ac9f0f05744092ac51c1cadef38ecc1bd86422faa943b8",
+    "prompt_count": 3328
+  },
+  "model": {
+    "provider": "huggingface-local",
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "resolved_commit": "de3e4e2d6cbb3b1a51f90fe153ea51fcd8c7c852",
+    "access_date_utc": "2026-09-06T02:30:49Z",
+    "interface": "transformers.AutoModelForCausalLM"
+  },
+  "measurement": {
+    "mode": "answer_position_logit_pair",
+    "read_as": "order relations only",
+    "candidate_token_ids": {
+      " YES": 22487,
+      " NO": 7651
+    },
+    "require_single_token_candidates": true,
+    "repeats_per_prompt": 1
+  },
+  "execution": {
+    "runner": "scripts/run_hf_hankel.py",
+    "runner_commit": "738aebe174fe086149b330180adbf36c0fd0e519",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "5.16.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads_per_process": 1,
+    "sharding": "single process, one forward pass per prompt",
+    "started_at_utc": "2026-09-06T02:30:49Z",
+    "finished_at_utc": "2026-09-06T02:34:43Z",
+    "notes": "Validity control for Gate S."
+  },
+  "raw_result_sha256_uncompressed": "a35350b033ca410d476d7f63eac5878857d971aecb1d17223127bd6468ed85c5",
+  "analysis": {
+    "script": "scripts/analyze_hankel_v2.py",
+    "summary": "experiments/results/phase3_4_hankel_v2_pythia70m_summary.json"
+  },
+  "analysis_status": "surface_controlled_frozen_plan_v2_completed"
+}

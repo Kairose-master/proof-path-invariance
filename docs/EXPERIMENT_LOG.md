@@ -237,3 +237,28 @@ Raw SHA-256 (uncompressed):
 `49bf32f90bb2b8aae77887b7a9e2cab7b7eb30a6ca44e16d281249ebc8ca1d6a`.
 Scale run (Qwen2.5-1.5B-Instruct) in progress. See `docs/RESULTS_PHASE3_3.md`.
 
+
+## 2026-09-06 — Phase 3.4 surface-controlled contrast `hankel_v2`
+
+**Status:** completed; frozen Gate S evaluated.
+
+```text
+recognizer  S(pooled)  classes perm<flip  compacc   Gate S
+qwen05b     1.27       3/8                0.842     fail (predicted)
+pythia70m   0.97       4/8                0.480     fail (predicted 'well above 1': wrong; noise value)
+qwen05b bullets 0.75 (5/8) ; prose 1.80 (0/8)
+```
+
+- **OBSERVED:** for Qwen, permuting the premises moves behavior more than
+  flipping one arrow, pooled. The Phase 3.2 Gate I proximity is
+  predominantly surface.
+- **OBSERVED:** the non-reading control sits at the noise value; the
+  contrast is uninformative for it.
+- **HYPOTHESIS:** the weak bullet-renderer logic signal grows with scale.
+
+Raw SHA-256 (uncompressed): `qwen05b`
+`5f6879ee777f44455db6b8de29ea90130d5248f08a67e49bb9c5b671e8999ba4`;
+`pythia70m` `a35350b033ca410d476d7f63eac5878857d971aecb1d17223127bd6468ed85c5`.
+
+See `docs/RESULTS_PHASE3_4.md`.
+

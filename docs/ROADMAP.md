@@ -175,7 +175,10 @@ base trace on the depth-≤1 Boolean family (`hankel_v2`, 3328 prompts).
 Gate S: median over classes of `d_perm / d_flip < 1`. Frozen in
 `docs/PHASE3_HANKEL_V2_DESIGN.md`.
 
-**Status:** inputs and predictions frozen; runs in progress.
+**Status:** completed. Qwen2.5-0.5B fails Gate S (`S` 1.27 pooled, 3/8
+classes; bullets 0.75, prose 1.80); the non-reading control sits at the
+noise value 0.97. The within-class proximity of Phase 3.2 is
+predominantly surface. See `docs/RESULTS_PHASE3_4.md`.
 
 ## Phase 3 — Derivation-sensitive experiments
 

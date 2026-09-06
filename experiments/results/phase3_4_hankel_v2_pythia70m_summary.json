@@ -1,0 +1,522 @@
+{
+  "benchmark": "hankel_v2",
+  "analysis_status": "surface_controlled_frozen_plan_v2",
+  "raw_result_sha256": "a35350b033ca410d476d7f63eac5878857d971aecb1d17223127bd6468ed85c5",
+  "prompt_rows": 3328,
+  "per_renderer": {
+    "bullets": {
+      "S_median_ratio_perm_over_flip": 1.2,
+      "classes_with_perm_closer_than_flip": 2,
+      "classes": 8,
+      "decision_accuracy": 0.37680288461538464,
+      "decision_positive_rate": 1.0,
+      "comparative_accuracy": 0.5320447609359105,
+      "columns": 80,
+      "per_class": {
+        "chain": {
+          "d_perm": 3.0,
+          "d_flip": 3.0,
+          "ratio": 1.0,
+          "perm_distances": [
+            3,
+            2,
+            3
+          ],
+          "flip_distances": [
+            3,
+            8,
+            2
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            13,
+            15
+          ],
+          "n_flips": 3
+        },
+        "fork_join": {
+          "d_perm": 9.0,
+          "d_flip": 9.5,
+          "ratio": 0.9473684210526315,
+          "perm_distances": [
+            4,
+            9,
+            9
+          ],
+          "flip_distances": [
+            6,
+            13
+          ],
+          "flip_gold_changes_decision_bits": [
+            14,
+            8
+          ],
+          "n_flips": 2
+        },
+        "chain_gap": {
+          "d_perm": 6.0,
+          "d_flip": 5.0,
+          "ratio": 1.2,
+          "perm_distances": [
+            3,
+            7,
+            6
+          ],
+          "flip_distances": [
+            5,
+            11,
+            4
+          ],
+          "flip_gold_changes_decision_bits": [
+            4,
+            2,
+            4
+          ],
+          "n_flips": 3
+        },
+        "branch": {
+          "d_perm": 10.0,
+          "d_flip": 7.5,
+          "ratio": 1.3333333333333333,
+          "perm_distances": [
+            11,
+            10,
+            10
+          ],
+          "flip_distances": [
+            6,
+            9
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            8
+          ],
+          "n_flips": 2
+        },
+        "reversed": {
+          "d_perm": 3.0,
+          "d_flip": 2.5,
+          "ratio": 1.2,
+          "perm_distances": [
+            3,
+            2,
+            3
+          ],
+          "flip_distances": [
+            3,
+            2
+          ],
+          "flip_gold_changes_decision_bits": [
+            2,
+            2
+          ],
+          "n_flips": 2
+        },
+        "fragments": {
+          "d_perm": 7.0,
+          "d_flip": 2.0,
+          "ratio": 3.5,
+          "perm_distances": [
+            8,
+            7,
+            5
+          ],
+          "flip_distances": [
+            2,
+            1,
+            6
+          ],
+          "flip_gold_changes_decision_bits": [
+            5,
+            10,
+            9
+          ],
+          "n_flips": 3
+        },
+        "gated": {
+          "d_perm": 8.0,
+          "d_flip": 0.5,
+          "ratio": 16.0,
+          "perm_distances": [
+            13,
+            4,
+            8
+          ],
+          "flip_distances": [
+            1,
+            0
+          ],
+          "flip_gold_changes_decision_bits": [
+            8,
+            7
+          ],
+          "n_flips": 2
+        },
+        "skip": {
+          "d_perm": 3.0,
+          "d_flip": 5.0,
+          "ratio": 0.6,
+          "perm_distances": [
+            5,
+            3,
+            3
+          ],
+          "flip_distances": [
+            5,
+            5,
+            5
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            15,
+            7
+          ],
+          "n_flips": 3
+        }
+      }
+    },
+    "prose": {
+      "S_median_ratio_perm_over_flip": 1.1111111111111112,
+      "classes_with_perm_closer_than_flip": 3,
+      "classes": 8,
+      "decision_accuracy": 0.37680288461538464,
+      "decision_positive_rate": 1.0,
+      "comparative_accuracy": 0.42828077314343843,
+      "columns": 80,
+      "per_class": {
+        "chain": {
+          "d_perm": 2.0,
+          "d_flip": 0.0,
+          "ratio": Infinity,
+          "perm_distances": [
+            0,
+            2,
+            2
+          ],
+          "flip_distances": [
+            2,
+            0,
+            0
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            13,
+            15
+          ],
+          "n_flips": 3
+        },
+        "fork_join": {
+          "d_perm": 0.0,
+          "d_flip": 1.5,
+          "ratio": 0.0,
+          "perm_distances": [
+            2,
+            0,
+            0
+          ],
+          "flip_distances": [
+            3,
+            0
+          ],
+          "flip_gold_changes_decision_bits": [
+            14,
+            8
+          ],
+          "n_flips": 2
+        },
+        "chain_gap": {
+          "d_perm": 2.0,
+          "d_flip": 9.0,
+          "ratio": 0.2222222222222222,
+          "perm_distances": [
+            2,
+            0,
+            4
+          ],
+          "flip_distances": [
+            9,
+            10,
+            6
+          ],
+          "flip_gold_changes_decision_bits": [
+            4,
+            2,
+            4
+          ],
+          "n_flips": 3
+        },
+        "branch": {
+          "d_perm": 5.0,
+          "d_flip": 2.0,
+          "ratio": 2.5,
+          "perm_distances": [
+            7,
+            3,
+            5
+          ],
+          "flip_distances": [
+            1,
+            3
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            8
+          ],
+          "n_flips": 2
+        },
+        "reversed": {
+          "d_perm": 10.0,
+          "d_flip": 9.0,
+          "ratio": 1.1111111111111112,
+          "perm_distances": [
+            10,
+            8,
+            11
+          ],
+          "flip_distances": [
+            11,
+            7
+          ],
+          "flip_gold_changes_decision_bits": [
+            2,
+            2
+          ],
+          "n_flips": 2
+        },
+        "fragments": {
+          "d_perm": 7.0,
+          "d_flip": 12.0,
+          "ratio": 0.5833333333333334,
+          "perm_distances": [
+            2,
+            10,
+            7
+          ],
+          "flip_distances": [
+            12,
+            13,
+            2
+          ],
+          "flip_gold_changes_decision_bits": [
+            5,
+            10,
+            9
+          ],
+          "n_flips": 3
+        },
+        "gated": {
+          "d_perm": 7.0,
+          "d_flip": 3.0,
+          "ratio": 2.3333333333333335,
+          "perm_distances": [
+            0,
+            11,
+            7
+          ],
+          "flip_distances": [
+            4,
+            2
+          ],
+          "flip_gold_changes_decision_bits": [
+            8,
+            7
+          ],
+          "n_flips": 2
+        },
+        "skip": {
+          "d_perm": 9.0,
+          "d_flip": 6.0,
+          "ratio": 1.5,
+          "perm_distances": [
+            17,
+            9,
+            9
+          ],
+          "flip_distances": [
+            17,
+            5,
+            6
+          ],
+          "flip_gold_changes_decision_bits": [
+            9,
+            15,
+            7
+          ],
+          "n_flips": 3
+        }
+      }
+    }
+  },
+  "pooled": {
+    "S_median_ratio_perm_over_flip": 0.974025974025974,
+    "classes_with_perm_closer_than_flip": 4,
+    "classes": 8,
+    "decision_accuracy": 0.37680288461538464,
+    "decision_positive_rate": 1.0,
+    "comparative_accuracy": 0.4801627670396745,
+    "columns": 160,
+    "per_class": {
+      "chain": {
+        "d_perm": 4.0,
+        "d_flip": 5.0,
+        "ratio": 0.8,
+        "perm_distances": [
+          3,
+          4,
+          5
+        ],
+        "flip_distances": [
+          5,
+          8,
+          2
+        ],
+        "flip_gold_changes_decision_bits": [
+          18,
+          26,
+          30
+        ],
+        "n_flips": 3
+      },
+      "fork_join": {
+        "d_perm": 9.0,
+        "d_flip": 11.0,
+        "ratio": 0.8181818181818182,
+        "perm_distances": [
+          6,
+          9,
+          9
+        ],
+        "flip_distances": [
+          9,
+          13
+        ],
+        "flip_gold_changes_decision_bits": [
+          28,
+          16
+        ],
+        "n_flips": 2
+      },
+      "chain_gap": {
+        "d_perm": 7.0,
+        "d_flip": 14.0,
+        "ratio": 0.5,
+        "perm_distances": [
+          5,
+          7,
+          10
+        ],
+        "flip_distances": [
+          14,
+          21,
+          10
+        ],
+        "flip_gold_changes_decision_bits": [
+          8,
+          4,
+          8
+        ],
+        "n_flips": 3
+      },
+      "branch": {
+        "d_perm": 15.0,
+        "d_flip": 9.5,
+        "ratio": 1.5789473684210527,
+        "perm_distances": [
+          18,
+          13,
+          15
+        ],
+        "flip_distances": [
+          7,
+          12
+        ],
+        "flip_gold_changes_decision_bits": [
+          18,
+          16
+        ],
+        "n_flips": 2
+      },
+      "reversed": {
+        "d_perm": 13.0,
+        "d_flip": 11.5,
+        "ratio": 1.1304347826086956,
+        "perm_distances": [
+          13,
+          10,
+          14
+        ],
+        "flip_distances": [
+          14,
+          9
+        ],
+        "flip_gold_changes_decision_bits": [
+          4,
+          4
+        ],
+        "n_flips": 2
+      },
+      "fragments": {
+        "d_perm": 12.0,
+        "d_flip": 14.0,
+        "ratio": 0.8571428571428571,
+        "perm_distances": [
+          10,
+          17,
+          12
+        ],
+        "flip_distances": [
+          14,
+          14,
+          8
+        ],
+        "flip_gold_changes_decision_bits": [
+          10,
+          20,
+          18
+        ],
+        "n_flips": 3
+      },
+      "gated": {
+        "d_perm": 15.0,
+        "d_flip": 3.5,
+        "ratio": 4.285714285714286,
+        "perm_distances": [
+          13,
+          15,
+          15
+        ],
+        "flip_distances": [
+          5,
+          2
+        ],
+        "flip_gold_changes_decision_bits": [
+          16,
+          14
+        ],
+        "n_flips": 2
+      },
+      "skip": {
+        "d_perm": 12.0,
+        "d_flip": 11.0,
+        "ratio": 1.0909090909090908,
+        "perm_distances": [
+          22,
+          12,
+          12
+        ],
+        "flip_distances": [
+          22,
+          10,
+          11
+        ],
+        "flip_gold_changes_decision_bits": [
+          18,
+          30,
+          14
+        ],
+        "n_flips": 3
+      }
+    }
+  },
+  "interpretation_limit": "S compares two kinds of rewrites of the same base trace on a finite Boolean table. It says which of surface reordering or a one-arrow logical change moves behavior more; it does not establish logical invariance."
+}

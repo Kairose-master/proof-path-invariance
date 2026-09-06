@@ -80,21 +80,28 @@ CONFOUND. The atom-label family changes the metric invariance defect by
 about 3×. A first-premise primacy effect on the query mentioned first is
 the largest single source of within-class distance in the Boolean table.
 
+OBSERVED (`RESULTS_PHASE3_4.md`). On the surface-controlled contrast,
+Qwen2.5-0.5B moves more under a permutation of its three premises than
+under a flip of one arrow (`S` 1.27 pooled; 3 of 8 classes favour logic;
+bullets 0.75, prose 1.80). The Boolean Gate I proximity is predominantly
+surface. The non-reading control sits at the noise value.
+
 ## The sentence the paper can currently defend
 
-> (Provisional, pending Phase 3.4.) For a small instruction-tuned language model read through order
-> relations at the answer position, traces that are logically identical
-> in a Lean-certified Horn semantics are, at the median, separated by
-> fewer behavioral tests than traces from distinct logical classes,
-> while no two logically identical traces are behaviorally identical;
-> for base models of the same or larger size the ordering is reversed.
-> Reading the task and identifying logical equivalents are therefore
-> distinct properties, the second weaker than the first and present only
-> approximately.
+> For every recognizer tested on a Lean-certified Horn benchmark,
+> including an instruction-tuned model that reads the task at 0.84–0.87
+> comparative accuracy, a maximal logic-preserving rewrite (permuting the
+> premises) moves behavior at least as much as a minimal logic-changing
+> rewrite (flipping one arrow). No two logically identical traces are
+> behaviorally identical for any recognizer. Reading the task and
+> respecting logical identity are distinct properties; the second is
+> absent at the pooled level and present only as a weak,
+> renderer-dependent tendency.
 
 HYPOTHESIS (Phase 3.3 scale run, preregistered). Within the
-instruction-tuned family the ratio falls with scale while exact identity
-remains absent.
+instruction-tuned family the Gate I ratio falls with scale while exact
+identity remains absent. HYPOTHESIS (Phase 3.4): the bullet-renderer
+logic signal on the surface-controlled contrast strengthens with scale.
 
 ## Novelty: not established
 
