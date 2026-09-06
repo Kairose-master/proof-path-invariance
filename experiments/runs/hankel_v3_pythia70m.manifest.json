@@ -1,0 +1,48 @@
+{
+  "run_id": "pythia70m-hankel-v3",
+  "phase": "3.5",
+  "design": "docs/PHASE3_HANKEL_V3_DESIGN.md",
+  "benchmark": {
+    "name": "hankel_v3",
+    "lock_file": "experiments/hankel_v3.lock.json",
+    "prompts_sha256": "59fed91c9ace2c0687658a08496496a0f60527eab3af0a279cb54871daab5a4b",
+    "prompt_count": 4224
+  },
+  "model": {
+    "provider": "huggingface-local",
+    "model_id": "EleutherAI/pythia-70m",
+    "revision": "step143000",
+    "resolved_commit": "de3e4e2d6cbb3b1a51f90fe153ea51fcd8c7c852",
+    "access_date_utc": "2026-09-06T04:11:44Z",
+    "interface": "transformers.AutoModelForCausalLM"
+  },
+  "measurement": {
+    "mode": "answer_position_logit_pair",
+    "read_as": "order relations only",
+    "candidate_token_ids": {
+      " YES": 22487,
+      " NO": 7651
+    },
+    "require_single_token_candidates": true,
+    "repeats_per_prompt": 1
+  },
+  "execution": {
+    "runner": "scripts/run_hf_hankel.py",
+    "runner_commit": "738aebe174fe086149b330180adbf36c0fd0e519",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "5.16.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads_per_process": 4,
+    "sharding": "single process, one forward pass per prompt",
+    "started_at_utc": "2026-09-06T04:11:44Z",
+    "finished_at_utc": "2026-09-06T04:13:37Z",
+    "notes": "Validity control for T, U, V, E."
+  },
+  "raw_result_sha256_uncompressed": "b550a306e557d0472dad92b2430600d328444c5a67ec801e2906c96de693519e",
+  "analysis": {
+    "script": "scripts/analyze_hankel_v3.py",
+    "summary": "experiments/results/phase3_5_hankel_v3_pythia70m_summary.json"
+  },
+  "analysis_status": "semantic_rewrite_frozen_plan_v3_completed"
+}
