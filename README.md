@@ -48,7 +48,7 @@ The frozen paired-prompt SHA-256 is recorded in `experiments/benchmark_v0.lock.j
 
 ```bash
 lake build
-python3 -m pip install -r requirements-runner.txt
+python3 -m pip install -r requirements-runner.txt   # torch, numpy, transformers, safetensors, huggingface_hub
 ```
 
 See `docs/RUN_PROTOCOL.md` for the model execution procedure.
