@@ -20,20 +20,39 @@ import torch.nn.functional as F
 
 sys.path.insert(0, str(Path(__file__).parent))
 from horn_data import TOK, encode, encode_clauses, sample, derivable_extension  # noqa: E402
-from models import SeqRecognizer, SetRecognizer  # noqa: E402
+from models import SeqRecognizer, SetRecognizer, IterReasoner  # noqa: E402
+
+
+def iter_batch_from(cs, hyps, goals, relabels):
+    """Atom-id tensors for IterReasoner from clause lists and relabel maps."""
+    n = len(cs); C = max(len(c) for c in cs)
+    bodies = torch.full((n, C, 2), -1, dtype=torch.long); heads = torch.full((n, C, 2), -1, dtype=torch.long)
+    for i, c in enumerate(cs):
+        rl = relabels[i]
+        for j, (b, h) in enumerate(c):
+            for k, x in enumerate(b[:2]):
+                bodies[i, j, k] = int(rl[x][1:])
+            for k, y in enumerate(h[:2]):
+                heads[i, j, k] = int(rl[y][1:])
+    hyp = torch.tensor([int(relabels[i][hyps[i]][1:]) for i in range(n)])
+    goal = torch.tensor([int(relabels[i][goals[i]][1:]) for i in range(n)])
+    return bodies, heads, None, hyp, goal
 
 
 def batch(rng, n, kind, augment):
     xs, cs, qs, ys = [], [], [], []
+    raw = []
     for _ in range(n):
         clauses, hyp, goal, relabel, label = sample(rng, augment)
-        ys.append(label)
+        ys.append(label); raw.append((clauses, hyp, goal, relabel))
         if kind == "seq":
             xs.append(encode(clauses, hyp, goal, relabel))
         else:
             cs.append(encode_clauses(clauses, relabel))
             qs.append([TOK["?"], TOK[relabel[hyp]], TOK["=>"], TOK[relabel[goal]]])
     y = torch.tensor(ys)
+    if kind == "iter":
+        return iter_batch_from([r[0] for r in raw], [r[1] for r in raw], [r[2] for r in raw], [r[3] for r in raw]), y
     if kind == "seq":
         L = max(len(x) for x in xs)
         ids = torch.full((n, L), TOK["<pad>"], dtype=torch.long)
@@ -78,7 +97,8 @@ def equiv_batch(rng, n, kind):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--kind", choices=["set", "seq"], required=True)
+    ap.add_argument("--kind", choices=["set", "seq", "iter"], required=True)
+    ap.add_argument("--rounds", type=int, default=4)
     ap.add_argument("--augment", action="store_true")
     ap.add_argument("--steps", type=int, default=6000)
     ap.add_argument("--batch", type=int, default=128)
@@ -89,7 +109,7 @@ def main():
     a = ap.parse_args()
     torch.manual_seed(a.seed)
     rng = random.Random(a.seed)
-    model = SetRecognizer() if a.kind == "set" else SeqRecognizer()
+    model = SetRecognizer() if a.kind == "set" else (IterReasoner(rounds=a.rounds) if a.kind == "iter" else SeqRecognizer())
     opt = torch.optim.AdamW(model.parameters(), lr=3e-4, weight_decay=0.01)
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=1e-3, total_steps=a.steps)
     t0 = time.time()
@@ -113,7 +133,7 @@ def main():
             log.append({"step": step, "loss": loss.item(), "val_acc": acc, "sec": time.time() - t0})
             print(json.dumps(log[-1]), flush=True)
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
-    torch.save({"kind": a.kind, "augment": a.augment, "equiv_loss": a.equiv_loss, "state": model.state_dict(), "log": log,
+    torch.save({"kind": a.kind, "augment": a.augment, "rounds": a.rounds, "equiv_loss": a.equiv_loss, "state": model.state_dict(), "log": log,
                 "params": sum(p.numel() for p in model.parameters()), "seed": a.seed, "steps": a.steps}, a.out)
     print(json.dumps({"saved": a.out, "params": sum(p.numel() for p in model.parameters()), "final_val_acc": log[-1]["val_acc"]}))
 

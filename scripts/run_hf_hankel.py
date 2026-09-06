@@ -81,7 +81,7 @@ def main() -> None:
                     "answer_map": row["answer_map"],
                     "gold": row["gold"],
                 }
-                for key in ("serialization", "variant", "kind", "flipped_clause", "doubled_prefix"):
+                for key in ("serialization", "variant", "kind", "flipped_clause", "doubled_prefix", "condition", "case_id", "query_kind", "depth"):
                     if key in row:
                         result[key] = row[key]
                 result.update({
