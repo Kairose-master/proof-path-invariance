@@ -99,7 +99,19 @@ component that a merely redundant clause can trigger. The budget-relative
 depth account still explains 0.67 of the 0.77 F effect; the residual 0.10
 is not depth.
 
-### S4 — 7-atom SetRecognizer (no budget knob) — *pending*
+### S4 — 7-atom SetRecognizer (no budget knob)
+
+168 386 parameters, in-distribution val acc 0.951. On the table:
+acc(D, all) 0.98, acc(D, target) 1.00, dis_F 0.01, dis_F1 0.00, dis_C
+0.00, dis_L 0.94, Δ 0.01 [0.00, 0.01]. At the decision level the set
+model identifies almost every extension and reads the logic change, so
+here it behaves like the oracle; there is no budget to vary. Exploratory
+margins: signed shift on the target F +0.65, F1 +1.91, C +0.23, L −9.3.
+The extended observation orders the conditions F1 > F > C > 0 > L, the
+same ordering as the reasoner's margins and as Qwen-0.5B's, although the
+set model has no round structure: a shortening clause moves the margin
+about three times as much as a depth-preserving one. This is the
+margin-level lead for a recognizer without an explicit budget.
 
 ## One-sentence conclusion (so far)
 
