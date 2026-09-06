@@ -361,15 +361,22 @@ invariance; accuracy buys neither.
 partly}\label{the-semantic-half-partly}}
 
 On \texttt{hankel\_v3} the \texttt{set} recognizer, 99\% accurate on
-classes it never saw, identifies none of the 14 derivable-clause
-extensions exactly in one seed and two in the other; on the columns
-where accuracy imposes nothing it moves 0.62--0.80 times as far under a
-semantic rewrite as under a logical flip. Every LLM, the control, and
-seven of eight causal toy runs have \texttt{V} above 1 (medians
-1.5--2.3). So the architecturally invariant recognizer is the only one
-in which a semantic rewrite is detectably less disruptive than a logical
-change, and even there most of the semantic half is missing and almost
-none of it is exact. (Two seeds; suggestive.)
+classes it never saw, identifies at most two of the 14 derivable-clause
+extensions exactly at any of four seeds; on the columns where accuracy
+imposes nothing it moves 0.48--0.80 times as far under a semantic
+rewrite as under a logical flip (four seeds, all below 1). Every LLM, the
+control, and seven of eight causal toy runs have \texttt{V} above 1
+(medians 1.5--2.3). So the architecturally invariant recognizer is the
+only one in which a semantic rewrite is detectably less disruptive than a
+logical change, and even there most of the semantic half is missing and
+almost none of it is exact. Training the same recognizer with a
+symmetric-KL objective on (trace, trace + derivable clause) pairs, the
+semantic rewrite itself, leaves \texttt{V} and \texttt{E} unchanged
+(0.53 and 0.80; 1 and 0 of 14; the recorded prediction of \texttt{V}
+below 0.4 failed): the objective closes the gap on simple classes and not
+on classes with disconnected or gated clauses. On this table the semantic
+half is not supplied by accuracy, by architecture, or by an objective that
+names it.
 
 \hypertarget{what-the-constructed-recognizers-add}{%
 \subsection{What the constructed recognizers
@@ -390,7 +397,10 @@ Section 4.
 syntactic part of logical identity, and respecting its semantic part are
 distinct, and every recognizer we measured or built sits on that ladder
 at a different rung. Accuracy does not climb it; architecture climbs one
-rung exactly; nothing we tried climbs the last.
+rung exactly; an objective aimed at the last rung does not reach it. What
+the last rung requires is the closure operator, which none of these
+recognizers computes; whether a recognizer with an explicit fixpoint layer
+reaches it is the next experiment (OPEN).
 
 \textbf{What a finite table can conclude.} By the identification
 theorem, a test family decides \texttt{≡\_ρ} when it is closed. On the
