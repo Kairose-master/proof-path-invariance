@@ -80,6 +80,21 @@ augmentation.
   accuracy, augmentation does not yield permutation invariance on this
   contrast.
 
+## Phase 4.1 — objective aimed at the quotient (added 2026-09-06, before running)
+
+`set` seeds 2 and 3 (replication of the central `V`/`E` numbers) and a new
+arm **`set_contrast`**: the same set encoder trained with the same data
+plus a symmetric-KL loss (weight 1.0) between its outputs on pairs
+(trace, trace + one derivable clause) with the same query, i.e. an
+objective that targets the semantic part of `≡_L` directly. Two seeds.
+
+Predictions: `set` s2/s3 `V` in 0.4–0.9, `E` 0–3. `set_contrast`: `V`
+below 0.4 and `E` at least 4 of 14 on `hankel_v3`, comparative accuracy
+still above 0.9; `S` 0 by construction. If `V` does not fall below the
+plain `set` range, an objective on derivable extensions does not
+generalise to the held-out classes' extensions, and the semantic half is
+not reachable this way either.
+
 ## Re-centring after the literature check
 
 Set-LLM (2025) and order-centric augmentation (2025) already realise the

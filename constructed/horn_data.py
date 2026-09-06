@@ -135,3 +135,21 @@ def sample(rng, augment: bool):
         if rng.random() < 0.3:
             clauses = clauses + [rng.choice(clauses)]
     return clauses, hyp, goal, relabel, label
+
+
+def derivable_extension(rng, clauses):
+    """Return `clauses + [c]` for a random single-atom clause c derivable from
+    `clauses` and not already present, or None if there is none.  The
+    extended trace is logically identical to the original
+    (`Horn.logicalEquiv_append_derivable`)."""
+    present = {(tuple(b), tuple(h)) for b, h in clauses}
+    cands = []
+    for x in ATOMS:
+        cl = closure(clauses, [x])
+        for y in ATOMS:
+            if y != x and y in cl and ((x,), (y,)) not in present:
+                cands.append(((x,), (y,)))
+    if not cands:
+        return None
+    return clauses + [rng.choice(cands)]
+
