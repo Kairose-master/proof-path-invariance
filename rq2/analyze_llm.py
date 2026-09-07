@@ -40,7 +40,7 @@ def main():
         complete_n = all((f"A_{c}_{cond}_n_j0", b) in d for c in cases for cond in ["D"] + CONDS)
         e = {"complete_t": complete_t, "complete_n": complete_n,
              "unparseable": sum(1 for r in rows if r["budget"] == b and r["decision"] is None),
-             "mean_thoughts_by_condition": {cond: float(np.mean([r["thoughts_tokens"] or 0 for r in rows if r["budget"] == b and r["condition"] == cond and r["part"] == "A"] or [0])) for cond in ["D"] + CONDS} if b != "none" else None}
+             "mean_thoughts_by_condition": {cond: float(np.mean([r["thoughts_tokens"] or 0 for r in rows if r["budget"] == b and r["condition"] == cond and r["row_id"].startswith("A_")] or [0])) for cond in ["D"] + CONDS} if b != "none" else None}
         if complete_t:
             accD_t = np.array([dec(f"A_{c}_D_t_j0", b) == True for c in cases], dtype=float)
             e["acc_D_t"] = float(accD_t.mean())
