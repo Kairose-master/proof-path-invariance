@@ -51,7 +51,7 @@ def main():
         for l in open(f):
             if l.strip():
                 r = json.loads(l); done.add((r["row_id"], r["budget"]))
-    todo = [(r, b) for r in rows for b in a.budgets if (r["row_id"], b) not in done]
+    todo = [(r, b) for r in rows for b in ([r["budget_plan"]] if "budget_plan" in r else a.budgets) if (r["row_id"], b) not in done]
     if a.limit:
         todo = todo[: a.limit]
     print(f"{len(done)} done, {len(todo)} to do", flush=True)
@@ -70,7 +70,7 @@ def main():
                 u = resp.usage_metadata
                 text = resp.text or ""
                 rec = {"row_id": r["row_id"], "budget": b, "model": a.model, "case_id": r["case_id"], "condition": r["condition"],
-                       "query_kind": r["query_kind"], "j": r["j"], "gold": r["gold"], "text": text[:80], "decision": decision(text),
+                       "query_kind": r["query_kind"], "j": r.get("j", 0), "gold": r["gold"], "text": text[:80], "decision": decision(text),
                        "thoughts_tokens": getattr(u, "thoughts_token_count", None), "out_tokens": u.candidates_token_count}
                 f.write(json.dumps(rec) + "\n"); f.flush(); fails = 0
             except Exception as e:

@@ -60,7 +60,7 @@ def main():
     sha = hashlib.sha256(out.read_bytes()).hexdigest()
     (HERE / "table_c" / "LOCK_rq2f_dose").write_text(f"rq2f_dose.jsonl sha256 {sha} rows {len(rows)}\n")
     from collections import Counter
-    print(json.dumps({"rows": len(rows), "sha256": sha, "by_condition_budget": dict(Counter((r["budget_plan"], r["condition"]) for r in rows))}, default=str))
+    print(json.dumps({"rows": len(rows), "sha256": sha, "by_condition_budget": {f"{b}:{c}": n for (b, c), n in Counter((r["budget_plan"], r["condition"]) for r in rows).items()}}))
 
 
 if __name__ == "__main__":
