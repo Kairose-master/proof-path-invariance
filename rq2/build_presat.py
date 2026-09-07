@@ -33,7 +33,12 @@ def t_rounds(clauses, facts, j):
 
 
 def main():
-    cases = json.load(open(HERE / "table" / "rq2_cases.json"))["cases"]
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--cases", default=str(HERE / "table" / "rq2_cases.json"))
+    ap.add_argument("--out", default=str(HERE / "table" / "rq2b_presat.jsonl"))
+    args = ap.parse_args()
+    cases = json.load(open(args.cases))["cases"]
     rows = []
     for c in cases:
         D = [(tuple(b), tuple(h)) for b, h in c["theories"]["D"]]
@@ -47,12 +52,12 @@ def main():
                              "gold": "pos" if goal in t_rounds(D, [a], 20) else "neg",
                              "depth_from_a": rounds_to_derive(D, a, goal),
                              "depth_from_H": min((rounds_to_derive(D, h, goal) for h in H if rounds_to_derive(D, h, goal) is not None), default=None) if goal not in H else 0})
-    out = HERE / "table" / "rq2b_presat.jsonl"
+    out = Path(args.out)
     with out.open("w") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")
     sha = hashlib.sha256(out.read_bytes()).hexdigest()
-    (HERE / "table" / "LOCK_rq2b").write_text(f"rq2b_presat.jsonl sha256 {sha} rows {len(rows)}\n")
+    (out.parent / f"LOCK_{out.stem}").write_text(f"{out.name} sha256 {sha} rows {len(rows)}\n")
     from collections import Counter
     print(json.dumps({"rows": len(rows), "sha256": sha,
                       "H_size_by_j": {j: dict(Counter(len(r["hyps"]) for r in rows if r["j"] == j and r["query_kind"] == "t")) for j in (0, 1, 2)},

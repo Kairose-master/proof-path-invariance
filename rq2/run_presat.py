@@ -31,8 +31,8 @@ BUDGETS = [0, 1, 2, 3, 4, 5, 6]
 PRIMARY = [(1, 2), (2, 1), (2, 2), (1, 3)]   # pairs where the symbolic yes-rate changes between budgets k and j+k
 
 
-def rows():
-    with open(HERE / "table" / "rq2b_presat.jsonl") as f:
+def rows(path=None):
+    with open(path or HERE / "table" / "rq2b_presat.jsonl") as f:
         return [json.loads(l) for l in f if l.strip()]
 
 
@@ -85,6 +85,14 @@ def analyze(table, dec, margin):
     for k in BUDGETS:
         for j in (0, 1, 2):
             out["accuracy"][f"j{j}_k{k}"] = float(np.mean([dec[(c, q, j, k)] == gold[(c, q)] for c in cases for q in ("t", "n")]))
+    sym, _ = symbolic_decisions(table)
+    out["sandwich"] = {}
+    for j in (1, 2):
+        for k in (1, 2, 3, 4):
+            per_case = np.array([np.mean([((not sym[(c, q, 0, j + k - 1)]) or dec[(c, q, j, k)]) and ((not dec[(c, q, j, k)]) or sym[(c, q, 0, j + k)])
+                                          for q in ("t", "n")]) for c in cases])
+            out["sandwich"][f"j{j}_k{k}"] = {"holds": float(per_case.mean()), "ci95": ci(per_case)}
+    out["sandwich_holds_all"] = all(v["ci95"][0] >= 0.95 for v in out["sandwich"].values())
     out["primary"] = {f"j{j}_k{k}": out["pairs"][f"j{j}_k{k}"] for j, k in PRIMARY}
     out["prediction_holds"] = all(out["pairs"][f"j{j}_k{k}"]["ci95"][0] >= 0.95 for j, k in PRIMARY)
     return out
@@ -93,8 +101,9 @@ def analyze(table, dec, margin):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model"); ap.add_argument("--symbolic", action="store_true"); ap.add_argument("--out", required=True)
+    ap.add_argument("--table", default=None)
     a = ap.parse_args()
-    table = rows()
+    table = rows(a.table)
     dec, margin = symbolic_decisions(table) if a.symbolic else model_decisions(table, a.model)
     rep = analyze(table, dec, margin)
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
@@ -104,7 +113,8 @@ def main():
         flag = "*" if name in rep["primary"] else " "
         print(f"{name:7s}{flag} {e['agree']:6.3f} [{e['ci95'][0]:5.3f},{e['ci95'][1]:5.3f}] {e['agree_t']:6.3f} {e['agree_n']:6.3f} {e['yes_rate_Hj_k']:7.3f} {e['yes_rate_H0_jk']:7.3f}")
     print("accuracy", {k: round(v, 3) for k, v in rep["accuracy"].items()})
-    print("PREDICTION_HOLDS", rep["prediction_holds"])
+    print("sandwich T_{j+k-1} <= R(H_j,k) <= T_{j+k}:", {k: (round(v["holds"], 3), [round(x, 3) for x in v["ci95"]]) for k, v in rep["sandwich"].items()})
+    print("PREDICTION_HOLDS", rep["prediction_holds"], "SANDWICH_HOLDS_ALL", rep["sandwich_holds_all"])
 
 
 if __name__ == "__main__":
