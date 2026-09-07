@@ -24,13 +24,20 @@ HERE = Path(__file__).parent
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--table-dir", default=str(HERE / "table"))
+    ap.add_argument("--presat", default="rq2b_presat.jsonl")
+    ap.add_argument("--out", default="rq2d_llm.jsonl")
+    a = ap.parse_args()
+    tdir = Path(a.table_dir)
     rows = []
-    for l in open(HERE / "table" / "rq2_prompts.jsonl"):
+    for l in open(tdir / "rq2_prompts.jsonl"):
         r = json.loads(l)
         if r["query_kind"] in ("t", "n"):
             rows.append({"part": "A", "priority": 0 if r["query_kind"] == "t" else 1, "case_id": r["case_id"], "condition": r["condition"],
                          "query_kind": r["query_kind"], "j": 0, "gold": r["gold"], "depth": r["depth"], "prompt": r["prompt"]})
-    for l in open(HERE / "table" / "rq2b_presat.jsonl"):
+    for l in open(tdir / a.presat):
         r = json.loads(l)
         if r["j"] == 0:
             continue
@@ -45,12 +52,12 @@ def main():
     rows.sort(key=lambda r: (r["priority"], r["case_id"]))
     for i, r in enumerate(rows):
         r["row_id"] = f"{r['part']}_{r['case_id']}_{r['condition']}_{r['query_kind']}_j{r['j']}"
-    out = HERE / "table" / "rq2d_llm.jsonl"
+    out = tdir / a.out
     with out.open("w") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")
     sha = hashlib.sha256(out.read_bytes()).hexdigest()
-    (HERE / "table" / "LOCK_rq2d").write_text(f"rq2d_llm.jsonl sha256 {sha} rows {len(rows)}\n")
+    (tdir / f"LOCK_{out.stem}").write_text(f"{out.name} sha256 {sha} rows {len(rows)}\n")
     print(json.dumps({"rows": len(rows), "sha256": sha}))
 
 
