@@ -2,6 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22495706.svg)](https://doi.org/10.5281/zenodo.22495706)
 
+Version 0.2.0 (RQ2 series: budgets, composition, thinking-budget LLM): DOI 10.5281/zenodo.22636570. Paper for the RQ2 series: [graded-recognition](https://github.com/Kairose-master/graded-recognition), DOI 10.5281/zenodo.22578931.
+
 A Lean-grounded project for measuring behavioral stability under formally controlled input transformations.
 
 **Status (2026-09-06).** Phases 1–4.1 (Hankel tables v0–v3, LLMs to 1.5B,
