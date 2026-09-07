@@ -31,6 +31,32 @@
     0.855
    ],
    "acc_L_t": 1.0,
+   "fixes_F": 0.145,
+   "breaks_F": 0.01,
+   "net_F": 0.135,
+   "net_F_ci": [
+    0.085,
+    0.19
+   ],
+   "fixes_F1": 0.2,
+   "breaks_F1": 0.0,
+   "net_F1": 0.2,
+   "net_F1_ci": [
+    0.145,
+    0.255
+   ],
+   "fixes_C": 0.025,
+   "breaks_C": 0.115,
+   "net_C": -0.09,
+   "net_C_ci": [
+    -0.14,
+    -0.04
+   ],
+   "signed_F_minus_C": 0.225,
+   "signed_F_minus_C_ci": [
+    0.165,
+    0.285
+   ],
    "delta": 0.015,
    "delta_ci": [
     -0.055,
@@ -80,6 +106,32 @@
     1.0
    ],
    "acc_L_t": 1.0,
+   "fixes_F": 0.0,
+   "breaks_F": 0.0,
+   "net_F": 0.0,
+   "net_F_ci": [
+    0.0,
+    0.0
+   ],
+   "fixes_F1": 0.0,
+   "breaks_F1": 0.0,
+   "net_F1": 0.0,
+   "net_F1_ci": [
+    0.0,
+    0.0
+   ],
+   "fixes_C": 0.0,
+   "breaks_C": 0.0,
+   "net_C": 0.0,
+   "net_C_ci": [
+    0.0,
+    0.0
+   ],
+   "signed_F_minus_C": 0.0,
+   "signed_F_minus_C_ci": [
+    0.0,
+    0.0
+   ],
    "delta": 0.0,
    "delta_ci": [
     0.0,
@@ -103,5 +155,11 @@
   "delta_low": 0.015,
   "delta_high": 0.0,
   "prediction_holds": false
+ },
+ "P6": {
+  "a_shortening_helps_B0": true,
+  "b_redundancy_hurts_B0": true,
+  "c_budget_removes_both": true,
+  "holds": true
  }
 }

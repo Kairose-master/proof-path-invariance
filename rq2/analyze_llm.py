@@ -48,6 +48,15 @@ def main():
                 v = np.array([dec(f"A_{c}_D_t_j0", b) != dec(f"A_{c}_{cond}_t_j0", b) for c in cases], dtype=float)
                 e[f"dis_{cond}"] = float(v.mean()); e[f"dis_{cond}_ci"] = ci(v)
                 e[f"acc_{cond}_t"] = float(np.mean([dec(f"A_{c}_{cond}_t_j0", b) == (cond != "L") for c in cases]))
+            # signed effects on the target (gold YES): fixes = D wrong & X right, breaks = D right & X wrong
+            for cond in ("F", "F1", "C"):
+                fx = np.array([(not dec(f"A_{c}_D_t_j0", b)) and dec(f"A_{c}_{cond}_t_j0", b) for c in cases], dtype=float)
+                bk = np.array([dec(f"A_{c}_D_t_j0", b) and not dec(f"A_{c}_{cond}_t_j0", b) for c in cases], dtype=float)
+                e[f"fixes_{cond}"] = float(fx.mean()); e[f"breaks_{cond}"] = float(bk.mean())
+                e[f"net_{cond}"] = float((fx - bk).mean()); e[f"net_{cond}_ci"] = ci(fx - bk)
+            sF = np.array([dec(f"A_{c}_F_t_j0", b) - dec(f"A_{c}_D_t_j0", b) for c in cases], dtype=float)
+            sC = np.array([dec(f"A_{c}_C_t_j0", b) - dec(f"A_{c}_D_t_j0", b) for c in cases], dtype=float)
+            e["signed_F_minus_C"] = float((sF - sC).mean()); e["signed_F_minus_C_ci"] = ci(sF - sC)
             dF = np.array([dec(f"A_{c}_D_t_j0", b) != dec(f"A_{c}_F_t_j0", b) for c in cases], dtype=float)
             dC = np.array([dec(f"A_{c}_D_t_j0", b) != dec(f"A_{c}_C_t_j0", b) for c in cases], dtype=float)
             ind[b] = (dF, dC); e["delta"] = float((dF - dC).mean()); e["delta_ci"] = ci(dF - dC)
@@ -68,6 +77,12 @@ def main():
         I = float((fl - cl).mean() - (fh - ch).mean()); v = (fl - cl) - (fh - ch)
         rep["primary"] = {"interaction": I, "ci95": ci(v), "delta_low": rep["budgets"][a.low]["delta"], "delta_high": rep["budgets"][a.high]["delta"],
                           "prediction_holds": bool(ci(v)[0] > 0 and rep["budgets"][a.low]["delta"] >= 0.10)}
+    lo, hi = rep["budgets"].get(a.low, {}), rep["budgets"].get(a.high, {})
+    if "net_F_ci" in lo and "dis_F" in hi:
+        rep["P6"] = {"a_shortening_helps_B0": bool(lo["net_F"] >= 0.05 and lo["net_F_ci"][0] > 0),
+                     "b_redundancy_hurts_B0": bool(lo["net_C"] <= -0.05 and lo["net_C_ci"][1] < 0),
+                     "c_budget_removes_both": bool(hi["dis_F"] <= 0.02 and hi["dis_C"] <= 0.02)}
+        rep["P6"]["holds"] = all(rep["P6"].values())
     txt = json.dumps(rep, indent=1)
     if a.out:
         open(a.out, "w").write(txt)
