@@ -1,0 +1,165 @@
+{
+ "n_rows": 5600,
+ "budgets": {
+  "none": {
+   "complete_t": true,
+   "complete_n": true,
+   "unparseable": 3,
+   "mean_thoughts_by_condition": null,
+   "acc_D_t": 0.78,
+   "dis_F": 0.155,
+   "dis_F_ci": [
+    0.11,
+    0.21
+   ],
+   "acc_F_t": 0.935,
+   "dis_F1": 0.22,
+   "dis_F1_ci": [
+    0.165,
+    0.28
+   ],
+   "acc_F1_t": 1.0,
+   "dis_C": 0.14,
+   "dis_C_ci": [
+    0.095,
+    0.19
+   ],
+   "acc_C_t": 0.71,
+   "dis_L": 0.78,
+   "dis_L_ci": [
+    0.72,
+    0.835
+   ],
+   "acc_L_t": 1.0,
+   "fixes_F": 0.155,
+   "breaks_F": 0.0,
+   "net_F": 0.155,
+   "net_F_ci": [
+    0.11,
+    0.21
+   ],
+   "fixes_F1": 0.22,
+   "breaks_F1": 0.0,
+   "net_F1": 0.22,
+   "net_F1_ci": [
+    0.165,
+    0.28
+   ],
+   "fixes_C": 0.035,
+   "breaks_C": 0.105,
+   "net_C": -0.07,
+   "net_C_ci": [
+    -0.12,
+    -0.02
+   ],
+   "signed_F_minus_C": 0.225,
+   "signed_F_minus_C_ci": [
+    0.17,
+    0.285
+   ],
+   "delta": 0.015,
+   "delta_ci": [
+    -0.05,
+    0.08
+   ],
+   "acc_D_n": 1.0,
+   "acc_D": 0.89,
+   "gate_reads": true,
+   "acc_t_H1": 0.71,
+   "acc_n_H1": 1.0,
+   "acc_t_H2": 0.925,
+   "acc_n_H2": 1.0
+  },
+  "1024": {
+   "complete_t": true,
+   "complete_n": true,
+   "unparseable": 0,
+   "mean_thoughts_by_condition": {
+    "D": 402.7875,
+    "F": 422.2725,
+    "F1": 368.9325,
+    "C": 441.5325,
+    "L": 394.1975
+   },
+   "acc_D_t": 1.0,
+   "dis_F": 0.0,
+   "dis_F_ci": [
+    0.0,
+    0.0
+   ],
+   "acc_F_t": 1.0,
+   "dis_F1": 0.0,
+   "dis_F1_ci": [
+    0.0,
+    0.0
+   ],
+   "acc_F1_t": 1.0,
+   "dis_C": 0.0,
+   "dis_C_ci": [
+    0.0,
+    0.0
+   ],
+   "acc_C_t": 1.0,
+   "dis_L": 1.0,
+   "dis_L_ci": [
+    1.0,
+    1.0
+   ],
+   "acc_L_t": 1.0,
+   "fixes_F": 0.0,
+   "breaks_F": 0.0,
+   "net_F": 0.0,
+   "net_F_ci": [
+    0.0,
+    0.0
+   ],
+   "fixes_F1": 0.0,
+   "breaks_F1": 0.0,
+   "net_F1": 0.0,
+   "net_F1_ci": [
+    0.0,
+    0.0
+   ],
+   "fixes_C": 0.0,
+   "breaks_C": 0.0,
+   "net_C": 0.0,
+   "net_C_ci": [
+    0.0,
+    0.0
+   ],
+   "signed_F_minus_C": 0.0,
+   "signed_F_minus_C_ci": [
+    0.0,
+    0.0
+   ],
+   "delta": 0.0,
+   "delta_ci": [
+    0.0,
+    0.0
+   ],
+   "acc_D_n": 1.0,
+   "acc_D": 1.0,
+   "gate_reads": true,
+   "acc_t_H1": 1.0,
+   "acc_n_H1": 1.0,
+   "acc_t_H2": 1.0,
+   "acc_n_H2": 1.0
+  }
+ },
+ "primary": {
+  "interaction": 0.015,
+  "ci95": [
+   -0.05,
+   0.08
+  ],
+  "delta_low": 0.015,
+  "delta_high": 0.0,
+  "prediction_holds": false
+ },
+ "P6": {
+  "a_shortening_helps_B0": true,
+  "b_redundancy_hurts_B0": true,
+  "c_budget_removes_both": true,
+  "holds": true
+ }
+}
