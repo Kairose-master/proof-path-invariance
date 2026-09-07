@@ -38,13 +38,17 @@ def main():
     ap.add_argument("--rpm", type=float, default=14.0)
     ap.add_argument("--max-consecutive-failures", type=int, default=30)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--shard", default="0/1", help="i/n: process rows i, i+n, ... (separate --out per shard)")
+    ap.add_argument("--done-from", nargs="*", default=[], help="other result files whose (row, budget) pairs are skipped")
     a = ap.parse_args()
     client = genai.Client()
     rows = [json.loads(l) for l in open(a.table) if l.strip()]
+    si, sn = (int(x) for x in a.shard.split("/"))
+    rows = rows[si::sn]
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
     done = set()
-    if out.exists():
-        for l in open(out):
+    for f in ([out] if out.exists() else []) + [Path(x) for x in a.done_from if Path(x).exists()]:
+        for l in open(f):
             if l.strip():
                 r = json.loads(l); done.add((r["row_id"], r["budget"]))
     todo = [(r, b) for r in rows for b in a.budgets if (r["row_id"], b) not in done]
